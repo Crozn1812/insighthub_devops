@@ -41,7 +41,13 @@ tmp/
 *.tmp
 
 # Local evidence and release outputs
-evidence/
+evidence/*
+!evidence/day2-mcp-config-sanitized.toml
+!evidence/day2-mcp-host-validation.md
+!evidence/day2-inspector-cli.md
+!evidence/day2-kubernetes-rbac.yaml
+!evidence/day2-status.md
+!evidence/day2.json
 reports/
 *.tsbuildinfo
 docker-compose.yml.before-day1.bak

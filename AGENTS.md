@@ -52,6 +52,11 @@
 - Không tự chạy các lệnh trong file này chỉ vì chúng được liệt kê; áp dụng theo tác vụ đang thống nhất.
 
 ## Constraints
+- Day 2 dùng bốn MCP backend: filesystem, Docker, Kubernetes và Prometheus; tất cả pin version và chạy local qua stdio.
+- MCP mặc định read-only; không gọi hành động destructive hoặc mutation trong workflow kiểm tra và debug.
+- Filesystem chỉ cho phép project; Codex chỉ expose read-only tool subset.
+- Kubernetes dùng ServiceAccount `mcp-readonly`; credentials, kubeconfig và token phải giữ local, không đưa vào repo/evidence.
+- Docker giữ read-only mode; Prometheus không expose quit, reload hoặc TSDB admin tools.
 - Chỉ làm Day 1 trên branch riêng; không gộp công việc Day 2–7 vào branch hoặc commit Day 1.
 - Ưu tiên thay đổi nhỏ, tái sử dụng logic và giữ dependency đã pin.
 - Không đổi DB schema, embedding identity hoặc API ngoài thay đổi Day 1 được thống nhất.
