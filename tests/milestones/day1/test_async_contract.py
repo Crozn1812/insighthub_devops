@@ -85,7 +85,10 @@ def test_refactor_regression():
     assert live_status == 200 and live["status"] == "ok"
     assert ready_status == 200 and ready["status"] == "ready" and ready["db"] is True
 
-    content = b"Refactor regression document remains retrievable by chat."
+    content = (
+        "Refactor regression document remains retrievable by chat "
+        + uuid.uuid4().hex
+    ).encode()
     status, accepted = upload(content)
     assert status == 202 and accepted["status"] == "pending"
     stored = document(accepted["id"], {"ready"})
