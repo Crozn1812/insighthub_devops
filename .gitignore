@@ -53,6 +53,13 @@ evidence/*
 !evidence/day3-status.md
 !evidence/day3-ci-binding.json
 !evidence/day3.json
+!evidence/day5-phase5a.md
+!evidence/day5-phase5b.md
+!evidence/day5-audit.json
+!evidence/day5-status.md
+!evidence/day5.json
+!evidence/day5-slack-setup.md
+!evidence/day5-screencast-plan.md
 reports/
 *.tsbuildinfo
 docker-compose.yml.before-day1.bak

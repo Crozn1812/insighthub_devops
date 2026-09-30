@@ -37,6 +37,10 @@ documents_total = Gauge(
     "Documents by status refreshed at metrics scrape",
     ["status"],
 )
+documents_created_today = Gauge(
+    "insighthub_documents_created_today",
+    "Documents created since local midnight in Asia/Ho_Chi_Minh",
+)
 ingestion_errors_total = Counter(
     "insighthub_ingestion_errors_total",
     "Failed processing attempts",
