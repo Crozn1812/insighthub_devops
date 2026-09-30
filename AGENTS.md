@@ -52,6 +52,10 @@
 - Không tự chạy các lệnh trong file này chỉ vì chúng được liệt kê; áp dụng theo tác vụ đang thống nhất.
 
 ## Constraints
+- Day 3 uses the local-only/no-cost track; never run AWS mutations or live Terraform plan/apply/destroy/import.
+- Day 3 Terraform is validated statically with the backend disabled; local policy fixtures must not contain credentials.
+- Docker Desktop Kubernetes is the Day 3 runtime target; cloud resources must not be reported as deployed.
+- Keep Terraform, policy, Helm, and CI changes on `day3-terraform` and preserve deferred Day 2 evidence.
 - Day 2 dùng bốn MCP backend: filesystem, Docker, Kubernetes và Prometheus; tất cả pin version và chạy local qua stdio.
 - MCP mặc định read-only; không gọi hành động destructive hoặc mutation trong workflow kiểm tra và debug.
 - Filesystem chỉ cho phép project; Codex chỉ expose read-only tool subset.

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insighthub-ingestion-worker
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: ingestion-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: ingestion-worker}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: ingestion-worker}
+    spec:
+      serviceAccountName: insighthub
+      securityContext: {fsGroup: 1001}
+      containers:
+        - name: ingestion-worker
+          image: "{{ .Values.images.worker.repository }}:{{ .Values.images.worker.tag }}"
+          imagePullPolicy: {{ .Values.images.worker.pullPolicy }}
+          envFrom: [{configMapRef: {name: insighthub-config}}]
+          env:
+            - name: DATABASE_URL
+              valueFrom: {secretKeyRef: {name: {{ .Values.runtimeSecretName }}, key: DATABASE_URL}}
+          volumeMounts: [{name: payloads, mountPath: /app/payloads, readOnly: true}]
+          livenessProbe:
+            exec: {command: [arq, --check, ingestion_worker.worker.WorkerSettings]}
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            exec: {command: [arq, --check, ingestion_worker.worker.WorkerSettings]}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          resources: {{- toYaml .Values.resources.worker | nindent 12 }}
+      volumes: [{name: payloads, persistentVolumeClaim: {claimName: insighthub-payloads}}]

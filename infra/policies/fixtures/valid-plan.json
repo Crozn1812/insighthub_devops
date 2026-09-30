@@ -1,0 +1,43 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.16.4",
+  "resource_changes": [
+    {
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "insighthub",
+      "change": {
+        "after": {
+          "storage_encrypted": true,
+          "publicly_accessible": false,
+          "tags": {
+            "project": "insighthub",
+            "environment": "dev",
+            "owner": "platform-team",
+            "cost_center": "training",
+            "managed_by": "terraform"
+          }
+        }
+      }
+    },
+    {
+      "mode": "managed",
+      "type": "aws_elasticache_replication_group",
+      "name": "insighthub",
+      "change": {
+        "after": {
+          "at_rest_encryption_enabled": true,
+          "transit_encryption_enabled": true,
+          "publicly_accessible": false,
+          "tags": {
+            "project": "insighthub",
+            "environment": "dev",
+            "owner": "platform-team",
+            "cost_center": "training",
+            "managed_by": "terraform"
+          }
+        }
+      }
+    }
+  ]
+}
