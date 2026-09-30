@@ -164,6 +164,7 @@ class IntegrationTests(unittest.TestCase):
         metrics = self.client.get("/metrics")
         self.assertEqual(metrics.status_code, 200)
         self.assertIn('insighthub_documents_total{status="ready"} 1.0', metrics.text)
+        self.assertIn("insighthub_documents_created_today 1.0", metrics.text)
         self.assertEqual(
             self.client.delete(f"/documents/{document['id']}").status_code, 204
         )

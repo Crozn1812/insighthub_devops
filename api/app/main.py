@@ -14,6 +14,7 @@ from app.core.config import get_settings
 from app.core.db import close_pool, get_conn, initialize_database
 from app.core.errors import ServiceError
 from app.core.metrics import (
+    documents_created_today,
     documents_total,
     http_requests_total,
     ingestion_queue_depth,
@@ -99,6 +100,14 @@ def metrics():
         )
     for status in ("pending", "ready", "failed"):
         documents_total.labels(status).set(counts.get(status, 0))
+    with get_conn() as conn:
+        created_today = conn.execute(
+            "SELECT count(*) FROM documents "
+            "WHERE created_at >= (date_trunc('day', now() AT TIME ZONE %s) "
+            "AT TIME ZONE %s)",
+            ("Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh"),
+        ).fetchone()[0]
+    documents_created_today.set(created_today)
     try:
         ingestion_queue_depth.set(asyncio.run(get_queue_depth()))
     except Exception:  # noqa: BLE001 - a scrape must not expose Redis details

@@ -1,0 +1,121 @@
+{
+  "run_id": "day5-phase5c-local-20260930",
+  "events": [
+    {
+      "timestamp": "2026-09-30T10:42:24.806728+00:00",
+      "event_id": "phase5c-0dd10642a6-health",
+      "action": "health",
+      "decision": "allowed",
+      "user": "U_LOCAL",
+      "test_run_id": "day5-phase5c-local-20260930",
+      "intent": "health",
+      "arguments_summary": {},
+      "attempt": 0,
+      "transport": "local"
+    },
+    {
+      "timestamp": "2026-09-30T10:42:30.960638+00:00",
+      "event_id": "phase5c-0dd10642a6-delete",
+      "action": "delete_namespace",
+      "decision": "denied",
+      "user": "U_LOCAL",
+      "test_run_id": "day5-phase5c-local-20260930",
+      "intent": "delete_namespace",
+      "arguments_summary": {},
+      "attempt": 0,
+      "transport": "local"
+    },
+    {
+      "timestamp": "2026-09-30T10:42:31.190501+00:00",
+      "event_id": "phase5c-0dd10642a6-scale-request",
+      "action": "scale_deployment",
+      "decision": "approval_required",
+      "user": "U_LOCAL",
+      "test_run_id": "day5-phase5c-local-20260930",
+      "intent": "scale_deployment",
+      "arguments_summary": {
+        "namespace": "insighthub-dev",
+        "deployment": "insighthub-api",
+        "replicas": 2
+      },
+      "attempt": 0,
+      "transport": "local"
+    },
+    {
+      "timestamp": "2026-09-30T10:42:31.520183+00:00",
+      "event_id": "phase5c-0dd10642a6-wrong-user",
+      "action": "scale_deployment",
+      "decision": "denied",
+      "user": "U_OTHER",
+      "test_run_id": "day5-phase5c-local-20260930",
+      "intent": "scale_deployment",
+      "arguments_summary": {},
+      "attempt": 0,
+      "transport": "local",
+      "approval_id": "27e5bc415af9"
+    },
+    {
+      "timestamp": "2026-09-30T10:42:31.999568+00:00",
+      "event_id": "phase5c-0dd10642a6-valid-confirm",
+      "action": "scale_deployment",
+      "decision": "allowed",
+      "user": "U_LOCAL",
+      "test_run_id": "day5-phase5c-local-20260930",
+      "intent": "scale_deployment",
+      "arguments_summary": {
+        "deployment": "insighthub-api",
+        "namespace": "insighthub-dev",
+        "replicas": 2
+      },
+      "attempt": 0,
+      "transport": "local",
+      "approval_id": "27e5bc415af9"
+    },
+    {
+      "timestamp": "2026-09-30T10:42:32.296354+00:00",
+      "event_id": "phase5c-0dd10642a6-reused",
+      "action": "scale_deployment",
+      "decision": "denied",
+      "user": "U_LOCAL",
+      "test_run_id": "day5-phase5c-local-20260930",
+      "intent": "scale_deployment",
+      "arguments_summary": {},
+      "attempt": 0,
+      "transport": "local",
+      "approval_id": "27e5bc415af9"
+    },
+    {
+      "timestamp": "2026-09-30T10:42:32.540843+00:00",
+      "event_id": "phase5c-0dd10642a6-restore-request",
+      "action": "scale_deployment",
+      "decision": "approval_required",
+      "user": "U_LOCAL",
+      "test_run_id": "day5-phase5c-local-20260930",
+      "intent": "scale_deployment",
+      "arguments_summary": {
+        "namespace": "insighthub-dev",
+        "deployment": "insighthub-api",
+        "replicas": 1
+      },
+      "attempt": 0,
+      "transport": "local"
+    },
+    {
+      "timestamp": "2026-09-30T10:42:32.863024+00:00",
+      "event_id": "phase5c-0dd10642a6-restore-confirm",
+      "action": "scale_deployment",
+      "decision": "allowed",
+      "user": "U_LOCAL",
+      "test_run_id": "day5-phase5c-local-20260930",
+      "intent": "scale_deployment",
+      "arguments_summary": {
+        "deployment": "insighthub-api",
+        "namespace": "insighthub-dev",
+        "replicas": 1
+      },
+      "attempt": 0,
+      "transport": "local",
+      "approval_id": "35ef7c7b9c19"
+    }
+  ]
+}

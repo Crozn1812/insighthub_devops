@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "day": 5,
+  "mode": "real",
+  "observed_at": "2026-09-30T17:52:48.221990+07:00",
+  "source_sha256": "e20a53b2b1f92521191d7465767bbe63d44842f1c8369d0292ea505c1d31dd39",
+  "artifacts": {
+    "permissions": {
+      "path": "chatops-bot/app/permissions.py",
+      "sha256": "329ed4edefe7f46a9d7bbcdbf58fcf5b0bd07246657140b003d348e465a64f46"
+    },
+    "audit": {
+      "path": "evidence/day5-audit.json",
+      "sha256": "9c2463d900a78033a2458ec6da1ac85e9239d6d648b3fea19e736dfcfb0079ba"
+    }
+  }
+}
