@@ -96,6 +96,13 @@ class CommonTests(VerifierCase):
         self.assertNotEqual(first, v.fingerprint(self.root))
         self.assertFalse((self.root / '.git').exists())
 
+    def test_fingerprint_is_stable_across_text_line_endings(self):
+        path = self.root / 'api/app/main.py'
+        path.write_bytes(b'def app():\n    return dict(ok=True)\n')
+        lf_fingerprint = v.fingerprint(self.root)
+        path.write_bytes(b'def app():\r\n    return dict(ok=True)\r\n')
+        self.assertEqual(v.fingerprint(self.root), lf_fingerprint)
+
     def test_digest_stable_across_cache_and_evidence(self):
         first = v.fingerprint(self.root)
         self.write('api/__pycache__/module.pyc', 'cached')
