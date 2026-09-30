@@ -10,8 +10,11 @@
 - Helm lint/render: **PASS**
 - Docker Desktop Kubernetes deployment: **PASS**
 - Local smoke: **PASS**
-- GitHub workflow source: **CREATED / LOCAL VALIDATION PASS**
-- GitHub remote workflow run: **PENDING**
+- GitHub workflow: **PASS**
+- PR pipeline: **PASS** — run `36657449428`
+- Official verifier: **PASS — partial-runtime-contract**
+- Runtime verified: **true**
+- Milestone complete: **false**
 
 ## Original cloud requirements
 
