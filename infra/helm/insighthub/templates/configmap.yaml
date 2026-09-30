@@ -16,3 +16,5 @@ data:
   EMBEDDING_REVISION: {{ .Values.config.embeddingRevision | quote }}
   PROVIDER_TIMEOUT_SECONDS: {{ .Values.config.providerTimeoutSeconds | quote }}
   API_INTERNAL_URL: {{ .Values.config.apiInternalUrl | quote }}
+  DAY4_CHAOS_LLM_DELAY_SECONDS: {{ .Values.config.day4ChaosLlmDelaySeconds | quote }}
+  DAY4_CHAOS_FORCE_ERROR: {{ .Values.config.day4ChaosForceError | quote }}

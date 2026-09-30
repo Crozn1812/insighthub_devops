@@ -1,0 +1,32 @@
+{
+  "incident_id": "incident-3-api-error-rate",
+  "started_at": "2026-09-30T15:17:29.4683385+07:00",
+  "ended_at": "2026-09-30T15:21:00.6730764+07:00",
+  "hypotheses": [
+    "The explicitly enabled controlled endpoint is producing the observed 5xx burst.",
+    "A shared database or Redis failure is causing otherwise normal API routes to return 5xx."
+  ],
+  "samples": [
+    {
+      "metric": "insighthub:api_error_ratio5m",
+      "labels": {},
+      "timestamp": "2026-09-30T08:20:07.707Z",
+      "value": 0.480454114326951
+    },
+    {
+      "metric": "ALERTS",
+      "labels": {
+        "alertname": "InsightHubApiErrorRateAnomaly",
+        "alertstate": "firing",
+        "incident": "api-error-rate",
+        "severity": "warning"
+      },
+      "timestamp": "2026-09-30T08:20:07.781Z",
+      "value": 1
+    }
+  ],
+  "summary": "One hundred controlled requests returned 503, raising the five-minute API error ratio above its live anomaly band and firing the dedicated alert.",
+  "root_cause": "The local DAY4_CHAOS_FORCE_ERROR switch was intentionally enabled for the bounded incident; telemetry did not establish a database, Redis, or external-provider fault.",
+  "confidence": "high",
+  "remediation": "Disable controlled error mode, roll out the default config, confirm readiness and a normal fixture chat, then allow the rolling error window to recover."
+}

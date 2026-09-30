@@ -39,3 +39,17 @@ async def enqueue_document(document_id: int) -> None:
             # that acknowledgement into a false failure.
             with suppress(Exception):
                 await asyncio.wait_for(pool.aclose(), timeout=0.1)
+
+
+async def get_queue_depth() -> int:
+    """Return the real backlog stored in the configured ARQ sorted set."""
+    settings = get_settings()
+    pool = None
+    try:
+        async with asyncio.timeout(settings.enqueue_timeout_seconds):
+            pool = await create_pool(redis_settings())
+            return int(await pool.zcard(settings.ingestion_queue))
+    finally:
+        if pool is not None:
+            with suppress(Exception):
+                await asyncio.wait_for(pool.aclose(), timeout=0.1)

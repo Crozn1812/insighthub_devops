@@ -12,6 +12,8 @@ spec:
   template:
     metadata:
       labels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: api}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       serviceAccountName: insighthub
       securityContext: {fsGroup: 1001}
@@ -36,6 +38,7 @@ metadata:
   name: insighthub-api
   labels:
     {{- include "insighthub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: api
 spec:
   type: ClusterIP
   selector: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: api}
