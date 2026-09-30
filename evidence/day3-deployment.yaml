@@ -1,0 +1,393 @@
+---
+# Source: insighthub/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: insighthub
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+automountServiceAccountToken: false
+---
+# Source: insighthub/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: insighthub-config
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+data:
+  REDIS_URL: "redis://insighthub-redis:6379/0"
+  INGESTION_QUEUE: "insighthub:ingestion"
+  PAYLOAD_DIR: "/app/payloads"
+  RAG_MODE: "fixture"
+  LLM_PROVIDER: "fixture"
+  EMBEDDING_PROVIDER: "fixture"
+  LLM_MAX_TOKENS: "1024"
+  EMBEDDING_DIM: "1024"
+  EMBEDDING_REVISION: "1"
+  PROVIDER_TIMEOUT_SECONDS: "60"
+  API_INTERNAL_URL: "http://insighthub-api:8000"
+---
+# Source: insighthub/templates/postgres-init-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: insighthub-postgres-init
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+data:
+  init.sql: |
+    -- Fresh-volume starter schema. Existing volumes require an explicit migration/rebuild.
+    -- Do not reinterpret old vectors: their provider identity cannot be recovered safely.
+    CREATE EXTENSION IF NOT EXISTS vector;
+
+    DO $$
+    BEGIN
+        IF EXISTS (
+            SELECT 1 FROM information_schema.tables
+            WHERE table_schema = current_schema() AND table_name = 'documents'
+        ) AND NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = current_schema() AND table_name = 'documents'
+              AND column_name = 'content_sha256'
+        ) THEN
+            RAISE EXCEPTION 'Legacy InsightHub schema: migrate or rebuild explicitly before using this starter';
+        END IF;
+    END $$;
+
+    -- One immutable vector space per starter index, claimed by the first successful ingest.
+    CREATE TABLE IF NOT EXISTS embedding_index (
+        singleton BOOLEAN PRIMARY KEY DEFAULT TRUE CHECK (singleton),
+        identity_id TEXT NOT NULL UNIQUE,
+        identity JSONB NOT NULL,
+        dimension INTEGER NOT NULL CHECK (dimension > 0),
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+
+    CREATE TABLE IF NOT EXISTS documents (
+        id BIGSERIAL PRIMARY KEY,
+        filename TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'ready', 'failed')),
+        chunk_count INTEGER NOT NULL DEFAULT 0 CHECK (chunk_count >= 0),
+        content_sha256 TEXT,
+        pipeline_id TEXT,
+        embedding_identity_id TEXT REFERENCES embedding_index(identity_id),
+        error_code TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        UNIQUE (id, embedding_identity_id),
+        CHECK (status <> 'ready' OR
+            (chunk_count > 0 AND content_sha256 IS NOT NULL AND pipeline_id IS NOT NULL
+             AND embedding_identity_id IS NOT NULL AND error_code IS NULL)),
+        CHECK (status = 'ready' OR chunk_count = 0)
+    );
+
+    -- EMBEDDING_DIM must match VECTOR(1024). Dimension changes require rebuilding this schema.
+    CREATE TABLE IF NOT EXISTS chunks (
+        id BIGSERIAL PRIMARY KEY,
+        document_id BIGINT NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+        chunk_index INTEGER NOT NULL CHECK (chunk_index >= 0),
+        chunk_text TEXT NOT NULL CHECK (length(chunk_text) > 0),
+        embedding VECTOR(1024) NOT NULL,
+        embedding_identity_id TEXT NOT NULL REFERENCES embedding_index(identity_id),
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        UNIQUE (document_id, chunk_index),
+        FOREIGN KEY (document_id, embedding_identity_id)
+            REFERENCES documents(id, embedding_identity_id) ON DELETE CASCADE
+    );
+    CREATE INDEX IF NOT EXISTS chunks_embedding_hnsw_idx
+        ON chunks USING hnsw (embedding vector_cosine_ops)
+        WITH (m = 16, ef_construction = 64);
+    CREATE INDEX IF NOT EXISTS documents_status_idx ON documents(status);
+---
+# Source: insighthub/templates/payload-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: insighthub-payloads
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+---
+# Source: insighthub/templates/api.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: insighthub-api
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: api}
+  ports: [{name: http, port: 8000, targetPort: http}]
+---
+# Source: insighthub/templates/postgres.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: insighthub-postgres
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: postgres}
+  ports: [{name: postgres, port: 5432, targetPort: postgres}]
+---
+# Source: insighthub/templates/redis.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: insighthub-redis
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: redis}
+  ports: [{name: redis, port: 6379, targetPort: redis}]
+---
+# Source: insighthub/templates/web.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: insighthub-web
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: web}
+  ports: [{name: http, port: 3000, targetPort: http}]
+---
+# Source: insighthub/templates/api.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insighthub-api
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: api}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: api}
+    spec:
+      serviceAccountName: insighthub
+      securityContext: {fsGroup: 1001}
+      containers:
+        - name: api
+          image: "insighthub-api:day3"
+          imagePullPolicy: IfNotPresent
+          ports: [{name: http, containerPort: 8000}]
+          envFrom: [{configMapRef: {name: insighthub-config}}]
+          env:
+            - name: DATABASE_URL
+              valueFrom: {secretKeyRef: {name: insighthub-runtime, key: DATABASE_URL}}
+          volumeMounts: [{name: payloads, mountPath: /app/payloads}]
+          livenessProbe: {httpGet: {path: /healthz, port: http}, initialDelaySeconds: 10, periodSeconds: 10}
+          readinessProbe: {httpGet: {path: /readyz, port: http}, initialDelaySeconds: 5, periodSeconds: 5}
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+      volumes: [{name: payloads, persistentVolumeClaim: {claimName: insighthub-payloads}}]
+---
+# Source: insighthub/templates/redis.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insighthub-redis
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: redis}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: redis}
+    spec:
+      serviceAccountName: insighthub
+      containers:
+        - name: redis
+          image: "redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952"
+          imagePullPolicy: IfNotPresent
+          args: [redis-server, --appendonly, "yes", --appendfsync, everysec, --maxmemory-policy, noeviction]
+          ports: [{name: redis, containerPort: 6379}]
+          volumeMounts: [{name: data, mountPath: /data}]
+          livenessProbe: {exec: {command: [redis-cli, ping]}, initialDelaySeconds: 10, periodSeconds: 10}
+          readinessProbe: {exec: {command: [redis-cli, ping]}, initialDelaySeconds: 5, periodSeconds: 5}
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+      volumes: [{name: data, emptyDir: {}}]
+---
+# Source: insighthub/templates/web.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insighthub-web
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: web}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: web}
+    spec:
+      serviceAccountName: insighthub
+      containers:
+        - name: web
+          image: "insighthub-web:day3"
+          imagePullPolicy: IfNotPresent
+          ports: [{name: http, containerPort: 3000}]
+          env:
+            - {name: API_INTERNAL_URL, value: "http://insighthub-api:8000"}
+          livenessProbe: {httpGet: {path: /api/health, port: http}, initialDelaySeconds: 15, periodSeconds: 10}
+          readinessProbe: {httpGet: {path: /api/health, port: http}, initialDelaySeconds: 5, periodSeconds: 5}
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+---
+# Source: insighthub/templates/worker.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insighthub-ingestion-worker
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: ingestion-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: ingestion-worker}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: ingestion-worker}
+    spec:
+      serviceAccountName: insighthub
+      securityContext: {fsGroup: 1001}
+      containers:
+        - name: ingestion-worker
+          image: "insighthub-ingestion-worker:day3"
+          imagePullPolicy: IfNotPresent
+          envFrom: [{configMapRef: {name: insighthub-config}}]
+          env:
+            - name: DATABASE_URL
+              valueFrom: {secretKeyRef: {name: insighthub-runtime, key: DATABASE_URL}}
+          volumeMounts: [{name: payloads, mountPath: /app/payloads, readOnly: true}]
+          livenessProbe:
+            exec: {command: [arq, --check, ingestion_worker.worker.WorkerSettings]}
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            exec: {command: [arq, --check, ingestion_worker.worker.WorkerSettings]}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+      volumes: [{name: payloads, persistentVolumeClaim: {claimName: insighthub-payloads}}]
+---
+# Source: insighthub/templates/postgres.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: insighthub-postgres
+  labels:
+    app.kubernetes.io/name: insighthub
+    app.kubernetes.io/instance: insighthub
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: postgres
+spec:
+  serviceName: insighthub-postgres
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: postgres}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: insighthub, app.kubernetes.io/component: postgres}
+    spec:
+      serviceAccountName: insighthub
+      containers:
+        - name: postgres
+          image: "pgvector/pgvector:0.8.2-pg16@sha256:00ba258a66dac104fd5171074a0084462a64a1369d8513f3d0a634e2f24d15bc"
+          imagePullPolicy: IfNotPresent
+          ports: [{name: postgres, containerPort: 5432}]
+          env:
+            - {name: POSTGRES_USER, value: insighthub}
+            - {name: POSTGRES_DB, value: insighthub}
+            - name: POSTGRES_PASSWORD
+              valueFrom: {secretKeyRef: {name: insighthub-runtime, key: POSTGRES_PASSWORD}}
+          volumeMounts:
+            - {name: data, mountPath: /var/lib/postgresql/data}
+            - {name: init, mountPath: /docker-entrypoint-initdb.d/init.sql, subPath: init.sql, readOnly: true}
+          livenessProbe:
+            exec: {command: [pg_isready, -U, insighthub, -d, insighthub]}
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            exec: {command: [pg_isready, -U, insighthub, -d, insighthub]}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: "1"
+              memory: 768Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+      volumes: [{name: init, configMap: {name: insighthub-postgres-init}}]
+  volumeClaimTemplates:
+    - metadata: {name: data}
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests: {storage: 2Gi}

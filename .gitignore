@@ -48,6 +48,11 @@ evidence/*
 !evidence/day2-kubernetes-rbac.yaml
 !evidence/day2-status.md
 !evidence/day2.json
+!evidence/day3-deployment.yaml
+!evidence/day3-local-k8s.md
+!evidence/day3-status.md
+!evidence/day3-ci-binding.json
+!evidence/day3.json
 reports/
 *.tsbuildinfo
 docker-compose.yml.before-day1.bak
