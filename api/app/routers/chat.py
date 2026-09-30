@@ -6,7 +6,12 @@ from typing import Literal
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.core.metrics import llm_call_latency, llm_tokens_total, rag_query_latency
+from app.core.metrics import (
+    llm_call_latency,
+    llm_estimated_cost_usd_total,
+    llm_tokens_total,
+    rag_query_latency,
+)
 from app.services.llm import generate
 from app.services.retrieval import retrieve
 
@@ -51,6 +56,9 @@ def chat(req: ChatRequest):
         value = result["usage"].get(f"{direction}_tokens")
         if value is not None:
             llm_tokens_total.labels(result["provider"], direction).inc(value)
+    if result["mode"] == "fixture":
+        # Fixture mode has no external provider call and therefore zero provider cost.
+        llm_estimated_cost_usd_total.labels(result["provider"], "fixture").inc(0)
     return ChatResponse(
         **result,
         contexts=contexts,

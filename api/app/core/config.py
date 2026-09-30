@@ -66,6 +66,10 @@ class Settings(BaseSettings):
     retrieval_top_k: int = Field(default=5, ge=1, le=20)
     hnsw_ef_search: int = Field(default=100, ge=20, le=1000)
     max_upload_bytes: int = Field(default=10 * 1024 * 1024, ge=1, le=50 * 1024 * 1024)
+    day4_chaos_llm_delay_seconds: float = Field(
+        default=0, ge=0, le=30, allow_inf_nan=False
+    )
+    day4_chaos_force_error: bool = False
 
     @model_validator(mode="after")
     def validate_configuration(self):

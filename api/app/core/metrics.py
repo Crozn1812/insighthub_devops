@@ -41,6 +41,15 @@ ingestion_errors_total = Counter(
     "insighthub_ingestion_errors_total",
     "Failed processing attempts",
 )
+ingestion_queue_depth = Gauge(
+    "insighthub_ingestion_queue_depth",
+    "Current jobs waiting in the configured ARQ Redis queue",
+)
+llm_estimated_cost_usd_total = Counter(
+    "insighthub_llm_estimated_cost_usd_total",
+    "Estimated provider cost derived from recorded usage; fixture cost is zero",
+    ["provider", "mode"],
+)
 
 
 def record_embedding_usage(provider, input_type, tokens, texts):

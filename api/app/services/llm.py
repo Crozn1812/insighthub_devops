@@ -1,6 +1,7 @@
 """Provider generation with explicit fixture labeling and usage provenance."""
 
 import json
+import time
 from urllib.parse import quote
 
 from app.core.config import get_settings
@@ -110,6 +111,8 @@ def generate(question: str, contexts: list[dict]) -> dict:
     settings = get_settings()
     try:
         if settings.rag_mode == "fixture":
+            if settings.day4_chaos_llm_delay_seconds:
+                time.sleep(settings.day4_chaos_llm_delay_seconds)
             snippet = (
                 contexts[0]["chunk_text"][:300] if contexts else "(không có dữ liệu)"
             )

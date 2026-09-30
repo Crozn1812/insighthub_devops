@@ -1,0 +1,61 @@
+rule_files:
+  - prometheus-rules.yaml
+
+evaluation_interval: 1m
+
+tests:
+  - name: normal-baseline-does-not-alert
+    interval: 1m
+    input_series:
+      - series: 'insighthub:llm_latency_p95_seconds'
+        values: '0.2+0x65'
+      - series: 'insighthub:ingestion_queue_depth'
+        values: '0+0x65'
+      - series: 'insighthub:api_error_ratio5m'
+        values: '0+0x65'
+    alert_rule_test:
+      - eval_time: 65m
+        alertname: InsightHubLlmLatencyAnomaly
+        exp_alerts: []
+      - eval_time: 65m
+        alertname: InsightHubQueueBacklogAnomaly
+        exp_alerts: []
+      - eval_time: 65m
+        alertname: InsightHubApiErrorRateAnomaly
+        exp_alerts: []
+
+  - name: llm-latency-anomaly
+    interval: 1m
+    input_series:
+      - series: 'insighthub:llm_latency_p95_seconds'
+        values: '0.2+0x60 5+0x5'
+    alert_rule_test:
+      - eval_time: 65m
+        alertname: InsightHubLlmLatencyAnomaly
+        exp_alerts:
+          - exp_labels: {severity: warning, incident: llm-latency}
+            exp_annotations: {summary: InsightHub fixture LLM latency exceeds its one-hour 3-sigma band}
+
+  - name: queue-backlog-anomaly
+    interval: 1m
+    input_series:
+      - series: 'insighthub:ingestion_queue_depth'
+        values: '0+0x60 10+0x5'
+    alert_rule_test:
+      - eval_time: 65m
+        alertname: InsightHubQueueBacklogAnomaly
+        exp_alerts:
+          - exp_labels: {severity: warning, incident: queue-backlog}
+            exp_annotations: {summary: InsightHub ingestion queue exceeds its one-hour 3-sigma band}
+
+  - name: api-error-rate-anomaly
+    interval: 1m
+    input_series:
+      - series: 'insighthub:api_error_ratio5m'
+        values: '0+0x60 0.8+0x5'
+    alert_rule_test:
+      - eval_time: 65m
+        alertname: InsightHubApiErrorRateAnomaly
+        exp_alerts:
+          - exp_labels: {severity: warning, incident: api-error-rate}
+            exp_annotations: {summary: InsightHub API error ratio exceeds its one-hour 3-sigma band}

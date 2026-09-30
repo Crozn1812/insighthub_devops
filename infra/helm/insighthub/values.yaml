@@ -5,11 +5,11 @@ images:
     pullPolicy: IfNotPresent
   api:
     repository: insighthub-api
-    tag: day3
+    tag: day4-final
     pullPolicy: IfNotPresent
   worker:
     repository: insighthub-ingestion-worker
-    tag: day3
+    tag: day4-final
     pullPolicy: IfNotPresent
   postgres: pgvector/pgvector:0.8.2-pg16@sha256:00ba258a66dac104fd5171074a0084462a64a1369d8513f3d0a634e2f24d15bc
   redis: redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952
@@ -28,6 +28,21 @@ config:
   embeddingRevision: "1"
   providerTimeoutSeconds: "60"
   apiInternalUrl: http://insighthub-api:8000
+  day4ChaosLlmDelaySeconds: "0"
+  day4ChaosForceError: "false"
+
+observability:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 15s
+  exporters:
+    postgres:
+      enabled: true
+      image: ghcr.io/prometheus-community/postgres-exporter:v0.20.1
+    redis:
+      enabled: true
+      image: oliver006/redis_exporter:v1.89.0
 
 postgres:
   initSql: ""
@@ -52,3 +67,9 @@ resources:
   redis:
     requests: {cpu: 50m, memory: 64Mi}
     limits: {cpu: 500m, memory: 256Mi}
+  postgresExporter:
+    requests: {cpu: 25m, memory: 32Mi}
+    limits: {cpu: 250m, memory: 128Mi}
+  redisExporter:
+    requests: {cpu: 25m, memory: 32Mi}
+    limits: {cpu: 250m, memory: 128Mi}

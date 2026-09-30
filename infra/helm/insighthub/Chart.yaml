@@ -3,4 +3,4 @@ name: insighthub
 description: Local-only InsightHub stack for Docker Desktop Kubernetes
 type: application
 version: 0.1.0
-appVersion: "day3"
+appVersion: "day4"

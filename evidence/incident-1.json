@@ -1,0 +1,32 @@
+{
+  "incident_id": "incident-1-llm-latency",
+  "started_at": "2026-09-30T15:07:50.7908846+07:00",
+  "ended_at": "2026-09-30T15:12:00.6280462+07:00",
+  "hypotheses": [
+    "The fixture LLM path is slower while the API and dependencies remain healthy.",
+    "A database, Redis, or pod availability fault is increasing end-to-end latency."
+  ],
+  "samples": [
+    {
+      "metric": "insighthub:llm_latency_p95_seconds",
+      "labels": {},
+      "timestamp": "2026-09-30T08:11:13.839Z",
+      "value": 4.870019255706746
+    },
+    {
+      "metric": "ALERTS",
+      "labels": {
+        "alertname": "InsightHubLlmLatencyAnomaly",
+        "alertstate": "firing",
+        "incident": "llm-latency",
+        "severity": "warning"
+      },
+      "timestamp": "2026-09-30T08:11:13.938Z",
+      "value": 1
+    }
+  ],
+  "summary": "The LLM latency p95 exceeded the live one-hour 3-sigma upper band and the dedicated alert fired while the service remained ready.",
+  "root_cause": "The explicitly enabled local DAY4_CHAOS_LLM_DELAY_SECONDS=2.5 fixture delay increased generation latency; no external provider was called.",
+  "confidence": "high",
+  "remediation": "Restore the chaos delay to zero, verify API readiness and normal chat, and retain the latency alert for future detection."
+}

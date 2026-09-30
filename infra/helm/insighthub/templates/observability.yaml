@@ -1,0 +1,132 @@
+{{- if .Values.observability.enabled }}
+{{- if .Values.observability.exporters.postgres.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insighthub-postgres-exporter
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: postgres-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: postgres-exporter}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: postgres-exporter}
+    spec:
+      serviceAccountName: insighthub
+      containers:
+        - name: postgres-exporter
+          image: {{ .Values.observability.exporters.postgres.image | quote }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DATA_SOURCE_NAME
+              valueFrom: {secretKeyRef: {name: {{ .Values.runtimeSecretName }}, key: DATABASE_URL}}
+          ports: [{name: metrics, containerPort: 9187}]
+          livenessProbe: {httpGet: {path: /, port: metrics}, initialDelaySeconds: 10, periodSeconds: 10}
+          readinessProbe: {httpGet: {path: /, port: metrics}, initialDelaySeconds: 5, periodSeconds: 5}
+          resources: {{- toYaml .Values.resources.postgresExporter | nindent 12 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insighthub-postgres-exporter
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: postgres-exporter
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: postgres-exporter}
+  ports: [{name: metrics, port: 9187, targetPort: metrics}]
+---
+{{- end }}
+{{- if .Values.observability.exporters.redis.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insighthub-redis-exporter
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: redis-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: redis-exporter}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: redis-exporter}
+    spec:
+      serviceAccountName: insighthub
+      containers:
+        - name: redis-exporter
+          image: {{ .Values.observability.exporters.redis.image | quote }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: REDIS_ADDR, value: redis://insighthub-redis:6379}
+          ports: [{name: metrics, containerPort: 9121}]
+          livenessProbe: {httpGet: {path: /health, port: metrics}, initialDelaySeconds: 10, periodSeconds: 10}
+          readinessProbe: {httpGet: {path: /health, port: metrics}, initialDelaySeconds: 5, periodSeconds: 5}
+          resources: {{- toYaml .Values.resources.redisExporter | nindent 12 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insighthub-redis-exporter
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: redis-exporter
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: redis-exporter}
+  ports: [{name: metrics, port: 9121, targetPort: metrics}]
+---
+{{- end }}
+{{- if .Values.observability.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: insighthub-api
+  labels: {{- include "insighthub.labels" . | nindent 4 }}
+spec:
+  namespaceSelector: {matchNames: [{{ .Release.Namespace }}]}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: api
+  endpoints:
+    - {port: http, path: /metrics, interval: {{ .Values.observability.serviceMonitor.interval }}}
+---
+{{- if .Values.observability.exporters.postgres.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: insighthub-postgres
+  labels: {{- include "insighthub.labels" . | nindent 4 }}
+spec:
+  namespaceSelector: {matchNames: [{{ .Release.Namespace }}]}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: postgres-exporter
+  endpoints:
+    - {port: metrics, interval: {{ .Values.observability.serviceMonitor.interval }}}
+---
+{{- end }}
+{{- if .Values.observability.exporters.redis.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: insighthub-redis
+  labels: {{- include "insighthub.labels" . | nindent 4 }}
+spec:
+  namespaceSelector: {matchNames: [{{ .Release.Namespace }}]}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: redis-exporter
+  endpoints:
+    - {port: metrics, interval: {{ .Values.observability.serviceMonitor.interval }}}
+{{- end }}
+{{- end }}
+{{- end }}
