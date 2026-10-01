@@ -54,6 +54,11 @@ llm_estimated_cost_usd_total = Counter(
     "Estimated provider cost derived from recorded usage; fixture cost is zero",
     ["provider", "mode"],
 )
+guardrail_decisions_total = Counter(
+    "insighthub_guardrail_decisions_total",
+    "Bounded RAG guardrail decisions without user or document content",
+    ["stage", "decision", "category"],
+)
 
 
 def record_embedding_usage(provider, input_type, tokens, texts):
