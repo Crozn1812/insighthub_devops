@@ -14,6 +14,7 @@ data:
   OLLAMA_BASE_URL: {{ .Values.config.ollamaBaseUrl | quote }}
   OLLAMA_CHAT_MODEL: {{ .Values.config.ollamaChatModel | quote }}
   OLLAMA_EMBEDDING_MODEL: {{ .Values.config.ollamaEmbeddingModel | quote }}
+  OLLAMA_THINK: {{ .Values.config.ollamaThink | quote }}
   LLM_MAX_TOKENS: {{ .Values.config.llmMaxTokens | quote }}
   EMBEDDING_DIM: {{ .Values.config.embeddingDim | quote }}
   EMBEDDING_REVISION: {{ .Values.config.embeddingRevision | quote }}

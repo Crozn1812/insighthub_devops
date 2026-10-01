@@ -81,7 +81,7 @@ def _real_generate(question, contexts, settings):
                 "stream": False,
                 # Qwen reasoning models can otherwise consume the entire bounded
                 # output budget in `message.thinking` and return empty content.
-                "think": False,
+                "think": settings.ollama_think,
                 "options": {"num_predict": settings.llm_max_tokens},
             },
         )

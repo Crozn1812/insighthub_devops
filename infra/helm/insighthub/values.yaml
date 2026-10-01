@@ -26,6 +26,7 @@ config:
   ollamaBaseUrl: http://ollama:11434
   ollamaChatModel: ""
   ollamaEmbeddingModel: mxbai-embed-large
+  ollamaThink: "false"
   llmMaxTokens: "1024"
   embeddingDim: "1024"
   embeddingRevision: "1"

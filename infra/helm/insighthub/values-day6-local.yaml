@@ -7,7 +7,9 @@ config:
   ollamaBaseUrl: http://host.docker.internal:11434
   ollamaChatModel: qwen3:4b
   ollamaEmbeddingModel: mxbai-embed-large
+  ollamaThink: "false"
   embeddingDim: "1024"
   embeddingRevision: "day6-ollama-mxbai-v1"
-  llmMaxTokens: "256"
+  # Bounded Day 6 evaluation profile: concise cited RAG answers without hidden thinking.
+  llmMaxTokens: "128"
   providerTimeoutSeconds: "300"

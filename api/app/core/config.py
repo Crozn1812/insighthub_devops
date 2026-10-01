@@ -52,6 +52,7 @@ class Settings(BaseSettings):
     ollama_base_url: str = "http://ollama:11434"
     ollama_chat_model: str = ""
     ollama_embedding_model: str = "mxbai-embed-large"
+    ollama_think: bool = False
     llm_model: str = ""
     embedding_model: str = ""
     llm_max_tokens: int = Field(default=1024, ge=1, le=32768)
