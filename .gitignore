@@ -60,6 +60,7 @@ evidence/*
 !evidence/day5.json
 !evidence/day5-slack-setup.md
 !evidence/day5-screencast-plan.md
+!evidence/day6-phase6a.md
 reports/
 *.tsbuildinfo
 docker-compose.yml.before-day1.bak

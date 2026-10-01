@@ -299,6 +299,24 @@ class GenerationTests(unittest.TestCase):
                 self.assertEqual(result["answer"], "answer")
                 self.assertEqual(result["usage"]["input_tokens"], 2)
 
+    def test_ollama_disables_reasoning_to_preserve_answer_budget(self):
+        with (
+            real_config("ollama", embedding_provider="ollama"),
+            patch(
+                "app.services.llm.post_json",
+                return_value={
+                    "message": {"content": "answer", "thinking": ""},
+                    "prompt_eval_count": 2,
+                    "eval_count": 3,
+                },
+            ) as transport,
+        ):
+            result = generate("question", self.contexts)
+        payload = transport.call_args.kwargs["payload"]
+        self.assertIs(payload["think"], False)
+        self.assertEqual(payload["options"]["num_predict"], 1024)
+        self.assertEqual(result["answer"], "answer")
+
     def test_failure_or_empty_real_answer_is_not_fixture(self):
         for response in (
             {},

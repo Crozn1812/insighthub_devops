@@ -1,0 +1,13 @@
+# Docker Desktop local-only real RAG. Ollama remains on the developer host and
+# requires no credential; host.docker.internal is verified from the API pod.
+config:
+  ragMode: real
+  llmProvider: ollama
+  embeddingProvider: ollama
+  ollamaBaseUrl: http://host.docker.internal:11434
+  ollamaChatModel: qwen3:4b
+  ollamaEmbeddingModel: mxbai-embed-large
+  embeddingDim: "1024"
+  embeddingRevision: "day6-ollama-mxbai-v1"
+  llmMaxTokens: "256"
+  providerTimeoutSeconds: "300"

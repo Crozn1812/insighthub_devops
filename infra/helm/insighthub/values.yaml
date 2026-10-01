@@ -23,6 +23,9 @@ config:
   ragMode: fixture
   llmProvider: fixture
   embeddingProvider: fixture
+  ollamaBaseUrl: http://ollama:11434
+  ollamaChatModel: ""
+  ollamaEmbeddingModel: mxbai-embed-large
   llmMaxTokens: "1024"
   embeddingDim: "1024"
   embeddingRevision: "1"

@@ -11,6 +11,9 @@ data:
   RAG_MODE: {{ .Values.config.ragMode | quote }}
   LLM_PROVIDER: {{ .Values.config.llmProvider | quote }}
   EMBEDDING_PROVIDER: {{ .Values.config.embeddingProvider | quote }}
+  OLLAMA_BASE_URL: {{ .Values.config.ollamaBaseUrl | quote }}
+  OLLAMA_CHAT_MODEL: {{ .Values.config.ollamaChatModel | quote }}
+  OLLAMA_EMBEDDING_MODEL: {{ .Values.config.ollamaEmbeddingModel | quote }}
   LLM_MAX_TOKENS: {{ .Values.config.llmMaxTokens | quote }}
   EMBEDDING_DIM: {{ .Values.config.embeddingDim | quote }}
   EMBEDDING_REVISION: {{ .Values.config.embeddingRevision | quote }}
