@@ -1,0 +1,37 @@
+{
+  "observed_at": "2026-10-04T10:44:44.271205+00:00",
+  "final_command": "docker run --rm --network none --read-only --tmpfs /tmp -v G:/Download/insighthub_devops:/workspace:ro -w /workspace -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONPATH=/workspace/api:/workspace/api/tests insighthub-api:day6-security-r2-local python -m unittest api.tests.test_unit_guardrails api.tests.test_unit_http api.tests.test_unit_providers finops.test_gateway finops.test_artifacts -q",
+  "runtime": "existing Linux API image Python; invoked directly after WSL failure",
+  "pass": 99,
+  "assertion_failures": 0,
+  "suite_counts": {
+    "guardrails": 48,
+    "http": 15,
+    "providers": 24,
+    "finops": 12
+  },
+  "reported_elapsed_seconds": 1.259,
+  "earlier_attempts": [
+    {
+      "runtime": "WSL pytest",
+      "result": "collection error",
+      "errors": 3,
+      "reason": "missing prometheus_client/httpx"
+    },
+    {
+      "runtime": "WSL to existing Linux container",
+      "result": "48 executed PASS; two module import errors",
+      "reason": "api/tests support import path omitted"
+    },
+    {
+      "runtime": "WSL corrected command",
+      "result": "launch failed",
+      "reason": "Wsl/Service/0x8007274c"
+    }
+  ],
+  "packages_installed": false,
+  "tests_modified": false,
+  "ruff": "unavailable/not run",
+  "mypy": "unavailable/not run",
+  "security_scan_rerun": false
+}

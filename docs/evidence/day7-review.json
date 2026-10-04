@@ -1,0 +1,47 @@
+{
+  "observed_at": "2026-10-04T10:45:31.516710+00:00",
+  "reviewed_files": [
+    "ai-prompts/day7.md",
+    "docs/demo-runbook.md",
+    "docs/end-to-end-flow.md",
+    "docs/final-architecture.md",
+    "docs/final-finops-status.md",
+    "docs/final-security-status.md",
+    "docs/final-test-matrix.md",
+    "docs/project-limitations.md",
+    "evidence/day7-final.md",
+    "evidence/day7-inventory.json",
+    "evidence/day7-runtime.json",
+    "evidence/day7-tests.json",
+    "evidence/day7-verify.py",
+    "evidence/README.md",
+    "README.md"
+  ],
+  "immutable_hashes_match": {
+    "security/results/day6-final-promptfoo.json": true,
+    "security/day6-dataset.json": true,
+    "scripts/verify.py": true
+  },
+  "broken_document_links": [],
+  "actual_key_or_secret_pattern_hits": [],
+  "full_protected_policy_hits": [],
+  "huge_new_files": [],
+  "git_diff_check_exit": 0,
+  "staged_files": [],
+  "head_unchanged": true,
+  "ignore_rules_unchanged": true,
+  "evidence_index_ignored": true,
+  "committed": false,
+  "pushed": false,
+  "note": "Review artifact now exists; its self-reference in day7-final.md resolves. No documentation/security result repair required.",
+  "historical_preservation": {
+    "evidence/day6-final-session-preservation.json": {
+      "records": 40,
+      "mismatches": []
+    },
+    "evidence/day6-promptleak-preservation-r1.json": {
+      "records": 43,
+      "mismatches": []
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "eval_id": "eval-aPL-2026-10-04T01:13:14",
+  "method": "Actual Prometheus API token-counter deltas over sequential case completion windows; exactly one observed model call required; gateway Bot/Coding traffic does not increment API counters",
+  "neighbor_validation_pass": true,
+  "records": [
+    {
+      "id": "f5f481f8-82c0-4eff-9aa0-66e4fe83fe96",
+      "before": 1791077826.0,
+      "after": 1791077860.0,
+      "missing": false,
+      "counters": {
+        "calls": {
+          "before": 51.0,
+          "after": 52.0,
+          "delta": 1.0
+        },
+        "input": {
+          "before": 29163.0,
+          "after": 29789.0,
+          "delta": 626.0
+        },
+        "output": {
+          "before": 4352.0,
+          "after": 4399.0,
+          "delta": 47.0
+        }
+      },
+      "method_valid": true,
+      "known_response_matches": true,
+      "target_latency_ms": 7873
+    },
+    {
+      "id": "773ac735-c769-4a94-bfd1-e118fc27b914",
+      "before": 1791077860.0,
+      "after": 1791077917.0,
+      "missing": true,
+      "counters": {
+        "calls": {
+          "before": 52.0,
+          "after": 53.0,
+          "delta": 1.0
+        },
+        "input": {
+          "before": 29789.0,
+          "after": 30415.0,
+          "delta": 626.0
+        },
+        "output": {
+          "before": 4399.0,
+          "after": 4481.0,
+          "delta": 82.0
+        }
+      },
+      "method_valid": true,
+      "target_latency_ms": 10151
+    },
+    {
+      "id": "8655e66e-071d-462a-b074-4ac095f6a679",
+      "before": 1791077917.0,
+      "after": 1791077965.0,
+      "missing": false,
+      "counters": {
+        "calls": {
+          "before": 53.0,
+          "after": 54.0,
+          "delta": 1.0
+        },
+        "input": {
+          "before": 30415.0,
+          "after": 31078.0,
+          "delta": 663.0
+        },
+        "output": {
+          "before": 4481.0,
+          "after": 4590.0,
+          "delta": 109.0
+        }
+      },
+      "method_valid": true,
+      "known_response_matches": true,
+      "target_latency_ms": 13798
+    },
+    {
+      "id": "a4c64118-518f-4ee7-bb8d-88d5338bf428",
+      "before": 1791077965.0,
+      "after": 1791078027.0,
+      "missing": true,
+      "counters": {
+        "calls": {
+          "before": 54.0,
+          "after": 55.0,
+          "delta": 1.0
+        },
+        "input": {
+          "before": 31078.0,
+          "after": 31712.0,
+          "delta": 634.0
+        },
+        "output": {
+          "before": 4590.0,
+          "after": 4624.0,
+          "delta": 34.0
+        }
+      },
+      "method_valid": true,
+      "target_latency_ms": 5580
+    },
+    {
+      "id": "00e78cbc-d9bf-437b-9014-a52636f620b4",
+      "before": 1791078027.0,
+      "after": 1791078059.0,
+      "missing": false,
+      "counters": {
+        "calls": {
+          "before": 55.0,
+          "after": 56.0,
+          "delta": 1.0
+        },
+        "input": {
+          "before": 31712.0,
+          "after": 32327.0,
+          "delta": 615.0
+        },
+        "output": {
+          "before": 4624.0,
+          "after": 4696.0,
+          "delta": 72.0
+        }
+      },
+      "method_valid": true,
+      "known_response_matches": true,
+      "target_latency_ms": 8600
+    }
+  ],
+  "no_model_replay": true,
+  "verdicts_changed": false
+}

@@ -1,0 +1,120 @@
+{
+  "dataset_sha256": "2800192d7ff81f4a1c1e3c439202408b102730c23cae88b939d1cc1f12c807ae",
+  "historical_failed_eval": "eval-1i8-2026-10-03T17:59:14",
+  "historical_stats": {
+    "successes": 8,
+    "failures": 2,
+    "errors": 0
+  },
+  "historical_failed_eval_sha256": "0e6cbed78c3b823d15a0e5c46eb752a1c575700a1203fe8f5ea8b45582d906bb",
+  "production_case_specific_logic": false,
+  "protected_matches": 0,
+  "credential_matches": 0,
+  "checks": [
+    {
+      "file": "security/results/day6-security-r2-probes.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-r2-targeted.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2-canary-expectations.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2-final-validation.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2-validation.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2b-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2b-canary-expectations.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2c-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2d-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2e-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2f-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2g-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2h-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2i-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2i-validation.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2j-canaries.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/results/day6-security-grader-r2j-validation.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "evidence/day6-benign002-pipeline-diagnostic-1.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "evidence/day6-benign002-pipeline-diagnostic-2.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    },
+    {
+      "file": "security/security-grading-r2.json",
+      "protected_matches": 0,
+      "credential_matches": 0
+    }
+  ]
+}

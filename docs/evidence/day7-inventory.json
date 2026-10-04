@@ -1,0 +1,239 @@
+{
+  "branch": "day6-security-finops",
+  "head": "4a5df7c42bb741226fd22a44f93cd40dc3f26a79",
+  "nodes": [
+    {
+      "name": "desktop-control-plane",
+      "conditions": [
+        {
+          "lastHeartbeatTime": "2026-10-04T10:35:40Z",
+          "lastTransitionTime": "2026-09-29T08:13:06Z",
+          "message": "kubelet has sufficient memory available",
+          "reason": "KubeletHasSufficientMemory",
+          "status": "False",
+          "type": "MemoryPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-04T10:35:40Z",
+          "lastTransitionTime": "2026-09-29T08:13:06Z",
+          "message": "kubelet has no disk pressure",
+          "reason": "KubeletHasNoDiskPressure",
+          "status": "False",
+          "type": "DiskPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-04T10:35:40Z",
+          "lastTransitionTime": "2026-09-29T08:13:06Z",
+          "message": "kubelet has sufficient PID available",
+          "reason": "KubeletHasSufficientPID",
+          "status": "False",
+          "type": "PIDPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-04T10:35:40Z",
+          "lastTransitionTime": "2026-09-29T08:13:31Z",
+          "message": "kubelet is posting ready status",
+          "reason": "KubeletReady",
+          "status": "True",
+          "type": "Ready"
+        }
+      ],
+      "version": "v1.34.3"
+    }
+  ],
+  "namespaces": [
+    "default",
+    "insighthub",
+    "insighthub-dev",
+    "kube-node-lease",
+    "kube-public",
+    "kube-system",
+    "local-path-storage",
+    "monitoring"
+  ],
+  "insighthub-dev": [
+    {
+      "name": "insighthub-api-74cbfb56bd-8ldm4",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "api",
+          "ready": true,
+          "restarts": 0,
+          "image": "docker.io/library/insighthub-api:day6-security-r2-local"
+        }
+      ]
+    },
+    {
+      "name": "insighthub-ingestion-worker-6c54b77c8f-zbrmh",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "ingestion-worker",
+          "ready": true,
+          "restarts": 40,
+          "image": "docker.io/library/insighthub-ingestion-worker:day4-final"
+        }
+      ]
+    },
+    {
+      "name": "insighthub-postgres-0",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "postgres",
+          "ready": true,
+          "restarts": 10,
+          "image": "sha256:be2dedd215733ac25f6d3d2413f5f579f35c82bd659e09ef47fc0f2a4bada0eb"
+        }
+      ]
+    },
+    {
+      "name": "insighthub-postgres-exporter-8966457fd-z7z95",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "postgres-exporter",
+          "ready": true,
+          "restarts": 7,
+          "image": "ghcr.io/prometheus-community/postgres-exporter:v0.20.1"
+        }
+      ]
+    },
+    {
+      "name": "insighthub-redis-5cb8d5f897-qlpjb",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "redis",
+          "ready": true,
+          "restarts": 6,
+          "image": "sha256:8f5c54441eb93183170be8c9fc2d8e8275171a6866ca1b4ae682a2ced6a98889"
+        }
+      ]
+    },
+    {
+      "name": "insighthub-redis-exporter-69788c8dd-52p2t",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "redis-exporter",
+          "ready": true,
+          "restarts": 7,
+          "image": "docker.io/oliver006/redis_exporter:v1.89.0"
+        }
+      ]
+    },
+    {
+      "name": "insighthub-web-6d7d4859d6-glqxh",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "web",
+          "ready": true,
+          "restarts": 22,
+          "image": "docker.io/library/insighthub-web:day3"
+        }
+      ]
+    }
+  ],
+  "monitoring": [
+    {
+      "name": "alertmanager-kube-prometheus-stack-alertmanager-0",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "alertmanager",
+          "ready": true,
+          "restarts": 6,
+          "image": "quay.io/prometheus/alertmanager:v0.34.1"
+        },
+        {
+          "name": "config-reloader",
+          "ready": true,
+          "restarts": 5,
+          "image": "quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1"
+        }
+      ]
+    },
+    {
+      "name": "kube-prometheus-stack-grafana-5b757774dc-gvnkj",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "grafana",
+          "ready": true,
+          "restarts": 6,
+          "image": "docker.io/grafana/grafana:13.2.3-distroless"
+        },
+        {
+          "name": "grafana-sc-dashboard",
+          "ready": true,
+          "restarts": 5,
+          "image": "quay.io/kiwigrid/k8s-sidecar:2.11.2"
+        },
+        {
+          "name": "grafana-sc-datasources",
+          "ready": true,
+          "restarts": 5,
+          "image": "quay.io/kiwigrid/k8s-sidecar:2.11.2"
+        }
+      ]
+    },
+    {
+      "name": "kube-prometheus-stack-kube-state-metrics-788d5d9c8c-dls7l",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "kube-state-metrics",
+          "ready": true,
+          "restarts": 30,
+          "image": "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.20.0"
+        }
+      ]
+    },
+    {
+      "name": "kube-prometheus-stack-operator-7c7bcb7ffb-sjx96",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "kube-prometheus-stack",
+          "ready": true,
+          "restarts": 13,
+          "image": "quay.io/prometheus-operator/prometheus-operator:v0.94.1"
+        }
+      ]
+    },
+    {
+      "name": "kube-prometheus-stack-prometheus-node-exporter-xrfp4",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "node-exporter",
+          "ready": true,
+          "restarts": 7,
+          "image": "quay.io/prometheus/node-exporter:v1.12.1-distroless"
+        }
+      ]
+    },
+    {
+      "name": "prometheus-kube-prometheus-stack-prometheus-0",
+      "phase": "Running",
+      "containers": [
+        {
+          "name": "config-reloader",
+          "ready": true,
+          "restarts": 5,
+          "image": "quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1"
+        },
+        {
+          "name": "prometheus",
+          "ready": true,
+          "restarts": 10,
+          "image": "quay.io/prometheus/prometheus:v3.15.0-distroless"
+        }
+      ]
+    }
+  ],
+  "containers": "insighthub-day6-budget-gateway docker.litellm.ai/berriai/litellm:v1.98.0 Up 9 hours\ninsighthub-day6-litellm docker.litellm.ai/berriai/litellm:v1.98.0 Up 9 hours\ndesktop-kubeapi-relay insighthub-api:day6-citation-r1-local Up 19 hours (unhealthy)"
+}

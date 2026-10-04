@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "target": "day6",
+  "status": "FAIL",
+  "scope": "partial-runtime-contract",
+  "runtime_verified": false,
+  "source_sha256": "d473472241ec0ece7b817f2128c9dfd5e2561bf3f34b17ddac38586472e25ed6",
+  "milestone_complete": false,
+  "checks": [
+    {
+      "id": "day6",
+      "status": "FAIL",
+      "runtime_verified": false,
+      "message": "Final evaluation failed case: attack-002"
+    }
+  ],
+  "specification_review_required": true,
+  "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+}

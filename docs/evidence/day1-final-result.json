@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "runtime_verified": true,
+  "backend_tests": {
+    "pass": 67
+  },
+  "milestone_tests": {
+    "pass": 6
+  },
+  "provenance": "Final milestone result recorded in ai-prompts/day1.md; original standalone verifier result not present here. This is a log-derived summary, not a reconstructed verifier output.",
+  "limitations": [
+    "Historical fixture scope",
+    "Earlier runtime JSON retry failed to failed is retained unchanged; successful retry described by later review/tests",
+    "Not fresh final-submission revalidation"
+  ]
+}

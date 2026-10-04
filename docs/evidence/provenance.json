@@ -1,0 +1,197 @@
+{
+  "notice": "Original historical files unchanged; exact copies retain bytes; compact projections omit unsafe/unnecessary bodies. Source hashes allow independent review with local originals.",
+  "artifacts": {
+    "day1-status.md": {
+      "source": "evidence/day1-review.md",
+      "source_sha256": "1b2834492cc9f794c991c399dc67ed56e837f13e0662a518c494d39baf64f69c",
+      "package_sha256": "1b2834492cc9f794c991c399dc67ed56e837f13e0662a518c494d39baf64f69c",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day2-status.md": {
+      "source": "evidence/day2-status.md",
+      "source_sha256": "7005c91488a0455c8790ee0dd17bade322493d462ce2b37b88ded9a96890d554",
+      "package_sha256": "7005c91488a0455c8790ee0dd17bade322493d462ce2b37b88ded9a96890d554",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day3-status.md": {
+      "source": "evidence/day3-status.md",
+      "source_sha256": "ac1a57dc4aa01584357797adf1150ef608ebb87138cf77770e483937ac6700bb",
+      "package_sha256": "ac1a57dc4aa01584357797adf1150ef608ebb87138cf77770e483937ac6700bb",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day4-status.md": {
+      "source": "evidence/day4-status.md",
+      "source_sha256": "5879c04bbb0884ef36b395d0c05334922e1f2908809864b88573c5332bd0d7db",
+      "package_sha256": "5879c04bbb0884ef36b395d0c05334922e1f2908809864b88573c5332bd0d7db",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day5-status.md": {
+      "source": "evidence/day5-status.md",
+      "source_sha256": "8d060627fea4c636666c6c7072bc5e682b57e5699e7634728423f9e9eb446a6e",
+      "package_sha256": "8d060627fea4c636666c6c7072bc5e682b57e5699e7634728423f9e9eb446a6e",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day1-runtime.json": {
+      "source": "evidence/day1-async-runtime.json",
+      "source_sha256": "8ee20cc0a2cd37c35bb19a5d866acc07f2e4e5c5f7d7b8f52bf6a32ff5eaa8bb",
+      "package_sha256": "8ee20cc0a2cd37c35bb19a5d866acc07f2e4e5c5f7d7b8f52bf6a32ff5eaa8bb",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day1-replay.json": {
+      "source": "evidence/day1-async-replay.json",
+      "source_sha256": "5accb638bf87122812a308d4aef6a6f2ecc2f8f43ab5794a29faee3467f6e33f",
+      "package_sha256": "5accb638bf87122812a308d4aef6a6f2ecc2f8f43ab5794a29faee3467f6e33f",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day1-final-result.json": {
+      "source": "ai-prompts/day1.md",
+      "source_sha256": "acf102ddd0a6b322b21741534356b9746d1cc3492a609c0e35ce6d246de07292",
+      "package_sha256": "77b25cf75f544be4b203d5ebf1c9b1d914124ee8148450de40b379f308d80e4d",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day4-baseline.md": {
+      "source": "evidence/day4-baseline.md",
+      "source_sha256": "00b2f21843244c7ddf4e9511d3b53896faa91510460f01895cebb0406baf5f78",
+      "package_sha256": "00b2f21843244c7ddf4e9511d3b53896faa91510460f01895cebb0406baf5f78",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day5-audit.json": {
+      "source": "evidence/day5-audit.json",
+      "source_sha256": "9c2463d900a78033a2458ec6da1ac85e9239d6d648b3fea19e736dfcfb0079ba",
+      "package_sha256": "59dbf4ddaa014238a55e4144f199955b60370304088963c60bbdaebc8c5f3d12",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-final-results.json": {
+      "source": "security/results/day6-final-promptfoo.json",
+      "source_sha256": "5c4d222dc8634acf3be26cd1e7c253bb2563e66138fd1140c0d653ac5d5a9ad4",
+      "package_sha256": "b35d4c11fcf589ad019912737829909835a98634f6fcb2e7afb9fce956f66aef",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-verifier.json": {
+      "source": "evidence/day6-verifier-first.json",
+      "source_sha256": "9450580d2aa5749d64bfb91dee3a17a6fa6482e476dbb92f85040713587e2cfe",
+      "package_sha256": "9450580d2aa5749d64bfb91dee3a17a6fa6482e476dbb92f85040713587e2cfe",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-cost-final.json": {
+      "source": "evidence/day6-cost-final.json",
+      "source_sha256": "967c7dcabc9091f5228de22c0c7d68b3463836d7a9b14dcffc59da8555fa07d3",
+      "package_sha256": "550ceea3841ef013de2d7fc45dea0303ff2f4d6dfa3910d8766994ec81e5291b",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-finops-workloads.json": {
+      "source": "evidence/day6-finops-workloads.json",
+      "source_sha256": "36344058106fc7af3848ff344672f17cc7bdd5dec741b866c94b36f3f5ac8002",
+      "package_sha256": "2fc6d200255bca32d4da732d406349a1ebbe09b3d7590fc555b7cadfa9ae3078",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-finops-insighthub.json": {
+      "source": "evidence/day6-finops-insighthub.json",
+      "source_sha256": "2af275bc51af0bef908ce4f700a8e676628e1e32ba03c548139cf40f1f832a80",
+      "package_sha256": "02ae31a2472180206006e7af6d43c4931ba59d68eb638aa64ccd8d7272b65333",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-finops-ledger.json": {
+      "source": "evidence/day6-finops-ledger.json",
+      "source_sha256": "0326dab2c5c7adce6229929826cc27057a7be3d2f156300db6ed993e45cc41ec",
+      "package_sha256": "ff87a07acc88fb2ede5b9d78f81184174c9c27fe3b4b90c10e5e77caeb638982",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-finops-cost-workloads.json": {
+      "source": "evidence/day6-finops-cost-workloads.json",
+      "source_sha256": "5aa067480d6047383be052358f441529322bc54ab69e0d04608f7ca57c4b42e9",
+      "package_sha256": "5ba36e482ae830eecca88e787fc45b682f94baa718628ed279cb92cd8fba3f2f",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-monitoring-runtime.json": {
+      "source": "evidence/day6-monitoring-runtime.json",
+      "source_sha256": "25b8648467933b0ebaed1fe5b4427338404e4e2aaf81d4a31056fb236e176463",
+      "package_sha256": "b00b0259e69b996019768f8484c4769da3f1deafd3d0b7085ae9461b6196e43e",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day7-runtime.json": {
+      "source": "evidence/day7-runtime.json",
+      "source_sha256": "41cbaf6acf319d35e674201390771352d1deaa5783dc0af358c0c60857276a08",
+      "package_sha256": "69db7397d2cc6918e61d9bd9acacc1d8270f944f8685b8ef65ba2af72fde914f",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day7-tests.json": {
+      "source": "evidence/day7-tests.json",
+      "source_sha256": "38a1be4db81f18fe1f231198c3003c8c705e3dcd9c47d5831a49badd58c1eb6f",
+      "package_sha256": "34a8bb23a37aecaabb5729f13febc768969f2ebce7ddd31284329e605cd9280e",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-rag-poisoning.json": {
+      "source": "security/results/day6-final-rag-poisoning.json",
+      "source_sha256": "0390f75a479c5735db19b7b67c6dbd012f758f4a14035eceebb624a25a0289f9",
+      "package_sha256": "27977585b1fa616a790bd28c79b1ab41462ea88637755dfc025ddae4c21e9af9",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-output-sanity.json": {
+      "source": "security/results/day6-final-sanity.json",
+      "source_sha256": "1eb15097570d0a44393b7f04d349171ee5db0d756ccf4c93b2a6f5de1eb08280",
+      "package_sha256": "e3ba30f62bf35625144fda6e0104e6ac9b099f7c879250d95bf2d7e48e40ff55",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-prompt-leak-integrity.json": {
+      "source": "security/results/day6-security-r2-integrity.json",
+      "source_sha256": "75040fcf1d364b81a5c4a6bffe864f8af17cfb064b1f542fd05ef68c9a698890",
+      "package_sha256": "727b18be58e7cbc707a4b8b83a4833dfe80586d227a1594c7ff87fc2b9bb0121",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-recovered-tokens.json": {
+      "source": "evidence/day6-recovered-token-observations.json",
+      "source_sha256": "294d35a198314a62eb1dd4d86181edbf2fca649b14ed6cc9702039b1eea264c8",
+      "package_sha256": "7e31642de242b0089144e6c8a6fdf304e25acb77ee7eb628a892bd0598d073d0",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day6-acceptance-reconciliation.md": {
+      "source": "evidence/day6-acceptance-reconciliation.md",
+      "source_sha256": "043e8d209f404aed384bee4766892a6a88465988281a98f05d3404e18c27a3bc",
+      "package_sha256": "b988f1773efd1fb648542f0e0317212938ca0ab93dcef1838022a23c79385309",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day7-final.md": {
+      "source": "evidence/day7-final.md",
+      "source_sha256": "6df479b77168148ce00515af6db135461d00b18ff0ca1b140194fb3f89af77f6",
+      "package_sha256": "56f00a0198bffd8d784cfbd2c005f87ce3e05e2e332728dd4b97a48034ff4682",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day7-inventory.json": {
+      "source": "evidence/day7-inventory.json",
+      "source_sha256": "63bf00563ede4f1e8b5941b0f7ae14d46de3f3c474724f3f628828202a1a4de2",
+      "package_sha256": "7c7d2bdf800886f5aaebfd45e5be716c750139dcef01467558a461bee5388e74",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day7-review.json": {
+      "source": "evidence/day7-review.json",
+      "source_sha256": "d7df61ae16089ef24172bd1f470f54d50a0b055d58c88f14c68ca57decce7fbe",
+      "package_sha256": "6c6f06986e808d19bc0710fdbed6448d6c634061577d0558bc594d705a56fa56",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day2-host-validation.md": {
+      "source": "evidence/day2-mcp-host-validation.md",
+      "source_sha256": "f82727de9fa5133dcca827a48f255f40def138e13c727eb886750c070522be6e",
+      "package_sha256": "f82727de9fa5133dcca827a48f255f40def138e13c727eb886750c070522be6e",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day3-local-k8s.md": {
+      "source": "evidence/day3-local-k8s.md",
+      "source_sha256": "9257f0386e6c6c0834cd59d76b0530eede0aec008d8df8d5c60013eb7aec30c5",
+      "package_sha256": "9257f0386e6c6c0834cd59d76b0530eede0aec008d8df8d5c60013eb7aec30c5",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "day3-ci-binding.json": {
+      "source": "evidence/day3-ci-binding.json",
+      "source_sha256": "de3dd7705a837f9dc4eea3e302bb4cc5d5f55e7910fb5ef67e3507fda88f0518",
+      "package_sha256": "0286a8a34aa660a5ecfb5adb015dd40b574b19ae7dea94dd8a93131b75bc97d1",
+      "packaging_notice": "Original preserved; links/private machine paths may be adapted in derivative. Verdicts, severity, IDs, tokens and cost not altered."
+    },
+    "final-smoke.json": {
+      "source": "evidence/submission-runtime.json",
+      "source_sha256": "f870a7e3886c59845e92f5038e0baaddac473df0f90259f3f08ecab2c0f75031",
+      "package_sha256": "ab36d67bc44f2aecbc74cfbab6f09f0c7f89e8c3b568a5a2f0840e0b0ebd1e07"
+    }
+  },
+  "package_hash_semantics": "SHA-256 of canonical staged Git blob bytes (LF); source hashes remain original local bytes."
+}

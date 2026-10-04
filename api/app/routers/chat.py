@@ -12,11 +12,18 @@ from app.core.metrics import (
     llm_tokens_total,
     rag_query_latency,
 )
-from app.services.llm import generate
+from app.services.llm import SYSTEM_PROMPT, generate
 from app.services.retrieval import retrieve
 from app.core.config import get_settings
 from app.core.metrics import guardrail_decisions_total
-from app.security.guardrails import REFUSAL, filter_contexts, inspect_request, protect_output
+from app.security.guardrails import (
+    REFUSAL,
+    filter_contexts,
+    inspect_request,
+    normalize_source_citations,
+    protect_output,
+    sanitize_context_sources,
+)
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
@@ -70,11 +77,11 @@ def chat(req: ChatRequest):
         contexts, filtered = filter_contexts(contexts)
         response_contexts = contexts
         if filtered:
-            safe_ids = {id(context) for context in contexts}
+            safe_keys = {(context.get("id"), context["source"]) for context in contexts}
             response_contexts = contexts + [
                 {"source": context["source"], "chunk_text": "[FILTERED_BY_GUARDRAIL]"}
                 for context in retrieved_contexts
-                if id(context) not in safe_ids
+                if (context.get("id"), context["source"]) not in safe_keys
             ]
         if not contexts:
             settings = get_settings()
@@ -82,11 +89,17 @@ def chat(req: ChatRequest):
                       "provider": settings.llm_provider, "model": settings.resolved_chat_model,
                       "usage": {"input_tokens": None, "output_tokens": None, "source": "unavailable"}}
         else:
+            generation_contexts = sanitize_context_sources(contexts)
             with llm_call_latency.time():
-                result = generate(req.question, contexts)
-            result["answer"], _ = protect_output(result["answer"])
-            if result["sources"] and "[nguồn:" not in result["answer"].casefold():
-                result["answer"] = f'{result["answer"]} [nguồn: {result["sources"][0]}]'
+                result = generate(req.question, generation_contexts)
+            result["answer"], _ = protect_output(result["answer"], (SYSTEM_PROMPT,))
+            if result["answer"] == REFUSAL:
+                result["sources"] = []
+            else:
+                result["answer"], result["sources"] = normalize_source_citations(
+                    result["answer"], generation_contexts
+                )
+        response_contexts = sanitize_context_sources(response_contexts)
     for direction in ("input", "output"):
         value = result["usage"].get(f"{direction}_tokens")
         if value is not None:
