@@ -6,9 +6,21 @@ REPOSITORY: https://github.com/Crozn1812/insighthub_devops
 
 BRANCH: day6-security-finops
 
-FINAL COMMIT: Not yet committed at preparation time; resolved after push.
+FINAL COMMIT: current head of [PR #5](https://github.com/Crozn1812/insighthub_devops/pull/5).
 
-PR: Not yet created at preparation time.
+Audited source/config/evidence checkpoint:
+[`adee283dc040a570f2564a68055638ad4542ed9e`](https://github.com/Crozn1812/insighthub_devops/commit/adee283dc040a570f2564a68055638ad4542ed9e).
+This manifest is finalized in a metadata-only follow-up commit; its own commit SHA
+cannot be embedded in its content without creating another commit. The PR head
+and remote submission branch are authoritative for the final tip. Resolve it with:
+
+```powershell
+git rev-parse HEAD
+git ls-remote --heads origin day6-security-finops
+gh pr view 5 --repo Crozn1812/insighthub_devops --json headRefOid
+```
+
+PR: https://github.com/Crozn1812/insighthub_devops/pull/5 — OPEN; base main. No automatic merge.
 
 STATUS: COMPLETE_WITH_LIMITATIONS
 
@@ -41,3 +53,10 @@ Days1–5 does not mean full original rubric completion. Security FAIL remains.
 Manual follow-up: screenshots/quiz/screencast, Slack integration, HIGH/error
 review, trainer acceptance and review of packaged vs retained raw evidence.
 This PR is for submission/review, not automatic merge or production acceptance.
+
+Submission checkpoint pushed normally; GitHub README render and required docs/
+source/package paths verified. Two workflows on the implementation checkpoint
+passed (Starter baseline; Day3 IaC validation). Checks on subsequent PR/metadata
+heads are independent and must be reviewed in GitHub; no blanket CI/security
+acceptance claim. Local tree clean after the implementation commit, except
+intentionally ignored local evidence/diagnostics/runtime files.

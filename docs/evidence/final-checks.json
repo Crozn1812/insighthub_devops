@@ -27,7 +27,11 @@
     "json_artifacts_valid": 24,
     "documentation_links": "PASS in intended tree without ignored evidence",
     "historical_raw_dataset_verifier": "unchanged",
-    "secret_scan": "PASS before staging; staged audit follows",
-    "new_large_generated_files": "excluded"
+    "secret_scan": "PASS for all 345 intended-tree files and 79 exact staged paths; no actual key/secret-pattern/full-policy artifact hits",
+    "new_large_generated_files": "excluded",
+    "staged_json_valid": 28,
+    "staged_provenance_hashes": "PASS canonical Git blob SHA-256",
+    "explicit_staging_plan": "79 A/B/C/D paths, no dataset/verifier, no new file over500KB",
+    "git_diff_cached_check": "PASS"
   }
 }
