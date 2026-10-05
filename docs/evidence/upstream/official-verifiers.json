@@ -1,0 +1,771 @@
+{
+  "authority": "congdinh2008/insighthub",
+  "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+  "note": "Pristine upstream executable. Reports bind their observed source fingerprint, not later changes. INCOMPLETE is retained verbatim, never converted to PASS.",
+  "runs": [
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day1",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--api-url",
+        "http://127.0.0.1:18103",
+        "--web-url",
+        "http://127.0.0.1:13103",
+        "--compose-file",
+        "evidence/upstream-audit/day1-real-compose-linux.json",
+        "--compose-project",
+        "insighthub-upstream-day1-real"
+      ],
+      "started_at": "2026-10-05T02:25:42.174058+00:00",
+      "ended_at": "2026-10-05T02:26:49.428121+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day1",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "ae00ca78687e349414135c7a7aeb37c56d90d4c63043edb57b25d01e494db764",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day1",
+            "status": "PASS",
+            "runtime_verified": true,
+            "document_id": 9,
+            "filename": "verify-d1c8be525c2b45c39364dc9f22b88730.md",
+            "started_at": 1791167166.5325286,
+            "upload_status": 202,
+            "note": "Pipeline smoke only; retrieval quality/provider effectiveness not evaluated. Uploaded document retained."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "ae04280d4d3c19a87ac272a0e440532130ba0353cfc7ed2393eb1f73c3c3a361"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day2",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--api-url",
+        "http://127.0.0.1:18102",
+        "--prometheus-url",
+        "http://127.0.0.1:19092"
+      ],
+      "started_at": "2026-10-05T02:26:49.438948+00:00",
+      "ended_at": "2026-10-05T02:28:19.094364+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day2",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "ae00ca78687e349414135c7a7aeb37c56d90d4c63043edb57b25d01e494db764",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day2",
+            "status": "PASS",
+            "runtime_verified": true,
+            "sdk_result": {
+              "passed": true,
+              "backend_mode": "live",
+              "live": true,
+              "backend": "live-loopback",
+              "node": "v24.19.0",
+              "server": "@modelcontextprotocol/server@2.0.0",
+              "results": [
+                {
+                  "client": "@modelcontextprotocol/client@2.0.0",
+                  "mode": "modern",
+                  "protocol": "2026-07-28",
+                  "methods": [
+                    "server/discover",
+                    "tools/list",
+                    "tools/call"
+                  ],
+                  "calls": [
+                    "insighthub_health",
+                    "insighthub_list_documents"
+                  ],
+                  "passed": true
+                },
+                {
+                  "client": "@modelcontextprotocol/client@2.0.0",
+                  "mode": "legacy",
+                  "protocol": "2025-11-25",
+                  "methods": [
+                    "initialize",
+                    "notifications/initialized",
+                    "tools/list",
+                    "tools/call"
+                  ],
+                  "calls": [
+                    "insighthub_health",
+                    "insighthub_list_documents"
+                  ],
+                  "passed": true
+                },
+                {
+                  "client": "@modelcontextprotocol/sdk@1.30.0",
+                  "mode": "v1",
+                  "protocol": "2025-11-25",
+                  "methods": [
+                    "initialize",
+                    "notifications/initialized",
+                    "tools/list",
+                    "tools/call"
+                  ],
+                  "calls": [
+                    "insighthub_health",
+                    "insighthub_list_documents"
+                  ],
+                  "passed": true
+                },
+                {
+                  "client": "@modelcontextprotocol/client@2.0.0",
+                  "mode": "auto",
+                  "protocol": "2026-07-28",
+                  "methods": [
+                    "server/discover",
+                    "tools/list",
+                    "tools/call"
+                  ],
+                  "calls": [
+                    "insighthub_health",
+                    "insighthub_list_documents"
+                  ],
+                  "passed": true
+                }
+              ]
+            },
+            "note": "Real SDK subprocess and permission tests executed; backend mode explicitly recorded."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "6e19eb80bb52e64bb4f08a9f7fac2d4dc4e588ac5612b66b5e019a4967673e4f"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day3",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--ci-profile",
+        "local"
+      ],
+      "started_at": "2026-10-05T02:28:19.102299+00:00",
+      "ended_at": "2026-10-05T02:30:25.528323+00:00",
+      "exit_code": 2,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day3",
+        "status": "INCOMPLETE",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": false,
+        "source_sha256": "ae00ca78687e349414135c7a7aeb37c56d90d4c63043edb57b25d01e494db764",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day3",
+            "status": "INCOMPLETE",
+            "runtime_verified": false,
+            "message": "Local preparation checked; GitHub pipeline remains mandatory for Day 3"
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "50e82f78f80e2042d48c6fc916f08d1cc3d2f34f801120019014787170c92379"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day4",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--prometheus-url",
+        "http://127.0.0.1:19092"
+      ],
+      "started_at": "2026-10-05T02:30:25.540127+00:00",
+      "ended_at": "2026-10-05T02:30:36.090773+00:00",
+      "exit_code": 2,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day4",
+        "status": "INCOMPLETE",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": false,
+        "source_sha256": "ae00ca78687e349414135c7a7aeb37c56d90d4c63043edb57b25d01e494db764",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day4",
+            "status": "INCOMPLETE",
+            "runtime_verified": false,
+            "message": "Evidence is stale or future-dated"
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "5ce4447daff74c89ff35d51ceb968bc0d62b5e82dbfad68e98b305c375e66c15"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day5",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--bot-url",
+        "http://127.0.0.1:18080"
+      ],
+      "started_at": "2026-10-05T02:30:36.099526+00:00",
+      "ended_at": "2026-10-05T02:30:58.939479+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day5",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "ae00ca78687e349414135c7a7aeb37c56d90d4c63043edb57b25d01e494db764",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day5",
+            "status": "PASS",
+            "runtime_verified": true,
+            "tests": 5,
+            "bot_transport": "http",
+            "note": "Permission/approval/dedup and selected transport tested locally with audit; external Slack delivery not tested."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "1b2e038a65a74cf019c43b62f4f9f0085e2a0f8ddaebcf60677fb8458441581f"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day6",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--api-url",
+        "http://127.0.0.1:18102"
+      ],
+      "started_at": "2026-10-05T02:30:58.968189+00:00",
+      "ended_at": "2026-10-05T02:31:18.459834+00:00",
+      "exit_code": 2,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day6",
+        "status": "INCOMPLETE",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": false,
+        "source_sha256": "ae00ca78687e349414135c7a7aeb37c56d90d4c63043edb57b25d01e494db764",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day6",
+            "status": "INCOMPLETE",
+            "runtime_verified": false,
+            "message": "Evidence is stale or future-dated"
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "567c3ff8ebc5d83c597f2dfae298e7fb50d06ee50333d1330a66550229163625"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day4",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/day4-real-envelopes",
+        "--prometheus-url",
+        "http://127.0.0.1:19092",
+        "--json",
+        "--timeout",
+        "60"
+      ],
+      "started_at": "2026-10-05T03:54:23.088907+00:00",
+      "ended_at": "2026-10-05T03:54:37.937935+00:00",
+      "exit_code": 1,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day4",
+        "status": "FAIL",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": false,
+        "source_sha256": "7b83c9ce2c0d931771de2ce90f3dd8412b369b81082d3ecde949b9eb7ad7cb47",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day4",
+            "status": "FAIL",
+            "runtime_verified": false,
+            "message": "RCA citation does not match live telemetry at timestamp"
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "9f95b0296704027d460c66f03e2d25341916defcf7840e5e6d2d0e33134831c4"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day4",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/day4-range-envelopes",
+        "--prometheus-url",
+        "http://127.0.0.1:19092",
+        "--json",
+        "--timeout",
+        "60"
+      ],
+      "started_at": "2026-10-05T03:57:45.573283+00:00",
+      "ended_at": "2026-10-05T03:57:57.927267+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day4",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "7b83c9ce2c0d931771de2ce90f3dd8412b369b81082d3ecde949b9eb7ad7cb47",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day4",
+            "status": "PASS",
+            "runtime_verified": true,
+            "incidents_checked": 3,
+            "samples_checked": 16,
+            "note": "Three RCA telemetry contracts checked; alert delivery, panel coverage and MLOps knowledge still require specification review."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "f1b8baa0c187dd8662568245d28cbbc50c263b5b8e377d5e9174868d4e5533e4"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day1",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--api-url",
+        "http://127.0.0.1:18103",
+        "--web-url",
+        "http://127.0.0.1:13103",
+        "--compose-file",
+        "evidence/upstream-audit/day1-real-compose-linux.json",
+        "--compose-project",
+        "insighthub-upstream-day1-real"
+      ],
+      "started_at": "2026-10-05T04:03:23.309062+00:00",
+      "ended_at": "2026-10-05T04:04:35.375208+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day1",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "7b83c9ce2c0d931771de2ce90f3dd8412b369b81082d3ecde949b9eb7ad7cb47",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day1",
+            "status": "PASS",
+            "runtime_verified": true,
+            "document_id": 14,
+            "filename": "verify-a2b04cbc1924493a937227231359b89f.md",
+            "started_at": 1791173039.505281,
+            "upload_status": 202,
+            "note": "Pipeline smoke only; retrieval quality/provider effectiveness not evaluated. Uploaded document retained."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "fde04a8a5ad04857878c2138c36346bde9389343330617b84d13345f2f2c642a"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day2",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--api-url",
+        "http://127.0.0.1:18102",
+        "--prometheus-url",
+        "http://127.0.0.1:19092"
+      ],
+      "started_at": "2026-10-05T04:04:35.399950+00:00",
+      "ended_at": "2026-10-05T04:06:05.244549+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day2",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "7b83c9ce2c0d931771de2ce90f3dd8412b369b81082d3ecde949b9eb7ad7cb47",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day2",
+            "status": "PASS",
+            "runtime_verified": true,
+            "sdk_result": {
+              "passed": true,
+              "backend_mode": "live",
+              "live": true,
+              "backend": "live-loopback",
+              "node": "v24.19.0",
+              "server": "@modelcontextprotocol/server@2.0.0",
+              "results": [
+                {
+                  "client": "@modelcontextprotocol/client@2.0.0",
+                  "mode": "modern",
+                  "protocol": "2026-07-28",
+                  "methods": [
+                    "server/discover",
+                    "tools/list",
+                    "tools/call"
+                  ],
+                  "calls": [
+                    "insighthub_health",
+                    "insighthub_list_documents"
+                  ],
+                  "passed": true
+                },
+                {
+                  "client": "@modelcontextprotocol/client@2.0.0",
+                  "mode": "legacy",
+                  "protocol": "2025-11-25",
+                  "methods": [
+                    "initialize",
+                    "notifications/initialized",
+                    "tools/list",
+                    "tools/call"
+                  ],
+                  "calls": [
+                    "insighthub_health",
+                    "insighthub_list_documents"
+                  ],
+                  "passed": true
+                },
+                {
+                  "client": "@modelcontextprotocol/sdk@1.30.0",
+                  "mode": "v1",
+                  "protocol": "2025-11-25",
+                  "methods": [
+                    "initialize",
+                    "notifications/initialized",
+                    "tools/list",
+                    "tools/call"
+                  ],
+                  "calls": [
+                    "insighthub_health",
+                    "insighthub_list_documents"
+                  ],
+                  "passed": true
+                },
+                {
+                  "client": "@modelcontextprotocol/client@2.0.0",
+                  "mode": "auto",
+                  "protocol": "2026-07-28",
+                  "methods": [
+                    "server/discover",
+                    "tools/list",
+                    "tools/call"
+                  ],
+                  "calls": [
+                    "insighthub_health",
+                    "insighthub_list_documents"
+                  ],
+                  "passed": true
+                }
+              ]
+            },
+            "note": "Real SDK subprocess and permission tests executed; backend mode explicitly recorded."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "e870e8f9f98b6b304aec7871048eeed110691683d00864cc87681aafb9ae4c23"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day3",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--ci-profile",
+        "local"
+      ],
+      "started_at": "2026-10-05T04:06:05.255149+00:00",
+      "ended_at": "2026-10-05T04:08:24.408183+00:00",
+      "exit_code": 2,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day3",
+        "status": "INCOMPLETE",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": false,
+        "source_sha256": "7b83c9ce2c0d931771de2ce90f3dd8412b369b81082d3ecde949b9eb7ad7cb47",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day3",
+            "status": "INCOMPLETE",
+            "runtime_verified": false,
+            "message": "Command timed out: terraform"
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "bcb2c77caa1573897b26d37ed5594c1a01b5329b4b49f64da2cb58d5dc0bcb11"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day4",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--prometheus-url",
+        "http://127.0.0.1:19092"
+      ],
+      "started_at": "2026-10-05T04:08:24.417698+00:00",
+      "ended_at": "2026-10-05T04:08:37.479339+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day4",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "7b83c9ce2c0d931771de2ce90f3dd8412b369b81082d3ecde949b9eb7ad7cb47",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day4",
+            "status": "PASS",
+            "runtime_verified": true,
+            "incidents_checked": 3,
+            "samples_checked": 16,
+            "note": "Three RCA telemetry contracts checked; alert delivery, panel coverage and MLOps knowledge still require specification review."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "f1b8baa0c187dd8662568245d28cbbc50c263b5b8e377d5e9174868d4e5533e4"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day5",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--bot-url",
+        "http://127.0.0.1:18080"
+      ],
+      "started_at": "2026-10-05T04:08:37.490912+00:00",
+      "ended_at": "2026-10-05T04:08:56.385526+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day5",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "7b83c9ce2c0d931771de2ce90f3dd8412b369b81082d3ecde949b9eb7ad7cb47",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day5",
+            "status": "PASS",
+            "runtime_verified": true,
+            "tests": 5,
+            "bot_transport": "http",
+            "note": "Permission/approval/dedup and selected transport tested locally with audit; external Slack delivery not tested."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "b5495141a5a76b327c55f7c543949fe7ef1421de2e6dfd83f5a6f03d005ead7d"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day6",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/resume-envelopes",
+        "--json",
+        "--timeout",
+        "60",
+        "--api-url",
+        "http://127.0.0.1:18102"
+      ],
+      "started_at": "2026-10-05T04:08:56.400798+00:00",
+      "ended_at": "2026-10-05T04:09:09.308220+00:00",
+      "exit_code": 2,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "report": {
+        "schema_version": 1,
+        "target": "day6",
+        "status": "INCOMPLETE",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": false,
+        "source_sha256": "7b83c9ce2c0d931771de2ce90f3dd8412b369b81082d3ecde949b9eb7ad7cb47",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day6",
+            "status": "INCOMPLETE",
+            "runtime_verified": false,
+            "message": "Evidence is stale or future-dated"
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "source_report_sha256": "9a2beacb54fb68865402cdc594850238b49751e85f3d5a608d391c42319a5d10"
+    }
+  ]
+}

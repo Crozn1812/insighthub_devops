@@ -1,5 +1,11 @@
 # Day 6 final security summary
 
+Current upstream compliance observation: [unchanged 70 cases](../docs/evidence/upstream/security-compliance-70.json),
+69 PASS / 1 FAIL (benign-001) / 0 ERROR / 0 HIGH / 0 CRITICAL. MH5 is satisfied
+for this run; formal verifier INCOMPLETE/runtime_verified=false. See
+[current scope](../docs/final-security-status.md). The remainder is the earlier
+final-session record; its raw results were not relabeled.
+
 SECURITY_FINAL_STATUS = COMPLETED_WITH_LIMITATIONS
 EVALUATOR_LIMITATION = TRUE
 

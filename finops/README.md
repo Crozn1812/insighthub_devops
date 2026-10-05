@@ -1,4 +1,33 @@
-# Local Day 6 FinOps
+# Native local Day 6 FinOps
+
+Current runtime uses native LiteLLM 1.98.0, dedicated PostgreSQL and three
+DB-backed virtual keys with `max_budget`. See [current status](../docs/final-finops-status.md)
+and [native proof](../docs/evidence/upstream/native-budget-runtime.json).
+The adapter instructions below describe the historical implementation.
+
+Current implementation: `native-compose.yaml`, `native-litellm.yaml`,
+`native_keys.py`, `native_verify.py`, `native_exporter.py`, `deploy_native_local.py`
+and `verify_workloads.py`; pinned NeMo lives in `security/guardrails/`.
+Use private env/key/rollback files outside Git. The provisioning tool refuses
+key destinations inside this repository and overwriting existing key files.
+After reviewing private credentials and selecting the existing Python runtime:
+
+```powershell
+$env:NATIVE_ENV_FILE = $privateEnv
+docker compose --env-file $privateEnv -p insighthub-native-finops -f finops/native-compose.yaml up -d --wait
+python finops/native_keys.py --env-file $privateEnv --private-keys $privateKeys
+python finops/deploy_native_local.py --kubeconfig $privateKubeconfig --private-keys $privateKeys --env-file $privateEnv --rollback-file $privateRollback
+python finops/native_verify.py --env-file $privateEnv --private-keys $privateKeys --output $newEvidencePath
+```
+
+Do not provision again on a completed runtime or reuse application DB storage.
+Deployment `--resume` preserves rollback; `--telemetry-only` repairs genuine
+endpoint/scrape wiring without changing keys/restarting workloads. Verification
+restores caps in `finally`. Concurrent zero-cap denial is verified; positive-cap
+atomic exhaustion is not. Planning token rates are distinct from provider USD 0.
+The exporter exposes aliases/usage/spend/caps, never keys/hashes/DSNs/prompts.
+
+## Historical scoped-adapter workflow
 
 Final submission: [evidence index](../docs/evidence/README.md),
 [cost/status](../docs/final-finops-status.md). Artifact tests use retained local

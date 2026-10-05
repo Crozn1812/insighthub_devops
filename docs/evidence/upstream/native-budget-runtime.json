@@ -1,0 +1,64 @@
+{
+  "observed_at": "2026-10-04T13:49:46.550663+00:00",
+  "engine": "native-litellm-1.98.0",
+  "workloads": [
+    {
+      "workload": "insighthub",
+      "allowed": true,
+      "response_id": "chatcmpl-c75f5534-68d7-41df-9244-f0ef8ed0be1e",
+      "usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 19,
+        "total_tokens": 51
+      },
+      "max_budget": 1.0,
+      "denied": 2,
+      "native_update_zero_cap": true,
+      "denial_http_statuses": [
+        "429",
+        "429"
+      ]
+    },
+    {
+      "workload": "bot",
+      "allowed": true,
+      "response_id": "chatcmpl-d7543ba3-168b-48db-857f-57713365dbeb",
+      "usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 19,
+        "total_tokens": 51
+      },
+      "max_budget": 0.5,
+      "denied": 2,
+      "native_update_zero_cap": true,
+      "denial_http_statuses": [
+        "429",
+        "429"
+      ]
+    },
+    {
+      "workload": "coding",
+      "allowed": true,
+      "response_id": "chatcmpl-051e440b-39c0-4550-b70f-af2b76a97cb8",
+      "usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 19,
+        "total_tokens": 51
+      },
+      "max_budget": 1.0,
+      "denied": 2,
+      "native_update_zero_cap": true,
+      "denial_http_statuses": [
+        "429",
+        "429"
+      ]
+    }
+  ],
+  "provider_cost_usd": 0,
+  "native_accounting_scope": "planning allocation, not provider billing",
+  "planning_input_rate": 1e-06,
+  "planning_output_rate": 2e-06,
+  "denial_scope": "temporary native max_budget=0",
+  "positive_budget_exhaustion_verified": false,
+  "keys_emitted": false
+}

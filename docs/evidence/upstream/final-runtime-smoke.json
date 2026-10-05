@@ -1,0 +1,49 @@
+{
+  "observed_at": "2026-10-05T09:02:42.437575+00:00",
+  "scope": "Actual final local smoke, no cloud/Slack/public accessibility attestation",
+  "checks": {
+    "kubernetes": {
+      "nodes_ready": true,
+      "application_pods_ready": true,
+      "monitoring_pods_ready": true
+    },
+    "api": {
+      "http_status": 200,
+      "mode": "real",
+      "db": true
+    },
+    "postgres": true,
+    "redis_pong": true,
+    "ollama": {
+      "http_status": 200,
+      "generated": true,
+      "model": "qwen3:4b"
+    },
+    "litellm": {
+      "health_status": 200,
+      "generated": true,
+      "response_id": "chatcmpl-3b1fd95b-367c-4f17-be96-77478d4514c6",
+      "usage": {
+        "completion_tokens": 16,
+        "prompt_tokens": 16,
+        "total_tokens": 32
+      }
+    },
+    "nemo": {
+      "http_status": 200,
+      "ready": true,
+      "engine": "nemoguardrails-0.24.1",
+      "semantic_checks": false
+    },
+    "prometheus_http_status": 200,
+    "grafana_http_status": 200,
+    "rag": {
+      "http_status": 200,
+      "nonempty_answer": true,
+      "citations": 5,
+      "mode": "real",
+      "model": "qwen3:4b"
+    }
+  },
+  "provider_cost_usd": 0
+}

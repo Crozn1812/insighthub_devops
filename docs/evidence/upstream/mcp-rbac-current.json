@@ -1,0 +1,21 @@
+{
+  "checks": [
+    {
+      "verb": "get",
+      "allowed": true,
+      "resource": "pods"
+    },
+    {
+      "verb": "get",
+      "allowed": false,
+      "resource": "secrets"
+    },
+    {
+      "verb": "delete",
+      "allowed": false,
+      "resource": "pods"
+    }
+  ],
+  "credentials_exported": false,
+  "observed_at": "2026-10-05T02:27:23.0876734+00:00"
+}

@@ -1,0 +1,213 @@
+{
+  "incident_id": "upstream-real-error-1791172325206",
+  "started_at": "2026-10-05T03:51:15.456Z",
+  "ended_at": "2026-10-05T03:52:05.206Z",
+  "environment": "Docker Desktop Kubernetes; native LiteLLM/Ollama real generation; no paid provider",
+  "controlled_fault": "controlled provider proxy HTTP 503",
+  "alert_firing": true,
+  "samples": [
+    {
+      "metric": "insighthub:api_error_ratio5m",
+      "labels": {},
+      "timestamp": "2026-10-05T03:51:49.996Z",
+      "value": 1
+    },
+    {
+      "metric": "ALERTS",
+      "labels": {
+        "alertname": "InsightHubApiErrorRateAnomaly",
+        "alertstate": "firing",
+        "incident": "api-error-rate",
+        "severity": "warning"
+      },
+      "timestamp": "2026-10-05T03:51:49.963Z",
+      "value": 1
+    }
+  ],
+  "nonfinite_observations": [],
+  "model_requests": [
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    }
+  ],
+  "restored": true,
+  "recovery": {
+    "observed_at": "2026-10-05T03:52:05.101Z",
+    "health_status": 200,
+    "worker_replicas": 1,
+    "documents": [],
+    "queue_depth": [
+      {
+        "metric": {
+          "__name__": "insighthub:ingestion_queue_depth"
+        },
+        "value": [
+          1791172325.204,
+          "0"
+        ]
+      }
+    ]
+  },
+  "uploaded_ids": [],
+  "provider_cost_usd": 0,
+  "measurement_notes": "Earlier bounded attempt did not observe firing and is preserved separately. Prometheus exported_endpoint probe-label collision was corrected and regression-tested; actual warm-up request precedes scrape/burst. Five-minute telemetry includes prior attempt carryover; this is continued validation, not an independently reset experiment.",
+  "mcp_observation": {
+    "tool": "mcp__prometheus_day2__query",
+    "query": "insighthub:api_error_ratio5m",
+    "timestamp": "2026-10-05T03:51:49.996Z",
+    "observed_at": "2026-10-05 03:53:03 UTC",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"result\":\"insighthub:api_error_ratio5m =\\u003e 1 @[1791172309.996]\",\"warnings\":null}"
+        }
+      ]
+    }
+  },
+  "hypotheses": [
+    "The known controlled fault: A transient provider proxy HTTP 503 error was the direct cause, likely due to temporary under-provisioning or misconfiguration of the upstream provider's proxy service.",
+    "A temporary spike in API request volume exceeding the provider's capacity, causing rate-limiting or overload on the provider's side.",
+    "A misconfigured Prometheus scrape interval or label collision causing incorrect error ratio metrics to be reported, leading to a false positive alert."
+  ],
+  "ai_rca": {
+    "provider_response_id": "chatcmpl-2443e4d4-b214-4909-98e0-563d4dfd1d4e",
+    "model": "qwen3:4b",
+    "usage": {
+      "completion_tokens": 206,
+      "prompt_tokens": 621,
+      "total_tokens": 827
+    },
+    "advisory": true,
+    "root_cause": "The known controlled fault: A transient provider proxy HTTP 503 error was the direct cause, likely due to temporary under-provisioning or misconfiguration of the upstream provider's proxy service.",
+    "recommendations": [
+      "Verify the provider's proxy service health and resource allocation during peak traffic periods to prevent transient under-provisioning.",
+      "Implement rate limiting on the provider's API to prevent overload from sudden traffic spikes."
+    ],
+    "actual_native_virtual_key_workload": "coding",
+    "input_output_guard_checked": true
+  },
+  "causal_scope": "Controlled local fault is known; model hypotheses are advisory and must be reviewed. No Slack delivery or AWS execution.",
+  "raw_incident_sha256": "855d3014041202356b9b2f9e0f7d328cdd63f6adad623090df43fef462e42382"
+}

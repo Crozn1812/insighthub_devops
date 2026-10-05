@@ -138,3 +138,6 @@ docker-compose.yml.before-day1.bak
 /security/scripts/security-grade-r2.cjs
 /security/scripts/validate-agency-r3.cjs
 /security/scripts/validate-final-judge.cjs
+
+# Retain the earlier partially loaded capture locally; submit clearer live views.
+/docs/evidence/upstream/grafana-day4.png

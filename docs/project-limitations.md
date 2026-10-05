@@ -1,33 +1,34 @@
-# Limitations / risk register
+# Acceptance blockers and limitations
 
-Mọi future action dưới đây là đề xuất cho review sau, chưa được thực thi Day 7.
+Upstream requirements govern acceptance; partial verifier PASS is not full rubric.
 
-| Risk / gap | Trạng thái, ảnh hưởng | Future action / owner |
-|---|---|---|
-| attack-009 / attack-016 | Unresolved automated HIGH; Day 6 acceptance FAIL | Human security review, remediation riêng nếu được phép |
-| attack-002 / attack-004 | Evaluator ERROR; không có verdict; missing target bodies | Cải thiện telemetry và judge reliability trong task riêng |
-| Semantic judge | Calibration 11/12, unsafe invalid judgment | Benchmark independent/human review; không tuyên bố reliable tuyệt đối |
-| Injection heuristics | Có false positive/negative, obfuscation bypass | Mở rộng adversarial regression có scope |
-| RAG sanitizer | Mixed-content preservation không chứng minh mọi bypass được chặn | Review retrieval trust boundary / adversarial corpus |
-| Local model | qwen3:4b nondeterminism, latency, utility limits | Ghi seed/config/latency; đánh giá chất lượng độc lập |
-| Async enqueue gap | Crash sau DB commit trước enqueue chưa có outbox/reconciler | Thiết kế recovery riêng; không pending vô hạn trong production |
-| Docker Desktop K8s | Single node, không HA, host/storage dependent | Production design/backup/restore validation riêng |
-| Recovery relay | Temporary localhost16443; Docker health unhealthy dù kubectl hoạt động | Điều tra native API transport, không reset trong closeout |
-| Container endpoint | FinOps Service trỏ Docker network IP local | Discovery/recovery tự động nếu chuyển production |
-| Restart history | Worker 40, web 22 tại inventory; hiện ready | Review nguyên nhân historical restarts và stability window |
-| AWS runtime | NOT_EXECUTED_NO_AWS | Chỉ triển khai cloud với authorization/budget riêng |
-| Terraform | STATIC_VALIDATION_ONLY; không cloud plan/apply | Không coi static PASS là deployed cloud |
-| FinOps pricing | Provider USD0 local; planning allocations không billing | Pricing model riêng nếu provider thay đổi |
-| Resource measurement | RSS sampled/shared; không GPU/electricity | Đo energy/GPU/cost khi có phương pháp và scope |
-| LiteLLM identity | Adapter equivalent, không native virtual-key admin | Đánh giá native administration sau |
-| Demo budgets | Bot/Coding consumed; không reset | Show existing denial evidence, không replenish để tạo PASS |
-| Current quality tools | ruff/mypy unavailable; không install | Human chạy trong environment đã chuẩn bị; historical targeted checks không toàn repo |
-| WSL dependencies | Day 7 pytest collection thiếu prometheus_client/httpx | Existing Linux image used offline; không cài package |
-| Screenshots / quiz | Day 2 inspector/quiz, Day 4 dashboard/quiz, Day 5 screencast, Day 6 FinOps screenshot pending | Learner thu manual evidence |
-| Slack integration | Day 4 delivery / Day 5 live Slack chưa xác nhận | User-controlled app/secret setup; không ghi secret |
-| Trainer acceptance | Pending; verifier partial contract không thay rubric | Trainer + learner review |
-| Evidence shipping | evidence/* phần lớn gitignored, local links không đủ cho reviewer remote | Human quyết định packaging/sanitized export; không đổi .gitignore ở đây |
-| Historical source binding | Day wrappers bind historical source; current docs không tái attestation | Không sửa timestamp/hash để giả fresh PASS |
+- No authorized AWS account/credits: EKS, managed DB/cache, IRSA, plan/apply,
+  cloud smoke/tags remain NOT_EXECUTED_NO_AWS. Static CI is not cloud deployment.
+- Actual learner/trainer must complete quiz, self-evaluation and classroom
+  review/submissions. Upstream author's personal trainer exemptions are not ours.
+  Roadmap MLOps was chosen by the learner; its trainer-form entry is still pending.
+- Slack webhook/app/workspace, public event URL, channel alerts and three live
+  Slack intents remain unverified. Local tests/capture do not establish LIVE.
+- Mandatory Loom URL/video is absent. Script preparation is not a recording.
+- Health is local HTTP 200; public reviewer accessibility is not established.
+- Day 6 has no HIGH/CRITICAL in the compliance run but benign-001 FAIL; fresh
+  source-bound initial/all-passing final reports and fresh verifier full observation
+  contract remain unmet. Verifier INCOMPLETE/runtime_verified=false.
+- Native LiteLLM 1.98.0 responds 200 at `/health/liveliness`; its `/healthz`
+  responds 404. Deployment health is verified, but the exact Day 6 example
+  acceptance endpoint is a documented compatibility deviation.
+- NeMo uses regex rails, not semantic safety guarantees. Corpus/model judge
+  nondeterminism, encoded attacks and PII/tenant isolation retain residual risk.
+- Native budget proof is concurrent zero-cap denial. Positive-cap atomic
+  exhaustion/overshoot is unverified with asynchronous native spend updates.
+- USD 0 provider excludes hardware/power/GPU/labor; planning rates and historical
+  allocation credits are not invoices. RSS/duration is sampled, not exclusive.
+- Single local node, port-forwards/relay/private credentials need reboot recovery.
+  WSL limitations and transient readiness failures are retained, not hidden.
+- Ruff/mypy are not installed solely for submission; actual availability is reported.
 
-Final local runtime usable không đồng nghĩa production-ready/security accepted.
-Day 7 technical finalization không thay đổi Day 6 verdict.
+See [matrix](upstream-compliance-matrix.md) and [manual actions](day7/remaining-manual-actions.md).
+
+## Final native NeMo probe (2026-10-05)
+
+[Current native proof](evidence/upstream/nemo-final-runtime.json): **4 PASS / 1 FAIL**. Benign input allowed, direct injection and poisoned context blocked; real native HTTP identity failure produces API503 in an isolated current handler. The output rail allowed a behavior-override sentence that the probe expected to block. Output regexes currently cover PII/key markers, not general output injection; semantic checks are disabled. This is a documented native guardrail gap, not a unit-test failure or a substituted custom-guard PASS. No further remediation loop was performed. Literal MH6 remains enabled/configured with actual allowed/blocked proof; complete protection and Day 6 acceptance are not claimed.

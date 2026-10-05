@@ -1,19 +1,20 @@
-# Security, Governance, FinOps - bắt buộc Day 6
+# Security / Governance / FinOps
 
-## Final submission state
+Current compliance scan on the unchanged70 dataset: **69 PASS, 1 benign FAIL,
+0 ERROR, 0 HIGH, 0 CRITICAL**. MH5's no-HIGH condition is met for this observed
+run; formal Day6 acceptance remains unmet. [Current status](../docs/final-security-status.md),
+[per-case evidence](../docs/evidence/upstream/security-compliance-70.json), and
+[matrix](../docs/upstream-compliance-matrix.md) govern current claims.
+Historical66/2/2 and initial reports remain preserved in the [historical index](../docs/evidence/README.md).
 
-Dataset70 cases đã được thực thi đúng một official final scan:
-66PASS/2FAIL/2ERROR, HIGH attack-009/016 unresolved, ERROR attack-002/004,
-CRITICAL0; acceptance/verifier FAIL. Đây không còn chỉ là scaffold.
-Xem [final security](../docs/final-security-status.md),
-[tracked results](../docs/evidence/day6-final-results.json) và
-[evidence index](../docs/evidence/README.md). Frozen config/tooling được giữ để
-review provenance; không chạy lại final scan trong submission workflow.
+Promptfoo is pinned0.123.1 with valid local plugins/strategies. The foundation
+promptfooconfig.yaml and generated corpus are historical initial-generation inputs;
+its qwen3:1.7b judge is rejected for acceptance. The evaluated70 cases use the
+frozen final config/profile and qwen3:4b, not that rejected foundation judge.
+Do not rerun casually, change expectations, special-case IDs or adjudicate manually.
+Real RAG poisoning must use ingestion/retrieval, not only a /chat attack string.
 
-Nội dung dưới là hướng dẫn starter/rubric lịch sử, không phải kết luận final PASS.
-
-Học viên hoàn thiện Promptfoo50+ cases, initial/final reports, guardrails runtime, LiteLLM gateway+3 virtual keys/budgets, routing cho app/bot/coding agent, cost dashboard và threat model>=6 threats. [Spec mục10](../Running-Project-Specification-Student.md).
-
-Config skeleton chỉ giúp bắt đầu; cần actual allowed/blocked, indirect injection qua ingestion/retrieval, budget/bypass tests. Dataset/eval tự viết bổ sung, không thay Promptfoo/guardrails/gateway.
-
-Cấu hình hiện tại là scaffold, chưa đủ 50 ca. Ghi coverage mapping cho direct/indirect injection, RAG poisoning, PII và excessive agency. Dùng plugin IDs của bản pin; strategy cũ `prompt-injection` đã đổi thành `jailbreak-templates`. Nguồn: [plugins](https://www.promptfoo.dev/docs/red-team/plugins/), [migration strategy](https://www.promptfoo.dev/docs/red-team/strategies/prompt-injection/). Target HTTP gọi /chat chỉ kiểm tra câu hỏi; poisoning phải đi qua upload/retrieval bằng adapter học viên xây.
+Native NeMo0.24.1 input/context/output rails and native LiteLLM virtual keys are
+actual local runtime additions. Regex rails are not semantic guarantees.
+See [guardrails](guardrails/README.md), [threat model](threat-model.md),
+[coverage](security-coverage.md), [FinOps](../docs/final-finops-status.md).

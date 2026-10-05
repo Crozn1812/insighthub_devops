@@ -1,75 +1,30 @@
-# Final test / verification matrix
+# Current test and verification matrix
 
-PASS dưới đây chỉ áp dụng scope có evidence; không thay full rubric. H = historical,
-D7 = kiểm tra mới Day 7, static = không chứng minh deployment/runtime.
+Counts represent distinct executed suites, not full upstream acceptance. Worker
+and API security tests are subsets of the API146 and must not be added again.
 
-| Capability | Status | Evidence / kiểm tra | Scope / limitation |
-|---|---|---|---|
-| API | PASS | D7 readyz + unit HTTP; day7-runtime.json | Local real db=true; không API exhaustive |
-| Web | PASS | D7 pod ready, HTTP200 qua Service | Backend-visible page; browser UI manual pending |
-| Async ingestion | PASS | H day1 runtime/replay; ai-prompts/day1.md final 6 milestone PASS | Fixture historical; no fresh D7 upload |
-| PostgreSQL/pgvector | PASS | D7 pg_isready, API RAG; H stored vectors | Retrieval mới; không backup/restore test |
-| Redis | PASS | D7 PONG; H ingestion/ChatOps queue | Không durability disaster test D7 |
-| RAG | PASS | D7 real benign, utility/citation; H poisoning | Một benign request không semantic benchmark |
-| Docker | PASS | D7 running containers/images; offline Linux unit tests | Relay health unhealthy được ghi riêng |
-| Kubernetes | PASS | D7 Ready node/pods; H day3 local-k8s | Single local node, không HA |
-| Helm | PASS | H day3-status lint/render/local deploy | Không upgrade/rollback D7 |
-| Terraform | PASS | H day3-status; Checkov20/0, targeted suppression1, policy2/2 | STATIC_VALIDATION_ONLY; AWS NOT RUN |
-| GitHub Actions | PASS | H day3-status PR run36657449428 + ci-binding | Không trigger/new remote run D7 |
-| MCP read-only | PASS | H day2-status, inspector4/4; RBAC Secret/delete denied | Host screenshots/quiz deferred |
-| Prometheus | PASS | D7 ready200; H day4 targets/metrics, day6 monitoring | Không one-hour re-baseline D7 |
-| Grafana | PASS | D7 health200; H day4 12panels, day6 FinOps10panels | Screenshots pending |
-| Alerts | PARTIAL | H day4 3 incidents firing/restored, promtool PASS | Local Alertmanager PASS; Slack delivery pending |
-| ChatOps signature/replay | PASS | H day5-phase5a/status | Local signed event, không live Slack |
-| ChatOps durable queue | PASS | H day5-phase5a/status | Redis worker tests historical |
-| ChatOps deduplication/retry | PASS | H day5-status | Bounded retry/dedup tests historical |
-| ChatOps approval | PASS | H day5-status/audit | Binding/expiry/single-use; không new approvals D7 |
-| ChatOps Kubernetes action | PASS | H day5-status/audit controlled scale/exact restore | Constrained identity; no mutation D7 |
-| ChatOps live Slack | NOT RUN | H day5-status PENDING_USER_SLACK_APP | Human-controlled external integration |
-| Prompt injection | PARTIAL | H final corpus + guardrail unit tests | Two injection-category HIGH FAIL; no fresh attack tests |
-| Benign utility | PASS | H final10/10 benign; D7 one benign RAG | Model nondeterminism/limited coverage |
-| RAG poisoning | PASS | H day6-final-rag-poisoning.json | r2 doc23; no rerun D7 |
-| PII protection | PARTIAL | H retained bodies scan + unit checks | Zero deterministic matches in68; HIGH native judge findings unresolved |
-| Excessive agency | PARTIAL | H final raw; agency mechanical tests | Two evaluator ERROR, no valid final verdict |
-| Protected prompt leakage | PARTIAL | H safeguards/sanity +68 retained inspections | Two bodies unavailable; no full policy exported |
-| Final70 evaluation | FAIL | H raw eval-aPL:66PASS/2FAIL/2ERROR | Day6 verifier FAIL/runtime_verified=false; unchanged |
-| LiteLLM routing | PASS | H day6-insighthub; D7 two benign model requests | Local Ollama only; new config not security rescanned |
-| Workload attribution | PASS | H three identity traffic + ledger | Equivalent adapter, not native key management |
-| Token accounting | PASS | H evaluation/cost70 + D7 actual provider usage | Recovered tokens use counter windows; not body reconstruction |
-| Budget enforcement | PASS | H Bot200/200/429 + denial ledger | Planning credits, not actual provider billing |
-| Concurrent threshold | PASS | H Coding one200/one429 | Atomic local SQLite; no cloud load test |
-| Cost evidence | PASS | H cost USD0, positive budgetUSD1 | RSS/duration measured; GPU/electricity NOT RUN |
-| AWS runtime | NOT RUN | H day3-status | NOT_EXECUTED_NO_AWS |
+| Check | Actual result | Scope |
+|---|---|---|
+| API pytest with real isolated PostgreSQL | 146 PASS +97 subtests; zero skips/failures | Current API/worker/provider/HTTP/guardrail/configuration tests |
+| Worker transient retry | 4 PASS included above | Bounded backoff/final failure/permanent no-retry; not duplicate count |
+| ChatOps Linux/Redis | 62 PASS | Signature/permissions/approval/dedup, real durable recovery and completed-action redelivery |
+| Existing FinOps unittest | 12 PASS | Historical adapter concurrency plus retained artifact validators; native proof separate |
+| Fork verifier helper regressions | 69 PASS | Does not mean all official milestone contracts pass |
+| Evaluator mechanics Node | 13 PASS | Generic schema/attribution/retry; no security model scan |
+| Real-provider fault proxy pytest | 3 PASS | Explicit503, sanitized transport failure, auth-preserving real response forwarding |
+| Promtool |16 rules valid; 7 rule scenarios PASS; CRD sync PASS | Full finite1h baseline/10m offset, volume and2m persistence guards |
+| Native runtime proof |3 allowed /6 denied;6 guard checks; coding3 isolated tests | Not added to unit total; observed native max_budget and workload scope |
+| Full compliance70 |69 PASS /1 benign FAIL /0 ERROR /0 HIGH/CRITICAL | Finite unchanged corpus; predates subsequent UUID/config alias corrections |
+| Ruff / mypy | UNAVAILABLE | Not installed solely for submission |
 
-## Historical milestone results
+Current unit/mechanics total: **305 PASS**, plus **97 subtests**, zero final
+assertion failures (146+62+12+69+13+3). Seven promtool scenarios and earlier isolated
+coding tests are reported separately. Intermediate infrastructure/transport
+failures and historical99-test closeout remain retained, not silently discarded.
 
-Day1 prompt log records final backend67/67, milestone6/6, official verifier PASS
-and runtime_verified=true. Earlier docs contain backend62/62 and regression66/68
-with CRLF failures; these are earlier observations, not overwritten by final
-milestone success. day1-async-runtime.json also retains failed-to-failed retry
-observation; independent final review and later milestone log cover successful
-retry. Do not present the earlier row as successful retry evidence.
+[Official reports](evidence/upstream/official-verifiers.json) preserve exact
+upstream PASS/INCOMPLETE status and source/time binding. A partial-runtime PASS
+does not waive AWS, Slack LIVE, quizzes, Loom or trainer rubric. Day6 formal
+fresh-source/every-case/live-observation acceptance is unmet despite no HIGH.
 
-Days2/3/4/5 official partial-runtime contracts PASS, runtime_verified=true;
-manual/cloud/Slack gaps prevent a full rubric completion claim. Day6 official
-FAIL, runtime_verified=false. Historical evidence/source hashes are retained;
-the current documentation tree is not a reattestation of those runs.
-
-## Fresh Day 7 tests
-
-99 existing offline unit/artifact tests PASS, 0 assertion failures: guardrails48,
-HTTP15, providers24, FinOps12. Executed using existing Linux API image Python,
-network none, read-only repo, tmpfs test storage; no packages installed.
-Seven runtime check groups PASS/0FAIL, including current RAG and LiteLLM traffic.
-
-Initial WSL pytest collection failed with 3 missing-dependency collection errors
-(prometheus_client/httpx). First container invocation omitted test-support import
-path: 48 executed PASS plus 2 module import errors. Corrected invocation through
-WSL then failed to launch with Wsl/Service/0x8007274c. Final direct Docker invocation
-added api/tests to PYTHONPATH and passed99/99. These infrastructure/setup attempts
-are recorded, not counted as security verdicts or hidden as PASS. Ruff/mypy
-unavailable; no installs. Day6 historical117 includes helper/evaluator/live checks
-not rerun here; do not sum it with Day7 totals as unique coverage.
-
-See [evidence index](evidence/README.md), [runtime](evidence/day7-runtime.json),
-[Day7 closeout](evidence/day7-final.md).
+Current additional native NeMo proof: 4 PASS/1 FAIL (unsafe output override allowed). This is separate from 305 passing unit/mechanics tests and remains a known local control gap.

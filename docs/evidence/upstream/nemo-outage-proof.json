@@ -1,0 +1,1 @@
+{"observed_at": "2026-10-05T02:20:06.311569+00:00", "method": "Actual current-image FastAPI handler invokes native NeMo client against an unreachable loopback port; no HTTP mock or production outage.", "http_status": 503, "detail": "guardrail_unavailable", "fail_closed": true, "provider_generation_reached": false}

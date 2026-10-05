@@ -1,0 +1,939 @@
+{
+  "incident_id": "upstream-real-latency-1791171666428",
+  "started_at": "2026-10-05T03:36:36.354Z",
+  "ended_at": "2026-10-05T03:41:06.428Z",
+  "environment": "Docker Desktop Kubernetes; native LiteLLM/Ollama real generation; no paid provider",
+  "controlled_fault": "25-second forwarding delay before actual native gateway",
+  "alert_firing": true,
+  "samples": [
+    {
+      "metric": "insighthub:llm_latency_p95_seconds",
+      "labels": {},
+      "timestamp": "2026-10-05T03:40:54.846Z",
+      "value": 60
+    },
+    {
+      "metric": "insighthub:llm_calls_5m",
+      "labels": {},
+      "timestamp": "2026-10-05T03:40:54.862Z",
+      "value": 26.823171526683613
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "0.25",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "0.5",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "1.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "2.5",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "5.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "10.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "20.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "60.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 8
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "+Inf",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 24
+    },
+    {
+      "metric": "ALERTS",
+      "labels": {
+        "alertname": "InsightHubLlmLatencyAnomaly",
+        "alertstate": "firing",
+        "incident": "llm-latency",
+        "severity": "warning"
+      },
+      "timestamp": "2026-10-05T03:40:54.836Z",
+      "value": 1
+    }
+  ],
+  "nonfinite_observations": [],
+  "model_requests": [
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    },
+    {
+      "status": 200,
+      "answer_present": true
+    }
+  ],
+  "restored": true,
+  "recovery": {
+    "observed_at": "2026-10-05T03:41:06.322Z",
+    "health_status": 200,
+    "worker_replicas": 1,
+    "documents": [],
+    "queue_depth": [
+      {
+        "metric": {
+          "__name__": "insighthub:ingestion_queue_depth"
+        },
+        "value": [
+          1791171666.419,
+          "0"
+        ]
+      }
+    ]
+  },
+  "uploaded_ids": [],
+  "provider_cost_usd": 0,
+  "mcp_observation": {
+    "tool": "mcp__prometheus_day2__query",
+    "query": "insighthub:llm_latency_p95_seconds",
+    "timestamp": "2026-10-05T03:40:54.846Z",
+    "observed_at": "2026-10-05 03:42:08 UTC",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"result\":\"insighthub:llm_latency_p95_seconds =\\u003e 60 @[1791171654.846]\",\"warnings\":null}"
+        }
+      ]
+    }
+  },
+  "hypotheses": [
+    "Known controlled fault: 25-second forwarding delay before actual native gateway",
+    "Hypothesis 1: High volume of LLM calls causing temporary queue buildup in the gateway",
+    "Hypothesis 2: Network congestion between gateway and LLM service due to sudden traffic spike"
+  ],
+  "ai_rca": {
+    "provider_response_id": "chatcmpl-c1011faf-deb5-45f9-adf2-3147cd6c7882",
+    "model": "qwen3:4b",
+    "usage": {
+      "completion_tokens": 146,
+      "prompt_tokens": 1899,
+      "total_tokens": 2045
+    },
+    "advisory": true,
+    "root_cause": "Known controlled fault: 25-second forwarding delay before actual native gateway",
+    "recommendations": [
+      "Implement circuit breakers for gateway-to-LLM service traffic to prevent cascading delays",
+      "Add a dedicated queue for high-priority LLM calls to avoid saturation of the gateway"
+    ],
+    "actual_native_virtual_key_workload": "coding",
+    "input_output_guard_checked": true
+  },
+  "causal_scope": "Controlled local fault is known; model hypotheses are advisory and must be reviewed. No Slack delivery or AWS execution.",
+  "raw_incident_sha256": "f3e9b02e74418c82c07cdff01d0a5f5b1fcde9df7b347788981d5038f98c7c8b",
+  "original_instant_observations": [
+    {
+      "metric": "insighthub:llm_latency_p95_seconds",
+      "labels": {},
+      "timestamp": "2026-10-05T03:40:54.846Z",
+      "value": 60
+    },
+    {
+      "metric": "insighthub:llm_calls_5m",
+      "labels": {},
+      "timestamp": "2026-10-05T03:40:54.862Z",
+      "value": 26.878011717675435
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "0.25",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "0.5",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "1.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "2.5",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "5.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "10.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "20.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 0
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "60.0",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 8
+    },
+    {
+      "metric": "insighthub_llm_call_latency_seconds_bucket",
+      "labels": {
+        "container": "api",
+        "endpoint": "http",
+        "instance": "10.244.0.23:8000",
+        "job": "insighthub-api",
+        "le": "+Inf",
+        "namespace": "insighthub-dev",
+        "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+        "service": "insighthub-api"
+      },
+      "timestamp": "2026-10-05T03:40:54.877Z",
+      "value": 24
+    },
+    {
+      "metric": "ALERTS",
+      "labels": {
+        "alertname": "InsightHubLlmLatencyAnomaly",
+        "alertstate": "firing",
+        "incident": "llm-latency",
+        "severity": "warning"
+      },
+      "timestamp": "2026-10-05T03:40:54.836Z",
+      "value": 1
+    }
+  ],
+  "citation_collection": {
+    "observed_at": "2026-10-05T03:56:53.875Z",
+    "scope": "New literal range-query-backed citation projection at the original incident timestamps; no new incident or AI generation claimed.",
+    "original_report": "docs/evidence/upstream/incident-latency.json",
+    "original_report_sha256": "ae619614f5cbce2a219db34eb1c04310a7c674426422f3ce9013a79a1b773ece",
+    "original_upstream_verifier_result": "FAIL retained in official-verifiers.json",
+    "differences": [
+      {
+        "metric": "insighthub:llm_calls_5m",
+        "timestamp": "2026-10-05T03:40:54.862Z",
+        "original_instant_value": 26.878011717675435,
+        "actual_historical_range_value": 26.823171526683613
+      }
+    ],
+    "queries": [
+      {
+        "query": "insighthub:llm_latency_p95_seconds",
+        "start": 1791171654.846,
+        "end": 1791171655.846,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub:llm_latency_p95_seconds"
+                },
+                "values": [
+                  [
+                    1791171654.846,
+                    "60"
+                  ],
+                  [
+                    1791171655.846,
+                    "60"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub:llm_calls_5m",
+        "start": 1791171654.862,
+        "end": 1791171655.862,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub:llm_calls_5m"
+                },
+                "values": [
+                  [
+                    1791171654.862,
+                    "26.823171526683613"
+                  ],
+                  [
+                    1791171655.862,
+                    "26.823171526683613"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"0.25\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "0.25",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "0"
+                  ],
+                  [
+                    1791171655.877,
+                    "0"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"0.5\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "0.5",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "0"
+                  ],
+                  [
+                    1791171655.877,
+                    "0"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"1.0\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "1.0",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "0"
+                  ],
+                  [
+                    1791171655.877,
+                    "0"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"2.5\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "2.5",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "0"
+                  ],
+                  [
+                    1791171655.877,
+                    "0"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"5.0\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "5.0",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "0"
+                  ],
+                  [
+                    1791171655.877,
+                    "0"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"10.0\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "10.0",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "0"
+                  ],
+                  [
+                    1791171655.877,
+                    "0"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"20.0\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "20.0",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "0"
+                  ],
+                  [
+                    1791171655.877,
+                    "0"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"60.0\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "60.0",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "8"
+                  ],
+                  [
+                    1791171655.877,
+                    "8"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "insighthub_llm_call_latency_seconds_bucket{container=\"api\",endpoint=\"http\",instance=\"10.244.0.23:8000\",job=\"insighthub-api\",le=\"+Inf\",namespace=\"insighthub-dev\",pod=\"insighthub-api-8dcbbcd9c-fdgpc\",service=\"insighthub-api\"}",
+        "start": 1791171654.877,
+        "end": 1791171655.877,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "insighthub_llm_call_latency_seconds_bucket",
+                  "container": "api",
+                  "endpoint": "http",
+                  "instance": "10.244.0.23:8000",
+                  "job": "insighthub-api",
+                  "le": "+Inf",
+                  "namespace": "insighthub-dev",
+                  "pod": "insighthub-api-8dcbbcd9c-fdgpc",
+                  "service": "insighthub-api"
+                },
+                "values": [
+                  [
+                    1791171654.877,
+                    "24"
+                  ],
+                  [
+                    1791171655.877,
+                    "24"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "query": "ALERTS{alertname=\"InsightHubLlmLatencyAnomaly\",alertstate=\"firing\",incident=\"llm-latency\",severity=\"warning\"}",
+        "start": 1791171654.836,
+        "end": 1791171655.836,
+        "step": 1,
+        "http_status": 200,
+        "response": {
+          "status": "success",
+          "data": {
+            "resultType": "matrix",
+            "result": [
+              {
+                "metric": {
+                  "__name__": "ALERTS",
+                  "alertname": "InsightHubLlmLatencyAnomaly",
+                  "alertstate": "firing",
+                  "incident": "llm-latency",
+                  "severity": "warning"
+                },
+                "values": [
+                  [
+                    1791171654.836,
+                    "1"
+                  ],
+                  [
+                    1791171655.836,
+                    "1"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "note": "Original instant observations and original report remain unchanged. Values are extracted directly from actual Prometheus query_range responses; no manual substitution or tolerance change."
+  }
+}

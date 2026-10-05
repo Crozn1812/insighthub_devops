@@ -1,46 +1,32 @@
-# Final FinOps status
+# Native local FinOps status
 
-Local-only LiteLLM **1.98.0**, Docker image
-`docker.litellm.ai/berriai/litellm:v1.98.0`, digest
-`sha256:20b5044b619055374061a6d5b7b08754cad75aeabbf82ddf4f69cc0cf80ddaf4`.
-Gateway admission và proxy dùng cùng image; underlying model Ollama qwen3:4b
-think=false. API nói OpenAI-compatible protocol nhưng không gọi cloud.
+LiteLLM **1.98.0** runs against dedicated PostgreSQL and local Ollama qwen3:4b.
+Three native /key/generate virtual keys have max_budget: InsightHub $1,
+bot $0.50, coding workflow $1. Values stay outside Git. API generation routes
+through the native key/gateway; embeddings remain direct with unchanged identity.
 
-| Workload | Evidence lịch sử | Kết quả |
-|---|---|---|
-| InsightHub | day6-finops-insighthub.json | actual deployed chat, utility/citation PASS |
-| Bot | day6-finops-workloads.json | 200/200/429; identity và token usage riêng |
-| Coding | day6-finops-workloads.json | first 200; concurrent near-threshold một 200, một 429 |
+[Budget proof](evidence/upstream/native-budget-runtime.json): three allowed real
+model calls, six denied HTTP 429 requests (two concurrent per workload), caps
+restored. Denial temporarily set caps to zero. This proves concurrent zero-cap
+denial, **not atomic positive-cap exhaustion or zero overshoot** under asynchronous
+spend updates. [Workload proof](evidence/upstream/native-workloads-runtime.json)
+covers real MCP-backed bot summaries and an isolated tested coding proposal;
+the proposal was not applied to production and local capture is not Slack LIVE.
 
-Ba scoped bearer identities nằm ngoài repo. Đây là equivalent identity/budget
-adapter quanh LiteLLM, **không phải native DB-backed LiteLLM virtual-key admin**.
-SQLite persistent ledger, `BEGIN IMMEDIATE` admission không overshoot khi
-concurrent. Failure vẫn giữ allocation để tránh retry bypass; budget demo đã
-consumed, không reset. Chỉ chấp nhận model local đã pin, non-streaming, bounded
-request/output. Xem [implementation](../finops/README.md).
+Provider USD = **0** for local Ollama. Planning rates $0.000001/input token and
+$0.000002/output token exercise native budgets despite LiteLLM's free-model
+bypass. They are accounting rates, not electricity/GPU costs or provider invoices.
+Earlier zero-rate calls mean cumulative tokens times current rate do not reconstruct
+all-time spend. [Attribution](evidence/upstream/native-attribution.json) exports
+aliases, caps, actual usage/response IDs and spend without keys/hashes.
+Do not add rolling gateway or judge totals to target scan totals.
 
-**Provider cost** local Ollama = USD 0. **Planning allocation**: 10,000 micro-USD
-mỗi admitted request, không phải hóa đơn hay token-based provider pricing.
-InsightHub cap 100,000; Bot/Coding mỗi workload 20,000. Sáu successful historical
-calls tiêu thụ planning USD 0.06. Ledger export Day 6 có 9 admission events
-(6 allowed, 3 denied); Day 7 thêm hai admitted benign calls, không ghi đè snapshot.
+Grafana UID insighthub-day6-finops has ten panels backed by a real read-only native
+database exporter: workloads, usage, planning spend/caps, provider USD and health.
+See [evidence index](evidence/upstream/README.md). The SQLite scoped-identity
+adapter and atomic allocation proofs are preserved as historical implementation,
+not current native-key proof. Sampled RSS/duration is not exclusive GPU/power use.
 
-Token accounting lấy usage thật/provider IDs; final evaluation cost có đủ 70
-records, 39,004 input + 6,805 output tokens, budget config USD 1, actual provider
-USD 0. Hai lost-body records dùng actual counter deltas có provenance riêng.
-Gateway workload tokens và evaluator-judge tokens không bị nhập chung vào target
-evaluation totals. Không tuyên bố cloud billing hoặc electricity free.
-
-Resource accounting là sampled Windows aggregate Ollama RSS và duration;
-không exclusive per-request RAM, không GPU memory, không điện năng. Hai missing
-scan responses dùng target latency và run-wide sampled peak có nhãn rõ.
-
-Grafana UID `insighthub-day6-finops`, 10 panels: workload requests/tokens,
-admission/budget metrics và provider cost riêng. Live dashboard API/Prometheus
-scrape được xác nhận Day 6; Day 7 service health 200. Screenshots manual pending.
-
-Evidence: [cost](evidence/day6-cost-final.json),
-[workload cost](evidence/day6-finops-cost-workloads.json),
-[ledger](evidence/day6-finops-ledger.json),
-[monitoring](evidence/day6-monitoring-runtime.json),
-[new bounded checks](evidence/day7-runtime.json).
+AWS: **NOT_EXECUTED_NO_AWS**. MH11 requires Budgets alert *when using AWS*;
+no AWS runtime means no triggered budget obligation, and no fabricated AWS output.
+See [weekly cost report](day7/cost-report.md) and [implementation](../finops/README.md).

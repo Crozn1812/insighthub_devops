@@ -1,5 +1,11 @@
 # Submission evidence index
 
+The table below is the retained **historical closeout package**, including the
+66/2/2 security result. Current upstream audit evidence is indexed
+[here](upstream/README.md), with the new 69/1/0 scan, native LiteLLM keys/NeMo,
+real Inspector/Grafana captures and exact fresh verifier results. Historical
+pending labels/hashes are not rewritten as new observations.
+
 Compact tracked package for Days1–7; original historical evidence remains local
 and unchanged. [Provenance](provenance.json) records source SHA-256 and package
 SHA-256. Compact projections omit prompts, answer bodies, judge rendered prompts,

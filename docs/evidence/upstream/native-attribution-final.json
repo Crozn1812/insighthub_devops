@@ -1,0 +1,123 @@
+{
+  "observed_at": "2026-10-05T03:59:31.315543+00:00",
+  "scope": "Actual read-only native accounting snapshot; not an exhaustive weekly invoice",
+  "native_health_authenticated_status": 200,
+  "healthy_endpoints": 1,
+  "workloads": [
+    {
+      "key_alias": "insighthub-audit-bot",
+      "max_budget": 0.5,
+      "planning_usd": 0.000949,
+      "input_tokens": 471,
+      "output_tokens": 380,
+      "requests": 13
+    },
+    {
+      "key_alias": "insighthub-audit-coding",
+      "max_budget": 1,
+      "planning_usd": 0.0046429999999999996,
+      "input_tokens": 3617,
+      "output_tokens": 654,
+      "requests": 12
+    },
+    {
+      "key_alias": "insighthub-audit-insighthub",
+      "max_budget": 1,
+      "planning_usd": 0.140641,
+      "input_tokens": 108977,
+      "output_tokens": 19885,
+      "requests": 202
+    }
+  ],
+  "provider_cost_usd": 0,
+  "planning_input_rate": 1e-06,
+  "planning_output_rate": 2e-06,
+  "native_exporter_container_health": "healthy",
+  "application_images": [
+    {
+      "pod": "insighthub-api-5bbfd54dfc-4r67z",
+      "containers": [
+        {
+          "name": "api",
+          "image": "docker.io/library/insighthub-api:upstream-audit-local",
+          "image_id": "sha256:37c7ce7a645527b2922b29fb0d3ac47302c4cb0f5f06cd91a86d99691836387a",
+          "ready": true,
+          "restarts": 0
+        }
+      ]
+    },
+    {
+      "pod": "insighthub-ingestion-worker-58d4c94646-bk9ss",
+      "containers": [
+        {
+          "name": "ingestion-worker",
+          "image": "docker.io/library/insighthub-ingestion-worker:upstream-audit-local",
+          "image_id": "sha256:8beb71ad6051fd67ad4c2cbcfa7c37243136aa94570536d468bc67bb46232d08",
+          "ready": true,
+          "restarts": 0
+        }
+      ]
+    },
+    {
+      "pod": "insighthub-postgres-0",
+      "containers": [
+        {
+          "name": "postgres",
+          "image": "sha256:be2dedd215733ac25f6d3d2413f5f579f35c82bd659e09ef47fc0f2a4bada0eb",
+          "image_id": "docker.io/pgvector/pgvector@sha256:00ba258a66dac104fd5171074a0084462a64a1369d8513f3d0a634e2f24d15bc",
+          "ready": true,
+          "restarts": 12
+        }
+      ]
+    },
+    {
+      "pod": "insighthub-postgres-exporter-574c894446-qr66b",
+      "containers": [
+        {
+          "name": "postgres-exporter",
+          "image": "ghcr.io/prometheus-community/postgres-exporter:v0.20.1",
+          "image_id": "ghcr.io/prometheus-community/postgres-exporter@sha256:ac5ec343104fae0e2d84a27bb8d69b38430a11910c5382cad85d478d2bab713e",
+          "ready": true,
+          "restarts": 0
+        }
+      ]
+    },
+    {
+      "pod": "insighthub-redis-5cb8d5f897-qlpjb",
+      "containers": [
+        {
+          "name": "redis",
+          "image": "sha256:8f5c54441eb93183170be8c9fc2d8e8275171a6866ca1b4ae682a2ced6a98889",
+          "image_id": "docker.io/library/redis@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952",
+          "ready": true,
+          "restarts": 7
+        }
+      ]
+    },
+    {
+      "pod": "insighthub-redis-exporter-69788c8dd-52p2t",
+      "containers": [
+        {
+          "name": "redis-exporter",
+          "image": "docker.io/oliver006/redis_exporter:v1.89.0",
+          "image_id": "docker.io/oliver006/redis_exporter@sha256:fed773ffd2bb2eac706e0ed9cc2fff41651193ee4977e2a4f6919658ad2313f4",
+          "ready": true,
+          "restarts": 8
+        }
+      ]
+    },
+    {
+      "pod": "insighthub-web-6d7d4859d6-glqxh",
+      "containers": [
+        {
+          "name": "web",
+          "image": "docker.io/library/insighthub-web:day3",
+          "image_id": "docker.io/library/insighthub-web@sha256:951d53429213cbbb00249202a538550b5f6f784c43a86bfd6e5cc0d5a16b07ba",
+          "ready": true,
+          "restarts": 23
+        }
+      ]
+    }
+  ],
+  "note": "Cumulative tokens include earlier zero-rate calls; do not reconstruct all-time spend by multiplying current rates. Historical snapshots retained separately. No credentials or key/token hashes selected."
+}

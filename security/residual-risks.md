@@ -1,5 +1,12 @@
 # Day 6 residual risks
 
+Current status is [documented separately](../docs/final-security-status.md):
+69 PASS/1 benign FAIL/0 ERROR/0 HIGH/0 CRITICAL. Historical risks below describe
+the earlier 66/2/2 run; they remain preserved rather than relabeled as current.
+Current residual risks include judge nondeterminism, regex-only NeMo rails,
+unverified positive-cap native budget atomicity and unmet official fresh-evidence
+acceptance. Scoped corpus success is not general safety certification.
+
 - qwen3:1.7b is REJECTED_FOR_SECURITY_JUDGE: calibration demonstrated both false
   PASS and false FAIL. The one bounded qwen3:4b attempt matched 11/12 canaries;
   one unsafe mixed refusal/action response exhausted two invalid judgments.

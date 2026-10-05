@@ -1,0 +1,156 @@
+{
+  "observed_at": "2026-10-05T01:58:10.265274+00:00",
+  "engine": "native-litellm-1.98.0",
+  "read_only_database_query": true,
+  "provider_cost_usd": 0,
+  "cost_scope": "planning allocation, not provider billing",
+  "native_key_metadata": [
+    {
+      "alias": "insighthub-audit-bot",
+      "max_budget": 0.5,
+      "planning_spend_usd": 0.000949,
+      "input_tokens": 471,
+      "output_tokens": 380,
+      "successful_requests": 13
+    },
+    {
+      "alias": "insighthub-audit-coding",
+      "max_budget": 1.0,
+      "planning_spend_usd": 0.00038500000000000003,
+      "input_tokens": 275,
+      "output_tokens": 196,
+      "successful_requests": 9
+    },
+    {
+      "alias": "insighthub-audit-insighthub",
+      "max_budget": 1.0,
+      "planning_spend_usd": 0.03481599999999999,
+      "input_tokens": 28894,
+      "output_tokens": 7014,
+      "successful_requests": 58
+    }
+  ],
+  "recent_success_traces": [
+    {
+      "alias": "insighthub-audit-coding",
+      "response_id": "chatcmpl-174a23e4-9ecd-4902-8555-7232fccda18d",
+      "input_tokens": 83,
+      "output_tokens": 34,
+      "planning_cost_usd": 0.000151,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:30:26.784000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-bot",
+      "response_id": "chatcmpl-30ffbdbd-6da8-47af-a807-7b4216fbfd21",
+      "input_tokens": 50,
+      "output_tokens": 108,
+      "planning_cost_usd": 0.000266,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:30:16.662000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-bot",
+      "response_id": "chatcmpl-c6573858-a718-4645-a92a-4f4c243e3d82",
+      "input_tokens": 62,
+      "output_tokens": 29,
+      "planning_cost_usd": 0.00012,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:30:13.249000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-bot",
+      "response_id": "chatcmpl-ff46e622-92dd-43eb-b931-e9ba12c9ad65",
+      "input_tokens": 69,
+      "output_tokens": 34,
+      "planning_cost_usd": 0.000137,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:30:06.370000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-coding",
+      "response_id": "chatcmpl-fd79dfe8-928c-4a55-bf22-8eb66c413803",
+      "input_tokens": 83,
+      "output_tokens": 34,
+      "planning_cost_usd": 0.000151,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:27:29.502000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-bot",
+      "response_id": "chatcmpl-2094b96b-9e68-402e-9f20-e60ef9a8c633",
+      "input_tokens": 50,
+      "output_tokens": 17,
+      "planning_cost_usd": 8.4e-05,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:27:27.386000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-bot",
+      "response_id": "chatcmpl-1fd75be1-b0ae-4250-ad61-6cc1c0b3ea95",
+      "input_tokens": 62,
+      "output_tokens": 29,
+      "planning_cost_usd": 0.00012,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:27:23.547000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-bot",
+      "response_id": "chatcmpl-08839ad5-9cb4-4822-aeee-c3ed5355e528",
+      "input_tokens": 69,
+      "output_tokens": 35,
+      "planning_cost_usd": 0.000139,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:27:14.747000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-insighthub",
+      "response_id": "chatcmpl-cfbdd500-a0ae-4744-b26c-f68fa0a18140",
+      "input_tokens": 561,
+      "output_tokens": 98,
+      "planning_cost_usd": 0.000757,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:26:23.532000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-insighthub",
+      "response_id": "chatcmpl-2f76dfaa-4c2d-417b-9058-882973412d0f",
+      "input_tokens": 563,
+      "output_tokens": 76,
+      "planning_cost_usd": 0.000715,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:26:13.771000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-insighthub",
+      "response_id": "chatcmpl-4474fa13-130b-466e-90fc-6256c140fa06",
+      "input_tokens": 559,
+      "output_tokens": 77,
+      "planning_cost_usd": 0.0007129999999999999,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:26:04.196000",
+      "status": "success"
+    },
+    {
+      "alias": "insighthub-audit-insighthub",
+      "response_id": "chatcmpl-500cc9aa-c5bc-4397-84a4-ff25f67edec4",
+      "input_tokens": 562,
+      "output_tokens": 61,
+      "planning_cost_usd": 0.000684,
+      "model": "ollama_chat/qwen3:4b",
+      "started_at": "2026-10-04 14:25:56.265000",
+      "status": "success"
+    }
+  ],
+  "secrets_or_key_hashes_exported": false
+}
