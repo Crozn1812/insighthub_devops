@@ -1,0 +1,21 @@
+model_list:
+  - model_name: qwen3:4b
+    litellm_params:
+      model: ollama_chat/qwen3:4b
+      api_base: http://host.docker.internal:11434
+      think: false
+      num_ctx: 4096
+    model_info:
+      # Local planning allocation, NOT an Ollama invoice/provider USD expense.
+      # Native LiteLLM skips every budget check for a zero-cost model.
+      input_cost_per_token: 0.000001
+      output_cost_per_token: 0.000002
+litellm_settings:
+  drop_params: true
+  telemetry: false
+  success_callback: [prometheus]
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL
+  disable_error_logs: true
+  store_model_in_db: false

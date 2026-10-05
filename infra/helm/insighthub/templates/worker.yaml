@@ -23,6 +23,11 @@ spec:
           imagePullPolicy: {{ .Values.images.worker.pullPolicy }}
           envFrom: [{configMapRef: {name: insighthub-config}}]
           env:
+            {{- if .Values.nativeSecuritySecretName }}
+            # Ingestion uses embeddings only; it does not need the generation key.
+            - name: LLM_PROVIDER
+              value: ollama
+            {{- end }}
             - name: DATABASE_URL
               valueFrom: {secretKeyRef: {name: {{ .Values.runtimeSecretName }}, key: DATABASE_URL}}
           volumeMounts: [{name: payloads, mountPath: /app/payloads, readOnly: true}]

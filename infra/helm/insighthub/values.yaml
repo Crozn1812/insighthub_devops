@@ -15,6 +15,7 @@ images:
   redis: redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952
 
 runtimeSecretName: insighthub-runtime
+nativeSecuritySecretName: ""
 
 config:
   redisUrl: redis://insighthub-redis:6379/0
@@ -22,6 +23,10 @@ config:
   payloadDir: /app/payloads
   ragMode: fixture
   llmProvider: fixture
+  openaiBaseUrl: ""
+  openaiChatModel: ""
+  llmStructuredOutput: "false"
+  nemoGuardrailsUrl: ""
   embeddingProvider: fixture
   ollamaBaseUrl: http://ollama:11434
   ollamaChatModel: ""
@@ -43,6 +48,8 @@ observability:
   exporters:
     postgres:
       enabled: true
+      secretName: ""
+      databaseUrlKey: DATABASE_URL
       image: ghcr.io/prometheus-community/postgres-exporter:v0.20.1
     redis:
       enabled: true

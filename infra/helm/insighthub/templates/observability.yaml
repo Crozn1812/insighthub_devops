@@ -22,7 +22,10 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: DATA_SOURCE_NAME
-              valueFrom: {secretKeyRef: {name: {{ .Values.runtimeSecretName }}, key: DATABASE_URL}}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default .Values.runtimeSecretName .Values.observability.exporters.postgres.secretName }}
+                  key: {{ default "DATABASE_URL" .Values.observability.exporters.postgres.databaseUrlKey }}
           ports: [{name: metrics, containerPort: 9187}]
           livenessProbe: {httpGet: {path: /, port: metrics}, initialDelaySeconds: 10, periodSeconds: 10}
           readinessProbe: {httpGet: {path: /, port: metrics}, initialDelaySeconds: 5, periodSeconds: 5}

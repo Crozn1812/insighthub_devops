@@ -1,8 +1,21 @@
 # Docker Desktop local-only real RAG. Ollama remains on the developer host and
 # requires no credential; host.docker.internal is verified from the API pod.
+nativeSecuritySecretName: insighthub-native-security
+images:
+  api: {repository: insighthub-api, tag: upstream-audit-local, pullPolicy: Never}
+  worker: {repository: insighthub-ingestion-worker, tag: upstream-audit-local, pullPolicy: Never}
+observability:
+  exporters:
+    postgres:
+      secretName: insighthub-postgres-exporter-local
+      databaseUrlKey: DATA_SOURCE_NAME
 config:
   ragMode: real
-  llmProvider: ollama
+  llmProvider: openai
+  openaiBaseUrl: http://insighthub-native-litellm:4000/v1
+  openaiChatModel: qwen3:4b
+  llmStructuredOutput: "true"
+  nemoGuardrailsUrl: http://insighthub-native-nemo:8082
   embeddingProvider: ollama
   ollamaBaseUrl: http://host.docker.internal:11434
   ollamaChatModel: qwen3:4b
@@ -11,5 +24,5 @@ config:
   embeddingDim: "1024"
   embeddingRevision: "day6-ollama-mxbai-v1"
   # Bounded Day 6 evaluation profile: concise cited RAG answers without hidden thinking.
-  llmMaxTokens: "128"
+  llmMaxTokens: "1024"
   providerTimeoutSeconds: "300"

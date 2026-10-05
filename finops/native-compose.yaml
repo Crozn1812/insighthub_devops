@@ -1,0 +1,58 @@
+# Isolated native accounting database; never modifies the application database.
+name: insighthub-native-finops
+services:
+  accounting-db:
+    mem_limit: 256m
+    image: postgres:17.11-alpine3.24@sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73
+    env_file: ["${NATIVE_ENV_FILE:?Provide an external private env file}"]
+    volumes: ["native-accounting:/var/lib/postgresql/data"]
+    networks: [finops]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U litellm -d litellm"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  litellm:
+    mem_limit: 1g
+    image: docker.litellm.ai/berriai/litellm:v1.98.0@sha256:20b5044b619055374061a6d5b7b08754cad75aeabbf82ddf4f69cc0cf80ddaf4
+    env_file: ["${NATIVE_ENV_FILE:?Provide an external private env file}"]
+    volumes: ["./native-litellm.yaml:/app/native-litellm.yaml:ro"]
+    command: [--config, /app/native-litellm.yaml, --port, "4000", --num_workers, "1"]
+    ports: ["127.0.0.1:14002:4000"]
+    networks: [finops]
+    depends_on:
+      accounting-db: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness',timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    environment:
+      DO_NOT_TRACK: "1"
+  guardrails:
+    mem_limit: 512m
+    image: insighthub-nemo:upstream-0.24.1
+    env_file: ["${NATIVE_ENV_FILE:?Provide an external private env file}"]
+    ports: ["127.0.0.1:18082:8082"]
+    networks: [finops]
+  accounting-exporter:
+    mem_limit: 128m
+    image: insighthub-api:upstream-audit-local
+    env_file: ["${NATIVE_ENV_FILE:?Provide an external private env file}"]
+    volumes: ["./native_exporter.py:/app/native_exporter.py:ro"]
+    command: [python, /app/native_exporter.py]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:9108/metrics',timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    ports: ["127.0.0.1:14003:9108"]
+    networks: [finops]
+    depends_on:
+      accounting-db: {condition: service_healthy}
+networks:
+  finops:
+    external: true
+    name: insighthub-day6-finops
+volumes:
+  native-accounting:
