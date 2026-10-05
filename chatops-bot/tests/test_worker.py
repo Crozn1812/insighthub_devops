@@ -7,6 +7,13 @@ from app import worker as worker_module
 class FakeQueue:
     def __init__(self) -> None:
         self.retries: list[tuple[ChatEvent, float]] = []
+        self.results: dict[str, str] = {}
+
+    def result(self, event: ChatEvent) -> str | None:
+        return self.results.get(event.event_id)
+
+    def save_result(self, event: ChatEvent, result: str) -> None:
+        self.results[event.event_id] = result
 
     def schedule_retry(self, event: ChatEvent, delay: float) -> None:
         self.retries.append((event, delay))
@@ -53,3 +60,14 @@ def test_retry_limit_is_bounded(monkeypatch) -> None:
     assert Worker(queue, capture, settings()).handle(event(2)) == "failed"
     assert queue.retries == []
     assert capture.records == [("failed", "retry limit reached")]
+
+
+def test_redelivery_does_not_repeat_completed_action(monkeypatch) -> None:
+    queue, capture = FakeQueue(), Capture()
+    calls = []
+    monkeypatch.setattr(worker_module, "process_event",
+                        lambda ev: calls.append(ev.event_id) or "completed")
+    worker = Worker(queue, capture, settings())
+    assert worker.handle(event()) == "ok"
+    assert worker.handle(event()) == "ok"
+    assert calls == ["Ev1"]

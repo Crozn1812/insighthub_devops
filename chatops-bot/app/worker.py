@@ -1,4 +1,4 @@
-"""Bounded local worker skeleton; MCP and real Slack are intentionally absent."""
+"""Durable event worker with MCP facts and explicit capture/Slack transport."""
 import logging
 import signal
 import asyncio
@@ -12,7 +12,10 @@ from .approvals import ApprovalStore
 from .mutation import ScaleExecutor
 from .permissions import PermissionEngine
 from .queue import ChatEvent, EventQueue
-from .transport import CaptureTransport, ResultTransport
+from .transport import CaptureTransport, ResultTransport, SlackTransport
+from .model_summary import summarize
+from .actions import route_action
+from .intents import Intent
 
 logger = logging.getLogger("chatops-bot.worker")
 
@@ -31,7 +34,11 @@ def process_event(event: ChatEvent) -> str:
         ScaleExecutor(settings.mutator_kubeconfig, settings.kubectl_command),
         ChatOpsService(prometheus, kubernetes),
     )
-    return asyncio.run(controller.process(event))
+    result = asyncio.run(controller.process(event))
+    action = route_action(event.text).action
+    if action in {intent.value for intent in Intent if intent is not Intent.UNKNOWN}:
+        return summarize(result, settings)
+    return result
 
 
 class Worker:
@@ -42,7 +49,10 @@ class Worker:
 
     def handle(self, event: ChatEvent) -> str:
         try:
-            result = process_event(event)
+            result = self.queue.result(event)
+            if result is None:
+                result = process_event(event)
+                self.queue.save_result(event, result)
         except TransientProcessingError:
             next_attempt = event.attempt + 1
             if next_attempt >= self.settings.max_attempts:
@@ -60,7 +70,13 @@ def run_forever() -> None:
     settings = Settings.from_env()
     client = Redis.from_url(settings.redis_url, decode_responses=True)
     queue = EventQueue(client, settings)
-    worker = Worker(queue, CaptureTransport(client, settings.result_key), settings)
+    if settings.transport == "slack":
+        transport = SlackTransport(settings.slack_bot_token or "")
+    elif settings.transport == "local":
+        transport = CaptureTransport(client, settings.result_key)
+    else:
+        raise ValueError("Unsupported ChatOps transport")
+    worker = Worker(queue, transport, settings)
     running = True
 
     def stop(_signum: int, _frame: object) -> None:
@@ -70,11 +86,33 @@ def run_forever() -> None:
     signal.signal(signal.SIGINT, stop)
     signal.signal(signal.SIGTERM, stop)
     logger.info("worker_started transport=%s", settings.transport)
-    while running:
-        queue.promote_due_retries()
-        event = queue.dequeue(timeout=1)
-        if event is not None:
-            worker.handle(event)
+    # A crashed worker leaves the event in processing. A new exclusive consumer
+    # recovers it; cached results prevent repeating an already completed action.
+    lease = client.lock(settings.queue_key + ":consumer", timeout=300,
+                        blocking_timeout=1)
+    if not lease.acquire():
+        raise RuntimeError("ChatOps consumer already running")
+    try:
+        queue.recover_pending()
+        while running:
+            lease.reacquire()
+            queue.promote_due_retries()
+            event = queue.dequeue(timeout=1)
+            if event is not None:
+                try:
+                    worker.handle(event)
+                except RuntimeError:
+                    logger.warning("delivery_or_processing_failed event_id=%s", event.event_id)
+                    if event.attempt + 1 >= settings.max_attempts:
+                        queue.dead_letter(event)
+                    else:
+                        retry = ChatEvent(**{**event.__dict__, "attempt": event.attempt + 1})
+                        queue.schedule_retry(retry, settings.retry_base_seconds * 2 ** event.attempt)
+                    queue.acknowledge(event)
+                else:
+                    queue.acknowledge(event)
+    finally:
+        lease.release()
 
 
 if __name__ == "__main__":

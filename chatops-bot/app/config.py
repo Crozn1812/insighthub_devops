@@ -1,12 +1,12 @@
 """Environment-backed settings for the local Day 5 ChatOps runtime."""
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import json
 import os
 
 
 @dataclass(frozen=True)
 class Settings:
-    slack_signing_secret: str | None
+    slack_signing_secret: str | None = field(repr=False)
     slack_bot_user_id: str | None
     redis_url: str
     queue_key: str
@@ -26,6 +26,12 @@ class Settings:
     approval_ttl_seconds: int = 60
     mutator_kubeconfig: str | None = None
     kubectl_command: str = "kubectl"
+    slack_bot_token: str | None = field(default=None, repr=False)
+    model_url: str = ""
+    model_key: str = field(default="", repr=False)
+    model_name: str = "qwen3:4b"
+    guard_url: str = ""
+    guard_key: str = field(default="", repr=False)
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -56,6 +62,12 @@ class Settings:
             approval_ttl_seconds=int(os.getenv("CHATOPS_APPROVAL_TTL_SECONDS", "60")),
             mutator_kubeconfig=os.getenv("CHATOPS_MUTATOR_KUBECONFIG"),
             kubectl_command=os.getenv("KUBECTL_COMMAND", "kubectl"),
+            slack_bot_token=os.getenv("SLACK_BOT_TOKEN"),
+            model_url=os.getenv("CHATOPS_MODEL_URL", ""),
+            model_key=os.getenv("CHATOPS_MODEL_KEY", ""),
+            model_name=os.getenv("CHATOPS_MODEL_NAME", "qwen3:4b"),
+            guard_url=os.getenv("CHATOPS_GUARD_URL", ""),
+            guard_key=os.getenv("CHATOPS_GUARD_KEY", ""),
         )
 
 

@@ -20,7 +20,12 @@ def isolated_queue() -> tuple[EventQueue, Redis, list[str]]:
     )
     client = Redis.from_url(settings.redis_url, decode_responses=True)
     return EventQueue(client, settings), client, [settings.queue_key, settings.retry_key,
+                                                   queue_processing_key(settings.queue_key),
                                                    f"{settings.dedup_prefix}:Ev1"]
+
+
+def queue_processing_key(key: str) -> str:
+    return key + ":processing"
 
 
 def test_queue_state_survives_queue_object_restart() -> None:
@@ -43,5 +48,21 @@ def test_retry_metadata_is_durable_and_promoted() -> None:
         restarted = EventQueue(client, queue.settings)
         assert restarted.promote_due_retries(now=time.time() + 1) == 1
         assert restarted.dequeue(timeout=1) == retry
+    finally:
+        client.delete(*keys)
+
+
+def test_worker_crash_recovers_unacknowledged_event_without_duplicate_enqueue() -> None:
+    queue, client, keys = isolated_queue()
+    ev = ChatEvent("Ev1", "U1", "C1", "hello", "1.0")
+    try:
+        assert queue.enqueue_once(ev)
+        assert queue.dequeue(timeout=1) == ev
+        restarted = EventQueue(client, queue.settings)
+        assert restarted.recover_pending() == 1
+        assert restarted.dequeue(timeout=1) == ev
+        restarted.acknowledge(ev)
+        assert restarted.recover_pending() == 0
+        assert client.llen(queue.pending_key) == 0
     finally:
         client.delete(*keys)
