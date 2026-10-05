@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-10-05 03:33:16 UTC",
+  "tool": "mcp__prometheus_day2__query",
+  "query": "count_over_time((insighthub:llm_latency_p95_seconds < Inf)[1h:1m] offset 10m)",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"result\":\"{} =\\u003e 60 @[1791171196.134]\",\"warnings\":null}"
+      }
+    ]
+  }
+}

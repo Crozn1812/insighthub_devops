@@ -1,0 +1,228 @@
+{
+  "uid": "insighthub-day4",
+  "title": "InsightHub Day 4 - Local AIOps",
+  "tags": [
+    "insighthub",
+    "day4",
+    "local-only"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "API request rate",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(rate(insighthub_http_requests_total[5m]))"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "API 5xx ratio",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "insighthub:api_error_ratio5m"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "RAG latency p95",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "insighthub:rag_latency_p95_seconds"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "LLM latency p95 and anomaly band",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "insighthub:llm_latency_p95_seconds"
+        },
+        {
+          "refId": "B",
+          "expr": "insighthub:llm_latency_upper_3sigma_1h"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Ingestion queue depth",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "insighthub:ingestion_queue_depth"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "LLM token rate",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(rate(insighthub_llm_tokens_total[5m])) or 0 * sum(rate(insighthub_llm_call_latency_seconds_count[5m]))"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Actual local provider cost USD",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 16
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(insighthub_native_provider_cost_usd_total)"
+        }
+      ],
+      "description": "Measured native LiteLLM workload accounting: provider billing is zero for local Ollama. Planning allocation is shown separately on the Day 6 dashboard."
+    },
+    {
+      "id": 8,
+      "title": "Pod CPU",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 16
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"insighthub-dev\",container!=\"\",image!=\"\"}[5m]))"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Pod memory",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 16
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by (pod) (container_memory_working_set_bytes{namespace=\"insighthub-dev\",container!=\"\",image!=\"\"})"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Deployment replicas available",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 24
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "kube_deployment_status_replicas_available{namespace=\"insighthub-dev\"}"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "PostgreSQL exporter health",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 24
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "pg_up{namespace=\"insighthub-dev\"}"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Redis exporter health",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 24
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "redis_up{namespace=\"insighthub-dev\"}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "observations": [
+    {
+      "backend": "filesystem",
+      "tool": "list_allowed_directories",
+      "args": {},
+      "started_at": "2026-10-04T14:01:29.338Z",
+      "finished_at": "2026-10-04T14:01:29.407Z",
+      "success": true,
+      "summary": "Allowed directory is the project only"
+    },
+    {
+      "backend": "docker",
+      "tool": "container_list",
+      "args": {
+        "sparse": true,
+        "limit": 2
+      },
+      "started_at": "2026-10-04T14:01:29.363Z",
+      "finished_at": "2026-10-04T14:01:29.532Z",
+      "success": true,
+      "summary": "Actual running container inventory returned"
+    },
+    {
+      "backend": "kubernetes",
+      "tool": "pods_list_in_namespace",
+      "args": {
+        "namespace": "insighthub-dev"
+      },
+      "started_at": "2026-10-04T14:01:29.363Z",
+      "finished_at": "2026-10-04T14:01:29.457Z",
+      "success": true,
+      "summary": "Seven application pods Running/Ready; restricted ServiceAccount"
+    },
+    {
+      "backend": "prometheus",
+      "tool": "healthy",
+      "args": {},
+      "started_at": "2026-10-04T14:01:29.363Z",
+      "finished_at": "2026-10-04T14:01:29.430Z",
+      "success": true,
+      "summary": "Prometheus Server is Healthy"
+    }
+  ],
+  "scope": "Actual four MCP backend calls in Codex host; raw container mount paths and credentials omitted"
+}

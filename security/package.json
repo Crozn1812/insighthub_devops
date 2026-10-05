@@ -1,0 +1,16 @@
+{
+  "name": "insighthub-day6-security",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Pinned local-only Promptfoo tooling for InsightHub Day 6",
+  "scripts": {
+    "build:dataset": "node scripts/build-dataset.mjs",
+    "promptfoo": "promptfoo",
+    "redteam:generate": "promptfoo redteam generate --config promptfooconfig.yaml",
+    "validate:foundation": "node scripts/validate-foundation.mjs"
+  },
+  "devDependencies": {
+    "promptfoo": "0.123.1",
+    "yaml": "2.9.1"
+  }
+}

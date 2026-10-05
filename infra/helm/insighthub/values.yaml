@@ -1,0 +1,86 @@
+images:
+  web:
+    repository: insighthub-web
+    tag: day3
+    pullPolicy: IfNotPresent
+  api:
+    repository: insighthub-api
+    tag: day4-final
+    pullPolicy: IfNotPresent
+  worker:
+    repository: insighthub-ingestion-worker
+    tag: day4-final
+    pullPolicy: IfNotPresent
+  postgres: pgvector/pgvector:0.8.2-pg16@sha256:00ba258a66dac104fd5171074a0084462a64a1369d8513f3d0a634e2f24d15bc
+  redis: redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952
+
+runtimeSecretName: insighthub-runtime
+nativeSecuritySecretName: ""
+
+config:
+  redisUrl: redis://insighthub-redis:6379/0
+  ingestionQueue: insighthub:ingestion
+  payloadDir: /app/payloads
+  ragMode: fixture
+  llmProvider: fixture
+  openaiBaseUrl: ""
+  openaiChatModel: ""
+  llmStructuredOutput: "false"
+  nemoGuardrailsUrl: ""
+  embeddingProvider: fixture
+  ollamaBaseUrl: http://ollama:11434
+  ollamaChatModel: ""
+  ollamaEmbeddingModel: mxbai-embed-large
+  ollamaThink: "false"
+  llmMaxTokens: "1024"
+  embeddingDim: "1024"
+  embeddingRevision: "1"
+  providerTimeoutSeconds: "60"
+  apiInternalUrl: http://insighthub-api:8000
+  day4ChaosLlmDelaySeconds: "0"
+  day4ChaosForceError: "false"
+
+observability:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 15s
+  exporters:
+    postgres:
+      enabled: true
+      secretName: ""
+      databaseUrlKey: DATABASE_URL
+      image: ghcr.io/prometheus-community/postgres-exporter:v0.20.1
+    redis:
+      enabled: true
+      image: oliver006/redis_exporter:v1.89.0
+
+postgres:
+  initSql: ""
+  storage: 2Gi
+
+payloads:
+  storage: 1Gi
+
+resources:
+  web:
+    requests: {cpu: 50m, memory: 128Mi}
+    limits: {cpu: 500m, memory: 512Mi}
+  api:
+    requests: {cpu: 100m, memory: 256Mi}
+    limits: {cpu: "1", memory: 1Gi}
+  worker:
+    requests: {cpu: 100m, memory: 256Mi}
+    limits: {cpu: "1", memory: 1Gi}
+  postgres:
+    requests: {cpu: 100m, memory: 256Mi}
+    limits: {cpu: "1", memory: 768Mi}
+  redis:
+    requests: {cpu: 50m, memory: 64Mi}
+    limits: {cpu: 500m, memory: 256Mi}
+  postgresExporter:
+    requests: {cpu: 25m, memory: 32Mi}
+    limits: {cpu: 250m, memory: 128Mi}
+  redisExporter:
+    requests: {cpu: 25m, memory: 32Mi}
+    limits: {cpu: 250m, memory: 128Mi}

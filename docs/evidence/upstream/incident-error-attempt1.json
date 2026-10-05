@@ -1,0 +1,319 @@
+{
+  "incident_id": "upstream-real-error-1791172242674",
+  "started_at": "2026-10-05T03:45:01.023Z",
+  "ended_at": "2026-10-05T03:50:42.675Z",
+  "environment": "Docker Desktop Kubernetes; native LiteLLM/Ollama real generation; no paid provider",
+  "controlled_fault": "controlled provider proxy HTTP 503",
+  "alert_firing": false,
+  "samples": [],
+  "model_requests": [
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    },
+    {
+      "status": 502,
+      "answer_present": false
+    }
+  ],
+  "restored": true,
+  "recovery": {
+    "observed_at": "2026-10-05T03:50:42.568Z",
+    "health_status": 200,
+    "worker_replicas": 1,
+    "documents": [],
+    "queue_depth": [
+      {
+        "metric": {
+          "__name__": "insighthub:ingestion_queue_depth"
+        },
+        "value": [
+          1791172242.67,
+          "0"
+        ]
+      }
+    ]
+  },
+  "uploaded_ids": [],
+  "provider_cost_usd": 0,
+  "result": "FAIL",
+  "reason": "No firing observed within the original bounded window; initial counter label and route collision diagnosed, generic rule correction tested. Historical failed attempt retained.",
+  "raw_sha256": "0be6b663e6a6974daaa0b4540019ce1c79751f8493819e843a84b1da5619c395",
+  "additional_actual_paced_requests": {
+    "note": "Actual paced requests within the same bounded provider error fault, to observe counter increments across scrapes.",
+    "requests": [
+      {
+        "at": "2026-10-05T03:48:11.674Z",
+        "status": 502,
+        "wave": 0
+      },
+      {
+        "at": "2026-10-05T03:48:11.700Z",
+        "status": 502,
+        "wave": 0
+      },
+      {
+        "at": "2026-10-05T03:48:11.700Z",
+        "status": 502,
+        "wave": 0
+      },
+      {
+        "at": "2026-10-05T03:48:11.700Z",
+        "status": 502,
+        "wave": 0
+      },
+      {
+        "at": "2026-10-05T03:48:27.282Z",
+        "status": 502,
+        "wave": 1
+      },
+      {
+        "at": "2026-10-05T03:48:27.284Z",
+        "status": 502,
+        "wave": 1
+      },
+      {
+        "at": "2026-10-05T03:48:27.285Z",
+        "status": 502,
+        "wave": 1
+      },
+      {
+        "at": "2026-10-05T03:48:27.286Z",
+        "status": 502,
+        "wave": 1
+      },
+      {
+        "at": "2026-10-05T03:48:42.688Z",
+        "status": 502,
+        "wave": 2
+      },
+      {
+        "at": "2026-10-05T03:48:42.689Z",
+        "status": 502,
+        "wave": 2
+      },
+      {
+        "at": "2026-10-05T03:48:42.690Z",
+        "status": 502,
+        "wave": 2
+      },
+      {
+        "at": "2026-10-05T03:48:42.690Z",
+        "status": 502,
+        "wave": 2
+      },
+      {
+        "at": "2026-10-05T03:48:58.110Z",
+        "status": 502,
+        "wave": 3
+      },
+      {
+        "at": "2026-10-05T03:48:58.111Z",
+        "status": 502,
+        "wave": 3
+      },
+      {
+        "at": "2026-10-05T03:48:58.111Z",
+        "status": 502,
+        "wave": 3
+      },
+      {
+        "at": "2026-10-05T03:48:58.111Z",
+        "status": 502,
+        "wave": 3
+      },
+      {
+        "at": "2026-10-05T03:49:13.552Z",
+        "status": 502,
+        "wave": 4
+      },
+      {
+        "at": "2026-10-05T03:49:13.552Z",
+        "status": 502,
+        "wave": 4
+      },
+      {
+        "at": "2026-10-05T03:49:13.553Z",
+        "status": 502,
+        "wave": 4
+      },
+      {
+        "at": "2026-10-05T03:49:13.553Z",
+        "status": 502,
+        "wave": 4
+      },
+      {
+        "at": "2026-10-05T03:49:28.980Z",
+        "status": 502,
+        "wave": 5
+      },
+      {
+        "at": "2026-10-05T03:49:28.981Z",
+        "status": 502,
+        "wave": 5
+      },
+      {
+        "at": "2026-10-05T03:49:28.981Z",
+        "status": 502,
+        "wave": 5
+      },
+      {
+        "at": "2026-10-05T03:49:28.981Z",
+        "status": 502,
+        "wave": 5
+      },
+      {
+        "at": "2026-10-05T03:49:44.400Z",
+        "status": 502,
+        "wave": 6
+      },
+      {
+        "at": "2026-10-05T03:49:44.400Z",
+        "status": 502,
+        "wave": 6
+      },
+      {
+        "at": "2026-10-05T03:49:44.400Z",
+        "status": 502,
+        "wave": 6
+      },
+      {
+        "at": "2026-10-05T03:49:44.401Z",
+        "status": 502,
+        "wave": 6
+      },
+      {
+        "at": "2026-10-05T03:49:59.854Z",
+        "status": 502,
+        "wave": 7
+      },
+      {
+        "at": "2026-10-05T03:49:59.855Z",
+        "status": 502,
+        "wave": 7
+      },
+      {
+        "at": "2026-10-05T03:49:59.855Z",
+        "status": 502,
+        "wave": 7
+      },
+      {
+        "at": "2026-10-05T03:49:59.855Z",
+        "status": 502,
+        "wave": 7
+      }
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "observed_at": "2026-10-04T14:30:31.247313+00:00",
+  "workloads": [
+    {
+      "workload": "bot",
+      "intent": "InsightHub healthy?",
+      "mcp_available": true,
+      "model_used": true,
+      "result_sha256": "00cf2e1e9513cd7b579761ecd984d76502ce6f899ee95adaf9071d940480794f",
+      "slack_live": false
+    },
+    {
+      "workload": "bot",
+      "intent": "Ingest today?",
+      "mcp_available": true,
+      "model_used": true,
+      "result_sha256": "3c180d9194d060dc626edf3f9c608730ab0328d55e0bdbe1cd2a3d317295bd06",
+      "slack_live": false
+    },
+    {
+      "workload": "bot",
+      "intent": "Pods failing?",
+      "mcp_available": true,
+      "model_used": true,
+      "result_sha256": "f3c3d70c3eeab05027cb481b51d2e07b8973a3194b5099bf459216bc3a407d06",
+      "slack_live": false
+    },
+    {
+      "workload": "coding",
+      "source_file": "chatops-bot/app/queue.py",
+      "source_sha256": "b744e182eec91327a15618e3bab6544c184284b59b341046b4b30961b03aa2dd",
+      "proposed_helper": "def event_payload(event):\n    return json.dumps(asdict(event), separators=(',', ':'), ensure_ascii=False)",
+      "patch_scope": "extraction proposal tested in isolated container; not applied to production",
+      "tests_passed": true,
+      "test_count": 3,
+      "provider_response_id": "chatcmpl-174a23e4-9ecd-4902-8555-7232fccda18d",
+      "usage": {
+        "completion_tokens": 34,
+        "prompt_tokens": 83,
+        "total_tokens": 117
+      }
+    }
+  ],
+  "provider_cost_usd": 0,
+  "keys_emitted": false
+}

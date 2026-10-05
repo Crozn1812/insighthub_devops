@@ -33,6 +33,7 @@ def configured(**values):
         "GEMINI_CHAT_MODEL": "",
         "ANTHROPIC_CHAT_MODEL": "",
         "OLLAMA_CHAT_MODEL": "",
+        "OLLAMA_THINK": "false",
         "OPENAI_CHAT_MODEL": "",
         "OPENAI_BASE_URL": "",
         "EMBEDDING_REVISION": "1",

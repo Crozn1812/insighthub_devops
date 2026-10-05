@@ -1,0 +1,51 @@
+prometheus:
+  prometheusSpec:
+    retention: 15d
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+    ruleSelectorNilUsesHelmValues: false
+    ruleSelector: {}
+    ruleNamespaceSelector: {}
+    resources:
+      requests: {cpu: 200m, memory: 512Mi}
+      limits: {cpu: "1", memory: 2Gi}
+
+grafana:
+  enabled: true
+  service: {type: ClusterIP}
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
+  resources:
+    requests: {cpu: 50m, memory: 128Mi}
+    limits: {cpu: 500m, memory: 512Mi}
+
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    resources:
+      requests: {cpu: 25m, memory: 64Mi}
+      limits: {cpu: 250m, memory: 256Mi}
+  config:
+    global: {resolve_timeout: 5m}
+    route:
+      receiver: local-null
+      group_by: [namespace, alertname]
+      group_wait: 10s
+      group_interval: 1m
+      repeat_interval: 4h
+    receivers:
+      - name: local-null
+      - name: "null"
+
+kube-state-metrics:
+  resources:
+    requests: {cpu: 25m, memory: 64Mi}
+    limits: {cpu: 250m, memory: 256Mi}
+
+prometheus-node-exporter:
+  resources:
+    requests: {cpu: 25m, memory: 32Mi}
+    limits: {cpu: 250m, memory: 128Mi}

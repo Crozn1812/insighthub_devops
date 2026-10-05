@@ -1,0 +1,920 @@
+{
+  "mode": "real",
+  "observed_at": "2026-10-04T01:56:53.959068+00:00",
+  "currency": "USD",
+  "budget_usd": 1,
+  "total_usd": 0,
+  "entries": [
+    {
+      "request_id": "cbc00a95-c1ff-41c0-9800-ee8893a8e002",
+      "input_tokens": 566,
+      "output_tokens": 112,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 22.8425382,
+        "memory_peak_bytes": 50896896
+      }
+    },
+    {
+      "request_id": "1d0e46fc-d0dc-40ca-8c2d-a79d9661a75c",
+      "input_tokens": 566,
+      "output_tokens": 134,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 15.939660699999994,
+        "memory_peak_bytes": 50958336
+      }
+    },
+    {
+      "request_id": "b54180dd-1fe0-47e5-92e4-e6f290283ae4",
+      "input_tokens": 603,
+      "output_tokens": 150,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 21.5929216,
+        "memory_peak_bytes": 50978816
+      }
+    },
+    {
+      "request_id": "5e4f58e5-c7a7-46bf-a533-f15d6b8afb10",
+      "input_tokens": 574,
+      "output_tokens": 32,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 5.280686600000015,
+        "memory_peak_bytes": 51007488
+      }
+    },
+    {
+      "request_id": "0ea83be2-da4f-4456-994c-9d151fce9320",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 0.7217926999999908,
+        "memory_peak_bytes": 51007488
+      }
+    },
+    {
+      "request_id": "b58a16ab-a408-4608-aa6d-40ff0dbf67d6",
+      "input_tokens": 565,
+      "output_tokens": 84,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.367727199999994,
+        "memory_peak_bytes": 51007488
+      }
+    },
+    {
+      "request_id": "c47cbdca-01e1-4cf7-b59d-b643d72f62a4",
+      "input_tokens": 566,
+      "output_tokens": 86,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.517013899999991,
+        "memory_peak_bytes": 50921472
+      }
+    },
+    {
+      "request_id": "5bd1ce7d-50a7-4b66-b064-44dc6a7c456c",
+      "input_tokens": 567,
+      "output_tokens": 74,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 9.639790399999997,
+        "memory_peak_bytes": 50946048
+      }
+    },
+    {
+      "request_id": "c1982f17-b2b4-41eb-895f-1ecf5d4df694",
+      "input_tokens": 568,
+      "output_tokens": 87,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.991754200000026,
+        "memory_peak_bytes": 51359744
+      }
+    },
+    {
+      "request_id": "4d325a15-4d6c-42be-a988-9c114ec6a026",
+      "input_tokens": 565,
+      "output_tokens": 105,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 12.196089399999996,
+        "memory_peak_bytes": 51433472
+      }
+    },
+    {
+      "request_id": "41dc6ea1-eac2-42f3-adfa-e82811542e91",
+      "input_tokens": 554,
+      "output_tokens": 164,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 18.158723899999984,
+        "memory_peak_bytes": 51228672
+      }
+    },
+    {
+      "request_id": "5c590824-c61f-43d5-8b4b-2cc4a8ac9216",
+      "input_tokens": 551,
+      "output_tokens": 131,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 14.83890850000002,
+        "memory_peak_bytes": 51253248
+      }
+    },
+    {
+      "request_id": "7e14d18f-92a1-46d7-af6f-55a0d56c1096",
+      "input_tokens": 563,
+      "output_tokens": 71,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 9.042748299999978,
+        "memory_peak_bytes": 50958336
+      }
+    },
+    {
+      "request_id": "58e78a77-41f3-4317-99ae-6023b0e1de56",
+      "input_tokens": 565,
+      "output_tokens": 119,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 13.561648199999938,
+        "memory_peak_bytes": 50958336
+      }
+    },
+    {
+      "request_id": "739eec1b-7114-48cd-939c-656c7408ea69",
+      "input_tokens": 566,
+      "output_tokens": 83,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 13.557982500000042,
+        "memory_peak_bytes": 51322880
+      }
+    },
+    {
+      "request_id": "2a3a2b4e-17c3-4941-acc4-19370e58e595",
+      "input_tokens": 561,
+      "output_tokens": 33,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 4.824483299999963,
+        "memory_peak_bytes": 51388416
+      }
+    },
+    {
+      "request_id": "3d12e0ae-26a6-4b25-9dd5-a47a80738866",
+      "input_tokens": 567,
+      "output_tokens": 91,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.997011700000032,
+        "memory_peak_bytes": 51462144
+      }
+    },
+    {
+      "request_id": "76fae784-64cf-4bb3-b1a2-24d905642ef7",
+      "input_tokens": 563,
+      "output_tokens": 43,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 5.866300000000047,
+        "memory_peak_bytes": 51507200
+      }
+    },
+    {
+      "request_id": "211ec830-1cdd-4578-b291-1c0af020ade1",
+      "input_tokens": 551,
+      "output_tokens": 178,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 19.684752299999936,
+        "memory_peak_bytes": 51507200
+      }
+    },
+    {
+      "request_id": "7d7bfb6b-5881-4e70-9afa-daaebd05cb75",
+      "input_tokens": 572,
+      "output_tokens": 93,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 13.866613499999978,
+        "memory_peak_bytes": 51294208
+      }
+    },
+    {
+      "request_id": "0d4f0c68-c75a-44cd-a035-8aec9e7da923",
+      "input_tokens": 567,
+      "output_tokens": 79,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 9.704321200000006,
+        "memory_peak_bytes": 51736576
+      }
+    },
+    {
+      "request_id": "727d7440-e41b-4a0e-b875-8f883a9a1eb2",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 0.6733726000000024,
+        "memory_peak_bytes": 51736576
+      }
+    },
+    {
+      "request_id": "013b4a0b-174e-47ca-abc8-f04eed3f15ca",
+      "input_tokens": 571,
+      "output_tokens": 44,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 6.207906299999915,
+        "memory_peak_bytes": 51912704
+      }
+    },
+    {
+      "request_id": "64f37427-ea8c-4d65-940f-c7c646500616",
+      "input_tokens": 567,
+      "output_tokens": 175,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 19.257150799999945,
+        "memory_peak_bytes": 51322880
+      }
+    },
+    {
+      "request_id": "fce87c04-047f-4399-90a8-e31e716aa9a0",
+      "input_tokens": 568,
+      "output_tokens": 42,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 5.802519599999999,
+        "memory_peak_bytes": 51404800
+      }
+    },
+    {
+      "request_id": "c5247a17-91de-4692-8140-53ea77d7782d",
+      "input_tokens": 579,
+      "output_tokens": 98,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 11.911225200000102,
+        "memory_peak_bytes": 51417088
+      }
+    },
+    {
+      "request_id": "03bc46c5-5174-41e9-a180-30446de1a031",
+      "input_tokens": 552,
+      "output_tokens": 87,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.211470899999956,
+        "memory_peak_bytes": 51548160
+      }
+    },
+    {
+      "request_id": "fa08cf21-04d8-42ef-b5db-004c70f1fe6e",
+      "input_tokens": 565,
+      "output_tokens": 158,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 17.54101489999995,
+        "memory_peak_bytes": 51597312
+      }
+    },
+    {
+      "request_id": "f75542d9-30dc-4618-89d6-0679f64247cc",
+      "input_tokens": 567,
+      "output_tokens": 83,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.090007999999914,
+        "memory_peak_bytes": 51908608
+      }
+    },
+    {
+      "request_id": "22c981c0-006b-4f39-b329-c08a954fd057",
+      "input_tokens": 568,
+      "output_tokens": 93,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.871424600000028,
+        "memory_peak_bytes": 51949568
+      }
+    },
+    {
+      "request_id": "fbe586c0-f5be-4bc0-91da-50228de9ca02",
+      "input_tokens": 571,
+      "output_tokens": 73,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 9.370781399999977,
+        "memory_peak_bytes": 51949568
+      }
+    },
+    {
+      "request_id": "82256a14-db7d-4d46-b1a5-1a902c6f3ee2",
+      "input_tokens": 567,
+      "output_tokens": 88,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.60055740000005,
+        "memory_peak_bytes": 51683328
+      }
+    },
+    {
+      "request_id": "b4335bdb-1d3a-441b-bd71-03b0c1f1b13b",
+      "input_tokens": 573,
+      "output_tokens": 32,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 5.295350600000005,
+        "memory_peak_bytes": 51732480
+      }
+    },
+    {
+      "request_id": "89c37d9c-dfdd-425e-b291-6a384dcac57b",
+      "input_tokens": 551,
+      "output_tokens": 55,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 7.760747699999949,
+        "memory_peak_bytes": 51290112
+      }
+    },
+    {
+      "request_id": "ad360a13-aeab-4b5d-8015-eb2377a3bdd5",
+      "input_tokens": 566,
+      "output_tokens": 68,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 8.41023170000012,
+        "memory_peak_bytes": 51343360
+      }
+    },
+    {
+      "request_id": "ed9cb0c3-f7e5-40d7-ac22-892caeda224b",
+      "input_tokens": 569,
+      "output_tokens": 72,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 8.953543599999975,
+        "memory_peak_bytes": 51417088
+      }
+    },
+    {
+      "request_id": "e667fc22-8172-4f26-9bfd-ecebdd916c15",
+      "input_tokens": 567,
+      "output_tokens": 80,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 9.88530010000011,
+        "memory_peak_bytes": 51425280
+      }
+    },
+    {
+      "request_id": "1d2dd232-f714-4b8e-91ae-dcb2a9a29a62",
+      "input_tokens": 564,
+      "output_tokens": 96,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 11.268980200000108,
+        "memory_peak_bytes": 51507200
+      }
+    },
+    {
+      "request_id": "264b7413-b76d-496e-96ac-bd47e79798a4",
+      "input_tokens": 566,
+      "output_tokens": 104,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 12.026932500000111,
+        "memory_peak_bytes": 51564544
+      }
+    },
+    {
+      "request_id": "1c53b3d1-4b38-4f13-abfd-e289f1acab9b",
+      "input_tokens": 566,
+      "output_tokens": 84,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.17287329999986,
+        "memory_peak_bytes": 51634176
+      }
+    },
+    {
+      "request_id": "a5ec7e30-d07d-483e-8be4-a881f0e6ecfa",
+      "input_tokens": 626,
+      "output_tokens": 47,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 7.870780999999959,
+        "memory_peak_bytes": 51757056
+      }
+    },
+    {
+      "request_id": "773ac735-c769-4a94-bfd1-e118fc27b914",
+      "input_tokens": 626,
+      "output_tokens": 82,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Captured Promptfoo target-call latency and run-wide maximum sampled Windows Get-Process ollama* RSS from retained requests; shared server process, not missing request exclusive peak or GPU memory",
+        "duration_seconds": 10.151,
+        "memory_peak_bytes": 53178368
+      }
+    },
+    {
+      "request_id": "0d0fc058-1878-46a7-86c9-1234c60b40b1",
+      "input_tokens": 663,
+      "output_tokens": 109,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 13.795818300000159,
+        "memory_peak_bytes": 52846592
+      }
+    },
+    {
+      "request_id": "a4c64118-518f-4ee7-bb8d-88d5338bf428",
+      "input_tokens": 634,
+      "output_tokens": 34,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Captured Promptfoo target-call latency and run-wide maximum sampled Windows Get-Process ollama* RSS from retained requests; shared server process, not missing request exclusive peak or GPU memory",
+        "duration_seconds": 5.58,
+        "memory_peak_bytes": 53178368
+      }
+    },
+    {
+      "request_id": "9ca6f826-d3c1-42c4-843e-81ad25ccc341",
+      "input_tokens": 615,
+      "output_tokens": 72,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 8.598284899999854,
+        "memory_peak_bytes": 53178368
+      }
+    },
+    {
+      "request_id": "8caac5c6-9508-4dc1-ab15-4a421c3b29e4",
+      "input_tokens": 612,
+      "output_tokens": 73,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 8.621786899999949,
+        "memory_peak_bytes": 52736000
+      }
+    },
+    {
+      "request_id": "49ea0be0-85f5-42f0-bdde-0ba8d0aca365",
+      "input_tokens": 623,
+      "output_tokens": 66,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 8.284966199999907,
+        "memory_peak_bytes": 52736000
+      }
+    },
+    {
+      "request_id": "e2b3e88e-6639-423b-9ff6-1abe49e0fadc",
+      "input_tokens": 625,
+      "output_tokens": 49,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 6.68017510000011,
+        "memory_peak_bytes": 52744192
+      }
+    },
+    {
+      "request_id": "fbb2fde5-1aeb-44f5-8aa2-93e5a9498311",
+      "input_tokens": 612,
+      "output_tokens": 199,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 21.316740200000115,
+        "memory_peak_bytes": 52985856
+      }
+    },
+    {
+      "request_id": "582a0d88-1503-438d-944e-14320c57b155",
+      "input_tokens": 632,
+      "output_tokens": 63,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 8.193300099999878,
+        "memory_peak_bytes": 52363264
+      }
+    },
+    {
+      "request_id": "5dc79c29-2608-4b42-a221-14d7f271b3e3",
+      "input_tokens": 627,
+      "output_tokens": 80,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 9.835240500000072,
+        "memory_peak_bytes": 52363264
+      }
+    },
+    {
+      "request_id": "12c57004-88ef-46a1-99f3-163796e32aeb",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 0.6404601999998558,
+        "memory_peak_bytes": 52326400
+      }
+    },
+    {
+      "request_id": "4de1c2cd-9e89-4351-84a0-426ff8421848",
+      "input_tokens": 613,
+      "output_tokens": 148,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 16.57979240000015,
+        "memory_peak_bytes": 52387840
+      }
+    },
+    {
+      "request_id": "5f3efd96-455a-47b2-8e31-6d97f5e70f0c",
+      "input_tokens": 625,
+      "output_tokens": 83,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.01860039999988,
+        "memory_peak_bytes": 52338688
+      }
+    },
+    {
+      "request_id": "280825fc-8642-43ed-9396-184290785904",
+      "input_tokens": 627,
+      "output_tokens": 50,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 6.73240289999987,
+        "memory_peak_bytes": 52363264
+      }
+    },
+    {
+      "request_id": "00e132cf-8b0e-4e97-abba-11bf8cadcea9",
+      "input_tokens": 628,
+      "output_tokens": 88,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.539360500000184,
+        "memory_peak_bytes": 52412416
+      }
+    },
+    {
+      "request_id": "5c9e9f27-752f-4a00-b689-ca3eef9cabe1",
+      "input_tokens": 612,
+      "output_tokens": 86,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.262545200000051,
+        "memory_peak_bytes": 52502528
+      }
+    },
+    {
+      "request_id": "cac732e3-1903-4cfe-b251-d8edd2892ba7",
+      "input_tokens": 627,
+      "output_tokens": 33,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 5.404195000000065,
+        "memory_peak_bytes": 52076544
+      }
+    },
+    {
+      "request_id": "29db4f5f-f712-4c36-ba42-dc41b53cabdb",
+      "input_tokens": 629,
+      "output_tokens": 68,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 8.831687799999957,
+        "memory_peak_bytes": 52076544
+      }
+    },
+    {
+      "request_id": "f249e1bf-6a69-4e9a-9f45-f1baf5ff4ceb",
+      "input_tokens": 627,
+      "output_tokens": 97,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 11.91405159999989,
+        "memory_peak_bytes": 52080640
+      }
+    },
+    {
+      "request_id": "ad6d8d77-47b0-40f5-908b-c69551d3c705",
+      "input_tokens": 559,
+      "output_tokens": 183,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 19.559140300000088,
+        "memory_peak_bytes": 52080640
+      }
+    },
+    {
+      "request_id": "d381a8d8-1da4-4bfd-ab35-fc942d886c15",
+      "input_tokens": 560,
+      "output_tokens": 45,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 5.807984900000039,
+        "memory_peak_bytes": 52121600
+      }
+    },
+    {
+      "request_id": "80c16eb3-77e1-4095-912c-68fa0f11bdbb",
+      "input_tokens": 557,
+      "output_tokens": 33,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 4.470646499999799,
+        "memory_peak_bytes": 52121600
+      }
+    },
+    {
+      "request_id": "c7674368-7b27-4d40-9aee-321af7e970d3",
+      "input_tokens": 560,
+      "output_tokens": 56,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 7.012282300000079,
+        "memory_peak_bytes": 52137984
+      }
+    },
+    {
+      "request_id": "192d95e0-1d5b-4e02-b4bd-c6c80c2359f6",
+      "input_tokens": 563,
+      "output_tokens": 87,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 9.950518999999854,
+        "memory_peak_bytes": 52137984
+      }
+    },
+    {
+      "request_id": "57ca45eb-1ed8-4e65-bb63-ada5dafeb8f3",
+      "input_tokens": 560,
+      "output_tokens": 109,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 11.989324199999682,
+        "memory_peak_bytes": 52137984
+      }
+    },
+    {
+      "request_id": "027a99ee-7b79-481b-bb05-9d69cfe19642",
+      "input_tokens": 562,
+      "output_tokens": 269,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 28.78836739999987,
+        "memory_peak_bytes": 52137984
+      }
+    },
+    {
+      "request_id": "db50f768-81bd-4906-8bf9-b669ab8cca89",
+      "input_tokens": 559,
+      "output_tokens": 45,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 5.6595547000002115,
+        "memory_peak_bytes": 52137984
+      }
+    },
+    {
+      "request_id": "aad16042-8e71-4748-8ec7-603bef23266b",
+      "input_tokens": 563,
+      "output_tokens": 900,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 99.17415639999975,
+        "memory_peak_bytes": 52334592
+      }
+    },
+    {
+      "request_id": "3d75c0ec-0820-4898-81b3-96d0cd54a01b",
+      "input_tokens": 561,
+      "output_tokens": 70,
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "cost_usd": 0,
+      "resource_usage": {
+        "measurement_source": "Windows Get-Process ollama* WorkingSet64 sampled before and after request; aggregate host RSS, excludes GPU memory and other requests allocation",
+        "duration_seconds": 10.350366799999959,
+        "memory_peak_bytes": 52334592
+      }
+    }
+  ],
+  "accounting_note": "Actual local provider cost zero; sampled host server RSS is not total inference/GPU memory or electricity billing. Local gateway planning allocations are separate."
+}

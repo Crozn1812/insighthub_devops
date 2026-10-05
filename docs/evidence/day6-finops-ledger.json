@@ -1,0 +1,117 @@
+{
+  "scopes": [
+    {
+      "workload": "insighthub",
+      "used": 20000
+    },
+    {
+      "workload": "bot",
+      "used": 20000
+    },
+    {
+      "workload": "coding",
+      "used": 20000
+    }
+  ],
+  "events": [
+    {
+      "request_id": "596c3f66-e0bd-4126-adb3-a6a200826e5a",
+      "workload": "bot",
+      "decision": "allowed",
+      "timestamp": "2026-10-04T01:22:48.051018+00:00",
+      "status": 200,
+      "input_tokens": 22,
+      "output_tokens": 32,
+      "duration": 11.929459434999444,
+      "provider_id": "chatcmpl-e2ed9503-1474-4716-8ce3-98e0116f4ac2"
+    },
+    {
+      "request_id": "4f933aa9-6838-4a06-8a1e-a2ce3a965a95",
+      "workload": "bot",
+      "decision": "allowed",
+      "timestamp": "2026-10-04T01:23:01.109482+00:00",
+      "status": 200,
+      "input_tokens": 22,
+      "output_tokens": 32,
+      "duration": 10.376291533000767,
+      "provider_id": "chatcmpl-fbd3fffe-e4f5-4f63-8109-c9d47daf0aad"
+    },
+    {
+      "request_id": "ded0ad51-09f5-4464-9272-d148f863de36",
+      "workload": "bot",
+      "decision": "denied",
+      "timestamp": "2026-10-04T01:23:12.681949+00:00",
+      "status": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "duration": null,
+      "provider_id": null
+    },
+    {
+      "request_id": "66ca4942-56da-447b-b86e-fc2dd88dbe5d",
+      "workload": "coding",
+      "decision": "allowed",
+      "timestamp": "2026-10-04T01:24:59.405188+00:00",
+      "status": 200,
+      "input_tokens": 34,
+      "output_tokens": 32,
+      "duration": 18.375325043001794,
+      "provider_id": "chatcmpl-f8db9aed-048b-44b4-af0d-91c6762e05a6"
+    },
+    {
+      "request_id": "574d3080-f8da-4a05-b9bc-79f86e2adc4b",
+      "workload": "coding",
+      "decision": "allowed",
+      "timestamp": "2026-10-04T01:25:18.965947+00:00",
+      "status": 200,
+      "input_tokens": 21,
+      "output_tokens": 32,
+      "duration": 39.78459878000285,
+      "provider_id": "chatcmpl-ca1b530e-556c-4234-9bdb-d46ac2fbe9b5"
+    },
+    {
+      "request_id": "155e3b00-3fa0-457d-bebd-4699d7c0fbd7",
+      "workload": "coding",
+      "decision": "denied",
+      "timestamp": "2026-10-04T01:25:19.010732+00:00",
+      "status": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "duration": null,
+      "provider_id": null
+    },
+    {
+      "request_id": "af0de7c9-1949-4992-b304-6093943cbf04",
+      "workload": "insighthub",
+      "decision": "allowed",
+      "timestamp": "2026-10-04T01:54:37.447453+00:00",
+      "status": 200,
+      "input_tokens": 560,
+      "output_tokens": 99,
+      "duration": 12.972932785000012,
+      "provider_id": "chatcmpl-23c09f88-8cbe-44d5-8179-b087688f6d83"
+    },
+    {
+      "request_id": "04e62d33-0f28-4069-be53-c544d53a1249",
+      "workload": "insighthub",
+      "decision": "allowed",
+      "timestamp": "2026-10-04T01:56:43.729683+00:00",
+      "status": 200,
+      "input_tokens": 560,
+      "output_tokens": 19,
+      "duration": 2.0318159490052494,
+      "provider_id": "chatcmpl-9edf754a-b890-48db-8912-4aacfcd0bc4d"
+    },
+    {
+      "request_id": "75a858aa-64e9-4cf2-983e-81324f556442",
+      "workload": "bot",
+      "decision": "denied",
+      "timestamp": "2026-10-04T01:56:45.795757+00:00",
+      "status": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "duration": null,
+      "provider_id": null
+    }
+  ]
+}

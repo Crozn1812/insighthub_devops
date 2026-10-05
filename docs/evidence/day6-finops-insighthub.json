@@ -1,0 +1,43 @@
+{
+  "workload": "insighthub",
+  "request_id": "af0de7c9-1949-4992-b304-6093943cbf04",
+  "request_id_source": "Captured from actual gateway admission ledger",
+  "provider_response_id": "chatcmpl-23c09f88-8cbe-44d5-8179-b087688f6d83",
+  "observed_at": "2026-10-04T01:54:37.447453+00:00",
+  "model": "qwen3:4b",
+  "api_provider": "openai",
+  "underlying_provider": "ollama via LiteLLM",
+  "http_status": 200,
+  "usage": {
+    "input_tokens": 560,
+    "output_tokens": 99,
+    "source": "provider"
+  },
+  "provider_cost_usd": 0,
+  "duration_seconds": 13.843999999997322,
+  "inspection": {
+    "protected_overlap": false,
+    "independent_longest_normalized_run": 12,
+    "pii_detected": false,
+    "refusal": false,
+    "refusal_has_citation": false,
+    "model": "qwen3:4b",
+    "mode": "real",
+    "usage": {
+      "input_tokens": 560,
+      "output_tokens": 99,
+      "source": "provider"
+    },
+    "request_id": null,
+    "path_leak": false,
+    "answer_sha256": "e7273ae71e7ed68ae3d32239e95a49b1053ceb7711aaaf496f2d07ecc3f00bd9"
+  },
+  "resource_usage": {
+    "measurement_source": "Windows Get-Process ollama* server RSS before/after actual deployed InsightHub gateway request; excludes GPU/model backend memory",
+    "duration_seconds": 13.843999999997322,
+    "memory_peak_bytes": 52174848
+  },
+  "utility": true,
+  "citation": true,
+  "answer_sha256": "e7273ae71e7ed68ae3d32239e95a49b1053ceb7711aaaf496f2d07ecc3f00bd9"
+}

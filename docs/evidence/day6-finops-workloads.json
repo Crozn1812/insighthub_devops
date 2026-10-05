@@ -1,0 +1,126 @@
+[
+  {
+    "workload": "bot",
+    "label": "below-budget",
+    "http_status": 200,
+    "request_id": "596c3f66-e0bd-4126-adb3-a6a200826e5a",
+    "provider_response_id": "chatcmpl-e2ed9503-1474-4716-8ce3-98e0116f4ac2",
+    "model": "qwen3:4b",
+    "usage": {
+      "completion_tokens": 32,
+      "prompt_tokens": 22,
+      "total_tokens": 54
+    },
+    "provider_cost_usd": 0,
+    "observed_at": "2026-10-04T01:23:00.003302+00:00",
+    "duration_seconds": 12.594000000011874,
+    "resource_usage": {
+      "measurement_source": "Windows Get-Process ollama* aggregate host RSS sampled before/after local gateway request; excludes GPU memory",
+      "duration_seconds": 12.594000000011874,
+      "memory_peak_bytes": 51314688
+    },
+    "answer_sha256": "62348c06c84fd9e29b628100ace6c705a49c6244fdfa8f39858435163f183dd6"
+  },
+  {
+    "workload": "bot",
+    "label": "at-threshold",
+    "http_status": 200,
+    "request_id": "4f933aa9-6838-4a06-8a1e-a2ce3a965a95",
+    "provider_response_id": "chatcmpl-fbd3fffe-e4f5-4f63-8109-c9d47daf0aad",
+    "model": "qwen3:4b",
+    "usage": {
+      "completion_tokens": 32,
+      "prompt_tokens": 22,
+      "total_tokens": 54
+    },
+    "provider_cost_usd": 0,
+    "observed_at": "2026-10-04T01:23:11.509337+00:00",
+    "duration_seconds": 10.984000000011292,
+    "resource_usage": {
+      "measurement_source": "Windows Get-Process ollama* aggregate host RSS sampled before/after local gateway request; excludes GPU memory",
+      "duration_seconds": 10.984000000011292,
+      "memory_peak_bytes": 51335168
+    },
+    "answer_sha256": "14c2f4db5d1b3243c5f0206afb4c3437c5e7a04599ee9031410f7c20be788b80"
+  },
+  {
+    "workload": "bot",
+    "label": "over-budget",
+    "http_status": 429,
+    "request_id": "ded0ad51-09f5-4464-9272-d148f863de36",
+    "provider_response_id": null,
+    "model": "qwen3:4b",
+    "usage": null,
+    "provider_cost_usd": 0,
+    "observed_at": "2026-10-04T01:23:12.699383+00:00",
+    "duration_seconds": 0.6410000000032596,
+    "resource_usage": {
+      "measurement_source": "Windows Get-Process ollama* aggregate host RSS sampled before/after local gateway request; excludes GPU memory",
+      "duration_seconds": 0.6410000000032596,
+      "memory_peak_bytes": 51335168
+    },
+    "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "workload": "coding",
+    "label": "coding-review",
+    "http_status": 200,
+    "request_id": "66ca4942-56da-447b-b86e-fc2dd88dbe5d",
+    "provider_response_id": "chatcmpl-f8db9aed-048b-44b4-af0d-91c6762e05a6",
+    "model": "qwen3:4b",
+    "usage": {
+      "completion_tokens": 32,
+      "prompt_tokens": 34,
+      "total_tokens": 66
+    },
+    "provider_cost_usd": 0,
+    "observed_at": "2026-10-04T01:25:17.834221+00:00",
+    "duration_seconds": 19.031000000002678,
+    "resource_usage": {
+      "measurement_source": "Windows Get-Process ollama* aggregate host RSS sampled before/after local gateway request; excludes GPU memory",
+      "duration_seconds": 19.031000000002678,
+      "memory_peak_bytes": 51281920
+    },
+    "answer_sha256": "823e06ddff1104ec44fa04b0bd30535e72a8d1aefe3132249a3060683c9809c9"
+  },
+  {
+    "workload": "coding",
+    "label": "concurrent-near-threshold",
+    "http_status": 429,
+    "request_id": "155e3b00-3fa0-457d-bebd-4699d7c0fbd7",
+    "provider_response_id": null,
+    "model": "qwen3:4b",
+    "usage": null,
+    "provider_cost_usd": 0,
+    "observed_at": "2026-10-04T01:25:19.073759+00:00",
+    "duration_seconds": 0.6720000000059372,
+    "resource_usage": {
+      "measurement_source": "Windows Get-Process ollama* aggregate host RSS sampled before/after local gateway request; excludes GPU memory",
+      "duration_seconds": 0.6720000000059372,
+      "memory_peak_bytes": 51294208
+    },
+    "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "workload": "coding",
+    "label": "concurrent-near-threshold",
+    "http_status": 200,
+    "request_id": "574d3080-f8da-4a05-b9bc-79f86e2adc4b",
+    "provider_response_id": "chatcmpl-ca1b530e-556c-4234-9bdb-d46ac2fbe9b5",
+    "model": "qwen3:4b",
+    "usage": {
+      "completion_tokens": 32,
+      "prompt_tokens": 21,
+      "total_tokens": 53
+    },
+    "provider_cost_usd": 0,
+    "observed_at": "2026-10-04T01:25:58.784363+00:00",
+    "duration_seconds": 40.375,
+    "resource_usage": {
+      "measurement_source": "Windows Get-Process ollama* aggregate host RSS sampled before/after local gateway request; excludes GPU memory",
+      "duration_seconds": 40.375,
+      "memory_peak_bytes": 51294208
+    },
+    "answer_sha256": "9739b94c543c99ed62a43d41cfe38d25ac96a53b1d28b68644692240cfbb1db2"
+  }
+]

@@ -1,0 +1,42 @@
+# Sanitized review artifact only. This is not an active Codex configuration.
+# Pinned versions:
+# - Filesystem: @modelcontextprotocol/server-filesystem@2026.8.31
+# - Docker: docker-mcp-server 2.2.6
+# - Kubernetes: kubernetes-mcp-server@0.0.67
+# - Prometheus: prometheus/prometheus-mcp v0.18.0
+# - Inspector: @modelcontextprotocol/inspector@2.8.0
+
+[mcp_servers.filesystem-day2]
+type = "stdio"
+command = "<NODE_EXE>"
+args = ["<FILESYSTEM_SERVER_ENTRYPOINT>", "<REPO_ROOT>"]
+cwd = "<REPO_ROOT>"
+enabled_tools = ["directory_tree", "get_file_info", "list_allowed_directories", "list_directory", "read_file", "read_multiple_files", "search_files"]
+
+[mcp_servers.docker-day2]
+type = "stdio"
+command = "<DOCKER_MCP_EXE>"
+args = []
+cwd = "<REPO_ROOT>"
+enabled_tools = ["container_list", "container_logs", "container_inspect", "container_stats", "container_top", "container_diff", "container_wait", "container_archive_get", "docs_lookup", "tool_list"]
+
+[mcp_servers.docker-day2.env]
+DOCKER_MCP_SERVER_READONLY = "1"
+DOCKER_MCP_SERVER_DISABLE = "images,networks,volumes,compose,stack,context,buildx,scout,registry,swarm,services,nodes,plugins,configs,secrets,system"
+
+# <KUBERNETES_SERVER_CONFIG> represents server-readonly.toml with read-only mode enabled.
+# It refers to <KUBERNETES_READONLY_KUBECONFIG>; Secret access is denied and no credential is copied here.
+[mcp_servers.kubernetes-day2]
+type = "stdio"
+command = "<NODE_EXE>"
+args = ["<KUBERNETES_MCP_ENTRYPOINT>", "--config", "<KUBERNETES_SERVER_CONFIG>"]
+cwd = "<REPO_ROOT>"
+enabled_tools = ["events_list", "namespaces_list", "nodes_log", "nodes_stats_summary", "pods_get", "pods_list", "pods_list_in_namespace", "pods_log", "resources_get", "resources_list"]
+
+[mcp_servers.prometheus-day2]
+type = "stdio"
+command = "<PROMETHEUS_MCP_EXE>"
+args = ["--prometheus.url=http://127.0.0.1:9090", "--mcp.transport=stdio", "--mcp.tools=list_targets", "--mcp.tools=healthy", "--mcp.tools=ready", "--mcp.tools=build_info", "--no-dangerous.enable-tsdb-admin-tools", "--no-docs.auto-update", "--web.listen-address=127.0.0.1:0"]
+cwd = "<REPO_ROOT>"
+enabled_tools = ["query", "range_query", "metric_metadata", "label_names", "label_values", "series", "list_targets", "healthy", "ready", "build_info"]
+# quit, reload, snapshot, delete_series, and clean_tombstones are unavailable.

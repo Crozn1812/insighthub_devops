@@ -1,9 +1,10 @@
-"""InsightHub synchronous starter API."""
+"""InsightHub API: async ingestion admission, synchronous RAG in threadpool."""
 
+import asyncio
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
@@ -12,9 +13,15 @@ from starlette.concurrency import run_in_threadpool
 from app.core.config import get_settings
 from app.core.db import close_pool, get_conn, initialize_database
 from app.core.errors import ServiceError
-from app.core.metrics import documents_total, http_requests_total
+from app.core.metrics import (
+    documents_created_today,
+    documents_total,
+    http_requests_total,
+    ingestion_queue_depth,
+)
 from app.core.upload_limit import UploadLimitMiddleware
 from app.routers import chat, documents, health
+from app.services.queue import get_queue_depth
 
 settings = get_settings()
 logging.basicConfig(level=settings.log_level)
@@ -93,7 +100,26 @@ def metrics():
         )
     for status in ("pending", "ready", "failed"):
         documents_total.labels(status).set(counts.get(status, 0))
+    with get_conn() as conn:
+        created_today = conn.execute(
+            "SELECT count(*) FROM documents "
+            "WHERE created_at >= (date_trunc('day', now() AT TIME ZONE %s) "
+            "AT TIME ZONE %s)",
+            ("Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh"),
+        ).fetchone()[0]
+    documents_created_today.set(created_today)
+    try:
+        ingestion_queue_depth.set(asyncio.run(get_queue_depth()))
+    except Exception:  # noqa: BLE001 - a scrape must not expose Redis details
+        logging.getLogger("insighthub.metrics").warning("queue depth collection failed")
     return Response(generate_latest(), headers={"Content-Type": CONTENT_TYPE_LATEST})
+
+
+@app.get("/day4-chaos/error", include_in_schema=False)
+def day4_controlled_error():
+    if not get_settings().day4_chaos_force_error:
+        raise HTTPException(404, "Day 4 controlled error mode is disabled")
+    raise HTTPException(503, "Day 4 controlled error")
 
 
 app.include_router(health.router)

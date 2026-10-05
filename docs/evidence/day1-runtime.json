@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-09-10T09:48:06.537837+00:00",
+  "mode": "fixture",
+  "five_services_healthy": true,
+  "api_worker_settings_identical": true,
+  "workload_bytes": 82,
+  "workload_sha256": "8ae8bb488b7fc623831e0a4b6dfb6c90766b85afcc8208857700401271626e81",
+  "document_id": 11,
+  "filename": "day1-async-f4ee162773694f4683cf244ca44164db.txt",
+  "upload_status": 202,
+  "upload_seconds": 0.03399380500013649,
+  "ready_seconds_from_upload_start": 0.5620192999995197,
+  "chunk_count": 1,
+  "chat_status": 200,
+  "fresh_source_verified": true,
+  "worker_events": [
+    {
+      "event": "ingestion_completed",
+      "document_id": 11,
+      "timestamp": "2026-09-10T09:48:05.041494+00:00",
+      "status": "ready"
+    }
+  ],
+  "oversize_upload_status": 413,
+  "retry_document_id": 12,
+  "retry_status": 202,
+  "retry_first_status": "failed",
+  "retry_second_status": "failed",
+  "retry_chunk_count": 0,
+  "upload_under_one_second": true,
+  "ready_under_30_seconds": true
+}

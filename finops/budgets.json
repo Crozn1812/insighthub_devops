@@ -1,0 +1,11 @@
+{
+  "accounting_policy": "Local admission allocation, USD-denominated planning credits per admitted model request; not provider billing or measured electricity cost. Failed upstream attempts retain allocation.",
+  "allocation_micro_usd_per_request": 10000,
+  "provider_cost_usd": 0,
+  "evaluation_provider_budget_usd": 1,
+  "scopes": {
+    "insighthub": {"max_budget_micro_usd": 100000},
+    "bot": {"max_budget_micro_usd": 20000},
+    "coding": {"max_budget_micro_usd": 20000}
+  }
+}

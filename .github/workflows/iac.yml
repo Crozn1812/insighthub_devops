@@ -1,0 +1,246 @@
+name: Day 3 IaC validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      aws_plan:
+        description: 'Run authorized AWS plan/cost (requires configured OIDC and private plan bucket)'
+        type: boolean
+        default: false
+      aws_apply:
+        description: 'Apply that reviewed plan through the protected aws-apply environment'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  TERRAFORM_VERSION: 1.16.4
+  TERRAFORM_SHA256: dc94af0eef1147718ad7c8daea792ed199e3e0492eec180d0adafa2a65a879df
+  TFLINT_VERSION: 0.64.0
+  TFLINT_SHA256: cca9d13e2e1d7a2c627af60ff899a3c9b74212899416aeb96ec764d2ef954537
+  CONFTEST_VERSION: 0.70.1
+  CONFTEST_SHA256: 613d124b8f6c1f3cee890491f7ab19114cca5a2102ca47cb2e6c35b4c23f9c8a
+  HELM_VERSION: 3.22.0
+  HELM_SHA256: 1e4ab49e429626cf6c6958d914248b78c9730803c2751b87627e171dc800e7bb
+  INFRACOST_SHA256: ea21bbc939530243a526b22e2f63ae3842b8ba6141ab0c0995bc49a0ad9ef2f4
+
+jobs:
+  fmt:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - name: Install Terraform
+        run: |
+          curl -fsSLO "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
+          echo "${TERRAFORM_SHA256}  terraform_${TERRAFORM_VERSION}_linux_amd64.zip" | sha256sum -c -
+          sudo unzip -q "terraform_${TERRAFORM_VERSION}_linux_amd64.zip" terraform -d /usr/local/bin
+      - run: terraform fmt -check -recursive infra
+
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - name: Install TFLint
+        run: |
+          curl -fsSL -o tflint.zip "https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip"
+          echo "${TFLINT_SHA256}  tflint.zip" | sha256sum -c -
+          sudo unzip -q tflint.zip -d /usr/local/bin
+      - run: tflint --chdir=infra --recursive
+
+  security-scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - run: pip install --disable-pip-version-check checkov==3.3.17
+      - run: checkov -d infra --quiet
+
+  policy-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - name: Install Conftest
+        run: |
+          curl -fsSL -o conftest.tar.gz "https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz"
+          echo "${CONFTEST_SHA256}  conftest.tar.gz" | sha256sum -c -
+          sudo tar -xzf conftest.tar.gz -C /usr/local/bin conftest
+      - name: Exercise positive and negative policies
+        run: |
+          conftest test infra/policies/fixtures/valid-plan.json --policy infra/policies/terraform
+          if conftest test infra/policies/fixtures/unsafe-plan.json --policy infra/policies/terraform; then
+            echo "unsafe fixture was unexpectedly accepted" >&2
+            exit 1
+          fi
+      - name: Run milestone policy tests
+        env:
+          INSIGHTHUB_REPO_ROOT: ${{ github.workspace }}
+        run: |
+          python3 -m pip install --require-hashes -r scripts/requirements-verification.txt
+          python3 -m pytest -c /dev/null -p no:cacheprovider tests/milestones/day3/test_policy.py -v
+
+  terraform-validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - name: Install Terraform
+        run: |
+          curl -fsSLO "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
+          echo "${TERRAFORM_SHA256}  terraform_${TERRAFORM_VERSION}_linux_amd64.zip" | sha256sum -c -
+          sudo unzip -q "terraform_${TERRAFORM_VERSION}_linux_amd64.zip" terraform -d /usr/local/bin
+      - run: terraform -chdir=infra init -backend=false -input=false
+      - run: terraform -chdir=infra validate -no-color
+
+  helm-lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - name: Install Helm
+        run: |
+          curl -fsSL -o helm.tar.gz "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz"
+          echo "${HELM_SHA256}  helm.tar.gz" | sha256sum -c -
+          tar -xzf helm.tar.gz
+          sudo install linux-amd64/helm /usr/local/bin/helm
+      - run: helm lint infra/helm/insighthub --set-file postgres.initSql=infra/db/init.sql
+
+  render-chart:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - name: Install Helm
+        run: |
+          curl -fsSL -o helm.tar.gz "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz"
+          echo "${HELM_SHA256}  helm.tar.gz" | sha256sum -c -
+          tar -xzf helm.tar.gz
+          sudo install linux-amd64/helm /usr/local/bin/helm
+      - run: |
+          mkdir -p artifacts
+          helm template insighthub infra/helm/insighthub --namespace insighthub-dev --set-file postgres.initSql=infra/db/init.sql > artifacts/day3-deployment.yaml
+          test -s artifacts/day3-deployment.yaml
+
+  verification-source:
+    runs-on: ubuntu-24.04
+    needs: [fmt, lint, security-scan, policy-check, terraform-validate, helm-lint, render-chart]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - name: Install Helm
+        run: |
+          curl -fsSL -o helm.tar.gz "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz"
+          echo "${HELM_SHA256}  helm.tar.gz" | sha256sum -c -
+          tar -xzf helm.tar.gz
+          sudo install linux-amd64/helm /usr/local/bin/helm
+      - name: Render and bind source
+        run: |
+          mkdir -p artifacts
+          helm template insighthub infra/helm/insighthub --namespace insighthub-dev --set-file postgres.initSql=infra/db/init.sql > artifacts/day3-deployment.yaml
+          SOURCE_SHA256="$(python3 scripts/verify.py fingerprint)"
+          ARTIFACT_SHA256="$(sha256sum artifacts/day3-deployment.yaml | cut -d' ' -f1)"
+          export SOURCE_SHA256 ARTIFACT_SHA256
+          python3 -c 'import json,os,pathlib; pathlib.Path("artifacts/source-manifest.json").write_text(json.dumps({"source_sha256":os.environ["SOURCE_SHA256"],"artifact_sha256":os.environ["ARTIFACT_SHA256"]},indent=2)+"\n")'
+      - uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        with:
+          name: verification-source
+          path: |
+            artifacts/source-manifest.json
+            artifacts/day3-deployment.yaml
+          if-no-files-found: error
+
+  # These jobs do not run on push/PR. A skipped job is NOT AWS execution evidence.
+  plan:
+    if: github.event_name == 'workflow_dispatch' && inputs.aws_plan
+    needs: [fmt, lint, security-scan, policy-check, terraform-validate]
+    runs-on: ubuntu-24.04
+    environment: aws-plan
+    permissions: {contents: read, id-token: write}
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      TF_VAR_enable_aws: 'true'
+      TF_VAR_vpc_id: ${{ vars.AWS_VPC_ID }}
+      TF_VAR_private_subnet_ids: ${{ vars.AWS_PRIVATE_SUBNET_IDS }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {persist-credentials: false}
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
+        with: {terraform_version: '${{ env.TERRAFORM_VERSION }}'}
+      - uses: aws-actions/configure-aws-credentials@00943011d9042930efac3dcd3a170e4273319bc8
+        with:
+          role-to-assume: ${{ vars.AWS_PLAN_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Create private reviewed plan
+        run: |
+          test -n '${{ vars.TF_STATE_BUCKET }}'
+          terraform -chdir=infra init -input=false -backend-config='bucket=${{ vars.TF_STATE_BUCKET }}' -backend-config='region=${{ vars.AWS_REGION }}'
+          terraform -chdir=infra plan -input=false -out=tfplan
+          sha256sum infra/tfplan | cut -d' ' -f1 > infra/tfplan.sha256
+          aws s3 cp infra/tfplan 's3://${{ vars.TF_STATE_BUCKET }}/plans/${{ github.run_id }}/tfplan' --sse AES256
+          aws s3 cp infra/tfplan.sha256 's3://${{ vars.TF_STATE_BUCKET }}/plans/${{ github.run_id }}/tfplan.sha256' --sse AES256
+
+  cost-estimate:
+    if: github.event_name == 'workflow_dispatch' && inputs.aws_plan
+    needs: [plan]
+    runs-on: ubuntu-24.04
+    environment: aws-plan
+    permissions: {contents: read, id-token: write}
+    env:
+      INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {persist-credentials: false}
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
+        with: {terraform_version: '${{ env.TERRAFORM_VERSION }}'}
+      - uses: aws-actions/configure-aws-credentials@00943011d9042930efac3dcd3a170e4273319bc8
+        with:
+          role-to-assume: ${{ vars.AWS_PLAN_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Cost and policy gates on the actual plan
+        run: |
+          test -n "$INFRACOST_API_KEY"
+          curl -fsSL -o infracost.tar.gz https://github.com/infracost/infracost/releases/download/v0.10.43/infracost-linux-amd64.tar.gz
+          echo "${INFRACOST_SHA256}  infracost.tar.gz" | sha256sum -c -
+          tar -xzf infracost.tar.gz
+          aws s3 cp 's3://${{ vars.TF_STATE_BUCKET }}/plans/${{ github.run_id }}/tfplan' infra/tfplan
+          terraform -chdir=infra init -backend=false -input=false
+          terraform -chdir=infra show -json tfplan > /tmp/tfplan.json
+          curl -fsSL -o conftest.tar.gz "https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz"
+          echo "${CONFTEST_SHA256}  conftest.tar.gz" | sha256sum -c -
+          tar -xzf conftest.tar.gz conftest
+          ./conftest test /tmp/tfplan.json --policy infra/policies/terraform
+          ./infracost-linux-amd64 breakdown --path /tmp/tfplan.json --format table > /tmp/cost-report.txt
+          cat /tmp/cost-report.txt
+
+  apply:
+    if: github.event_name == 'workflow_dispatch' && inputs.aws_plan && inputs.aws_apply
+    needs: [plan, cost-estimate]
+    runs-on: ubuntu-24.04
+    environment: aws-apply
+    permissions: {contents: read, id-token: write}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {persist-credentials: false}
+      - name: Require configured human approval protection
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          gh api 'repos/${{ github.repository }}/environments/aws-apply' --jq '.protection_rules[] | select(.type == "required_reviewers") | .reviewers | length' | grep -Eq '^[1-9][0-9]*$'
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
+        with: {terraform_version: '${{ env.TERRAFORM_VERSION }}'}
+      - uses: aws-actions/configure-aws-credentials@00943011d9042930efac3dcd3a170e4273319bc8
+        with:
+          role-to-assume: ${{ vars.AWS_APPLY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Apply only the hash-verified reviewed plan
+        run: |
+          aws s3 cp 's3://${{ vars.TF_STATE_BUCKET }}/plans/${{ github.run_id }}/tfplan' infra/tfplan
+          aws s3 cp 's3://${{ vars.TF_STATE_BUCKET }}/plans/${{ github.run_id }}/tfplan.sha256' infra/tfplan.sha256
+          test "$(sha256sum infra/tfplan | cut -d' ' -f1)" = "$(cat infra/tfplan.sha256)"
+          terraform -chdir=infra init -input=false -backend-config='bucket=${{ vars.TF_STATE_BUCKET }}' -backend-config='region=${{ vars.AWS_REGION }}'
+          terraform -chdir=infra apply -input=false tfplan

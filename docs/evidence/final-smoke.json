@@ -1,0 +1,103 @@
+{
+  "observed_at": "2026-10-04T11:58:11.751781+00:00",
+  "checks": [
+    {
+      "check": "inventory/workloads",
+      "status": "PASS",
+      "observation": {
+        "node_ready": true,
+        "application_and_monitoring_pods_ready": true
+      }
+    },
+    {
+      "check": "API/database readiness",
+      "status": "PASS",
+      "observation": {
+        "status": "ready",
+        "db": true,
+        "mode": "real"
+      }
+    },
+    {
+      "check": "Redis",
+      "status": "PASS",
+      "observation": "PONG"
+    },
+    {
+      "check": "PostgreSQL",
+      "status": "PASS",
+      "observation": "/var/run/postgresql:5432 - accepting connections"
+    },
+    {
+      "check": "LiteLLM health",
+      "status": "PASS",
+      "observation": {
+        "gateway": "ready",
+        "litellm_status": 200
+      }
+    },
+    {
+      "check": "web/Ollama/Prometheus/Grafana",
+      "status": "PASS",
+      "observation": {
+        "web": 200,
+        "prometheus": 200,
+        "grafana": 200,
+        "ollama": 200
+      }
+    },
+    {
+      "check": "benign RAG/citation and direct LiteLLM model traffic",
+      "status": "PASS",
+      "observation": {
+        "rag": {
+          "model": "qwen3:4b",
+          "provider": "openai",
+          "usage": {
+            "input_tokens": 560,
+            "output_tokens": 16,
+            "source": "provider"
+          },
+          "citation": true,
+          "utility": true,
+          "inspection": {
+            "protected_overlap": false,
+            "independent_longest_normalized_run": 9,
+            "pii_detected": false,
+            "refusal": false,
+            "refusal_has_citation": false,
+            "model": "qwen3:4b",
+            "mode": "real",
+            "usage": {
+              "input_tokens": 560,
+              "output_tokens": 16,
+              "source": "provider"
+            },
+            "request_id": null,
+            "path_leak": false,
+            "answer_sha256": "717e34d09b9bbd8e326dad1f3b2e7457cd897470872ef64e776132bf069d5481"
+          },
+          "answer_sha256": "717e34d09b9bbd8e326dad1f3b2e7457cd897470872ef64e776132bf069d5481",
+          "duration_seconds": 19.905999999988126
+        },
+        "direct_gateway": {
+          "http_status": 200,
+          "model": "qwen3:4b",
+          "usage": {
+            "completion_tokens": 12,
+            "prompt_tokens": 25,
+            "total_tokens": 37
+          },
+          "request_id": "232cab29-95bd-4d4f-a5ef-62aed97bcc71",
+          "provider_response_id": "chatcmpl-9e138e76-5791-4b90-ab72-8efe0b612ee1",
+          "answer_sha256": "744dd77bb73acff8c8ee4286cb551d875f182f18f08333144ab3f5fdee5e73c8"
+        },
+        "note": "Two new benign final-submission model requests; original Day 6 scan and ledger export are untouched. Persistent planning allocation advances normally."
+      }
+    }
+  ],
+  "pass": 7,
+  "fail": 0,
+  "security_scan_rerun": false,
+  "infrastructure_mutated": false
+}

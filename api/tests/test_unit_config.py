@@ -57,6 +57,7 @@ class ConfigTests(unittest.TestCase):
             ("provider_timeout_seconds", "nan"),
             ("embedding_batch_size", 0),
             ("max_upload_bytes", -1),
+            ("ollama_think", "not-a-boolean"),
         ):
             with self.subTest(key=key), self.assertRaises(ValidationError):
                 with configured(**{key: value}):

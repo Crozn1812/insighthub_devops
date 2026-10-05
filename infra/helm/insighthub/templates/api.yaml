@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insighthub-api
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: api}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: api}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: insighthub
+      securityContext: {fsGroup: 1001}
+      containers:
+        - name: api
+          image: "{{ .Values.images.api.repository }}:{{ .Values.images.api.tag }}"
+          imagePullPolicy: {{ .Values.images.api.pullPolicy }}
+          ports: [{name: http, containerPort: 8000}]
+          envFrom: [{configMapRef: {name: insighthub-config}}]
+          env:
+            {{- if .Values.nativeSecuritySecretName }}
+            - name: LITELLM_API_KEY
+              valueFrom: {secretKeyRef: {name: {{ .Values.nativeSecuritySecretName }}, key: LITELLM_API_KEY}}
+            - name: NEMO_GUARDRAILS_KEY
+              valueFrom: {secretKeyRef: {name: {{ .Values.nativeSecuritySecretName }}, key: NEMO_GUARDRAILS_KEY}}
+            {{- end }}
+            - name: DATABASE_URL
+              valueFrom: {secretKeyRef: {name: {{ .Values.runtimeSecretName }}, key: DATABASE_URL}}
+          volumeMounts: [{name: payloads, mountPath: /app/payloads}]
+          livenessProbe: {httpGet: {path: /healthz, port: http}, initialDelaySeconds: 10, periodSeconds: 10}
+          readinessProbe: {httpGet: {path: /readyz, port: http}, initialDelaySeconds: 5, periodSeconds: 5}
+          resources: {{- toYaml .Values.resources.api | nindent 12 }}
+      volumes: [{name: payloads, persistentVolumeClaim: {claimName: insighthub-payloads}}]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insighthub-api
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: api
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/instance: {{ .Release.Name }}, app.kubernetes.io/component: api}
+  ports: [{name: http, port: 8000, targetPort: http}]

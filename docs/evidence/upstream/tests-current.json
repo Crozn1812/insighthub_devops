@@ -1,0 +1,73 @@
+{
+  "observed_at": "2026-10-05T04:02:14.772Z",
+  "assembly_note": "Summary of completed commands; source logs retain execution details. Assembly timestamp is not a reexecution.",
+  "api": {
+    "passed": 146,
+    "subtests_passed": 97,
+    "includes_worker_retry": 4,
+    "security_unit_tests": "included; do not add twice"
+  },
+  "chatops": {
+    "passed": 62,
+    "real_redis": true
+  },
+  "finops": {
+    "passed": 12,
+    "scope": "historical scoped adapter and retained artifact contracts"
+  },
+  "verifier_regressions": {
+    "passed": 69
+  },
+  "evaluator_mechanics": {
+    "passed": 13,
+    "no_model_scan": true
+  },
+  "provider_fault_proxy": {
+    "passed": 3
+  },
+  "promtool": {
+    "rule_count": 16,
+    "check": "PASS",
+    "test": "PASS",
+    "edge_case_count": 7,
+    "sync": "PASS",
+    "final_log_sha256": "2eda58e17f062b028a46e5c66a625f812a6af43cb0ee7b0abfdf4650699631e8"
+  },
+  "optional_tools": {
+    "ruff": "UNAVAILABLE",
+    "mypy": "UNAVAILABLE",
+    "installed_for_submission": false
+  },
+  "logs": [
+    {
+      "path": "evidence/upstream-audit/api-pytest-resume.log",
+      "sha256": "6b682a14eed718e5829eed7d555054b8cb8ca396d3f6beaa2beeb05c5b741758",
+      "passed": 146,
+      "subtests": 97
+    },
+    {
+      "path": "evidence/upstream-audit/chatops-resume.log",
+      "sha256": "052273fc75e0498831f3a55422d0d55d59830da60110c787f3869c69104029bf",
+      "passed": 62,
+      "subtests": 0
+    },
+    {
+      "path": "evidence/upstream-audit/offline-resume.log",
+      "sha256": "aa9d08aec7dd856077c9523afd2ae05d25a461995f9d41a75789a5a8c3d1fedb",
+      "passed": 81,
+      "subtests": 0
+    },
+    {
+      "path": "evidence/upstream-audit/evaluator-mechanics-resume.log",
+      "sha256": "e06645ecfc6caf664d42a2df06c512c997b54d262a171f710cf015dd8497deee",
+      "passed": 13,
+      "subtests": 0
+    },
+    {
+      "path": "evidence/upstream-audit/promtool-resume.log",
+      "sha256": "ecb7b70e7b5e97244454b74430e0f2ca5de5b765df818f51a93e156ce9e16ca9",
+      "passed": null,
+      "subtests": 0
+    }
+  ]
+}

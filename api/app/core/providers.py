@@ -4,7 +4,7 @@ import logging
 import httpx
 
 from app.core.config import get_settings
-from app.core.errors import ProviderError
+from app.core.errors import ProviderError, TransientProviderError
 
 logger = logging.getLogger("insighthub.providers")
 
@@ -23,6 +23,14 @@ def post_json(url: str, *, headers: dict, payload: dict) -> dict:
             if not isinstance(data, dict):
                 raise ValueError("Invalid JSON object")
             return data
+    except httpx.TransportError:
+        logger.warning("AI provider transport unavailable")
+        raise TransientProviderError() from None
+    except httpx.HTTPStatusError as error:
+        logger.warning("AI provider request failed")
+        if error.response.status_code >= 500:
+            raise TransientProviderError() from None
+        raise ProviderError() from None
     except (httpx.HTTPError, ValueError):
         logger.warning("AI provider request failed")
         raise ProviderError() from None

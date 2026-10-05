@@ -284,7 +284,7 @@ class GenerationTests(unittest.TestCase):
                 "usage": {"input_tokens": 2, "output_tokens": 3},
             },
             "ollama": {
-                "message": {"content": "answer"},
+                "message": {"content": '{"answer": "answer"}'},
                 "prompt_eval_count": 2,
                 "eval_count": 3,
             },
@@ -298,6 +298,57 @@ class GenerationTests(unittest.TestCase):
                 result = generate("question", self.contexts)
                 self.assertEqual(result["answer"], "answer")
                 self.assertEqual(result["usage"]["input_tokens"], 2)
+
+    def test_ollama_sends_configured_thinking_mode(self):
+        for think in (False, True):
+            with (
+                self.subTest(think=think),
+                real_config("ollama", embedding_provider="ollama", ollama_think=think),
+                patch(
+                    "app.services.llm.post_json",
+                    return_value={
+                        "message": {"content": '{"answer": "answer"}', "thinking": ""},
+                        "prompt_eval_count": 2,
+                        "eval_count": 3,
+                    },
+                ) as transport,
+            ):
+                result = generate("question", self.contexts)
+            payload = transport.call_args.kwargs["payload"]
+            self.assertIs(payload["think"], think)
+            self.assertEqual(payload["options"]["num_predict"], 1024)
+            self.assertEqual(result["answer"], "answer")
+
+    def test_ollama_requests_final_answer_schema_and_preserves_usage(self):
+        with real_config("ollama"), patch("app.services.llm.post_json", return_value={
+            "message": {"content": '{"answer": "12 bar. [nguồn: gauge.md]"}',
+                        "thinking": "provider analysis is not returned"},
+            "prompt_eval_count": 15, "eval_count": 9,
+        }) as transport:
+            result = generate("What pressure?", self.contexts)
+        schema = transport.call_args.kwargs["payload"]["format"]
+        self.assertEqual(schema["required"], ["answer"])
+        self.assertFalse(schema["additionalProperties"])
+        self.assertEqual(result["answer"], "12 bar. [nguồn: gauge.md]")
+        self.assertEqual(result["usage"], {"input_tokens": 15, "output_tokens": 9, "source": "provider"})
+
+    def test_ollama_invalid_envelopes_fail_without_fixture_or_raw_error(self):
+        for content in ("analysis then answer", '{"answer": "truncated', '[]', '{}',
+                        '{"answer": 7}', '{"answer": ""}',
+                        '{"answer": "safe", "analysis": "hidden"}'):
+            with self.subTest(content=content), real_config("ollama"), \
+                 patch("app.services.llm.post_json", return_value={"message": {"content": content}}), \
+                 self.assertRaises(ProviderError) as raised:
+                generate("question", self.contexts)
+            self.assertNotIn(content, str(raised.exception))
+
+    def test_structured_policy_excerpt_still_reaches_existing_output_guard(self):
+        from app.security.guardrails import REFUSAL, protect_output
+        policy = "Confidential synthetic custodians secure the amber archive against unauthorized access."
+        with real_config("ollama"), patch("app.services.llm.post_json", return_value={
+            "message": {"content": __import__("json").dumps({"answer": policy})}}):
+            result = generate("question", self.contexts)
+        self.assertEqual(protect_output(result["answer"], (policy,)), (REFUSAL, True))
 
     def test_failure_or_empty_real_answer_is_not_fixture(self):
         for response in (

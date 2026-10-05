@@ -1,0 +1,602 @@
+{
+  "scope": "Actual normal real API/gateway/Ollama workload before controlled faults; failed startup requests retained.",
+  "first_success_request_started_at": "2026-10-05T09:20:56.3072685+07:00",
+  "last_success_request_started_at": "2026-10-05T10:36:03.8445498+07:00",
+  "successful_start_window_minutes": 75.12561666666667,
+  "passed": 113,
+  "failed": 2,
+  "extension_stop": "Owned helper intentionally stopped before incidents; not falsely marked as natural completion.",
+  "recording_rule_interval_seconds": 15,
+  "baseline_hours": 1,
+  "offset_minutes": 10,
+  "finite_sample_guard": 60,
+  "volume_guard": 20,
+  "alert_for_minutes": 2,
+  "logs": [
+    {
+      "path": "evidence/upstream-audit/real-baseline-r2.log",
+      "sha256": "37ce9d672e82e29481d6d9c304c97b9cc4e0a196a4bf752406754b1cc016d091"
+    },
+    {
+      "path": "evidence/upstream-audit/real-baseline-r3.log",
+      "sha256": "0a34344d0ead3a0e1041b5e184631976d26f8612ff90b06bbf06c4a725d009e7"
+    }
+  ],
+  "observations": [
+    {
+      "request_started_at": "2026-10-05T09:18:53.3146955+07:00",
+      "passed": false,
+      "failure_category": "TaskCanceledException"
+    },
+    {
+      "request_started_at": "2026-10-05T09:19:56.2202325+07:00",
+      "passed": false,
+      "failure_category": "TaskCanceledException"
+    },
+    {
+      "request_started_at": "2026-10-05T09:20:56.3072685+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:21:41.0622687+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:22:20.5701592+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:23:01.5417063+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:23:44.6325825+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:24:28.1558288+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:25:14.2875029+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:25:54.3454318+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:26:48.6619023+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:27:31.8368420+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:28:09.9513046+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:28:47.7738570+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:29:31.9603518+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:30:16.0782588+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:31:00.1963163+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:31:43.7366401+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:32:30.0730827+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:33:09.5859711+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:33:50.4313082+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:34:34.0093484+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:35:13.4357563+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:35:55.9900005+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:36:33.9861577+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:37:11.4673827+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:37:44.8821701+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:38:22.3026235+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:39:05.9382932+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:39:49.7442065+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:40:27.9714748+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:41:05.1153346+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:41:50.3697837+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:42:33.8922229+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:43:17.3127340+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:44:00.5668501+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:44:43.0967107+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:45:27.0977313+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:46:13.2871588+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:46:52.8897365+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:47:51.2839238+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:48:29.9032125+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:49:10.4007132+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:49:56.3387364+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:50:40.0553129+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:51:25.6159867+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:52:10.6796800+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:52:51.8100038+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:53:30.9312358+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:54:08.1902322+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:54:52.5790676+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:55:35.5013959+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:56:22.5581732+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:57:03.3663349+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:57:46.7775657+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:58:29.0338605+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:59:09.0749310+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T09:59:54.1308762+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:00:39.5667027+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:01:26.1414002+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:02:08.5926585+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:02:48.4726219+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:03:29.0429827+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:04:14.7754240+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:04:56.2054068+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:05:35.8388651+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:06:17.3664807+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:06:56.8793838+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:07:37.7042945+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:08:21.4732936+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:09:06.4273096+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:09:44.1064242+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:10:26.5676954+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:11:08.7383309+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:11:55.5031610+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:12:35.0136764+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:13:21.3756571+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:14:04.3734562+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:14:44.0858077+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:15:25.7758432+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:16:08.0282522+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:16:51.7556827+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:17:30.2256079+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:18:13.7295901+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:18:52.6599653+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:19:34.4842199+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:20:06.9894232+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:20:19.7515287+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:20:46.9378439+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:21:00.8860883+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:21:28.4542274+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:21:41.2181227+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:22:15.2526869+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:22:25.3150223+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:22:59.6760145+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:23:12.4212977+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:23:40.1092409+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:24:23.1373250+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:25:00.8161882+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:25:46.3126723+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:26:26.4650961+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:27:10.5597467+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:27:47.7835835+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:28:28.8994501+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:29:05.8217596+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:29:51.9535909+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:30:34.7642321+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:31:14.7728357+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:32:01.8617949+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:32:45.0720138+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:33:32.5115529+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:34:12.0998094+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:34:49.8100073+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:35:27.7230555+07:00",
+      "passed": true,
+      "failure_category": null
+    },
+    {
+      "request_started_at": "2026-10-05T10:36:03.8445498+07:00",
+      "passed": true,
+      "failure_category": null
+    }
+  ]
+}

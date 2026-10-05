@@ -1,0 +1,47 @@
+{
+  "incident_id": "incident-2-queue-backlog",
+  "started_at": "2026-09-30T15:13:05.3487859+07:00",
+  "ended_at": "2026-09-30T15:16:05.6497152+07:00",
+  "hypotheses": [
+    "The ingestion queue is growing because the worker has no available replica.",
+    "Redis is unavailable and jobs cannot be consumed despite a healthy worker."
+  ],
+  "samples": [
+    {
+      "metric": "insighthub:ingestion_queue_depth",
+      "labels": {},
+      "timestamp": "2026-09-30T08:15:00.868Z",
+      "value": 6
+    },
+    {
+      "metric": "kube_deployment_status_replicas_available",
+      "labels": {
+        "container": "kube-state-metrics",
+        "deployment": "insighthub-ingestion-worker",
+        "endpoint": "http",
+        "instance": "10.244.0.14:8080",
+        "job": "kube-state-metrics",
+        "namespace": "insighthub-dev",
+        "pod": "kube-prometheus-stack-kube-state-metrics-788d5d9c8c-dls7l",
+        "service": "kube-prometheus-stack-kube-state-metrics"
+      },
+      "timestamp": "2026-09-30T08:15:00.949Z",
+      "value": 0
+    },
+    {
+      "metric": "ALERTS",
+      "labels": {
+        "alertname": "InsightHubQueueBacklogAnomaly",
+        "alertstate": "firing",
+        "incident": "queue-backlog",
+        "severity": "warning"
+      },
+      "timestamp": "2026-09-30T08:15:00.943Z",
+      "value": 1
+    }
+  ],
+  "summary": "Six accepted ingestion jobs accumulated while the worker deployment had zero available replicas; the queue alert fired.",
+  "root_cause": "The ingestion worker was intentionally scaled to zero for the controlled test. Redis remained available; it correctly retained the real ARQ backlog.",
+  "confidence": "high",
+  "remediation": "Restore one worker replica, wait for readiness, and verify the Redis queue drains and documents leave pending state."
+}

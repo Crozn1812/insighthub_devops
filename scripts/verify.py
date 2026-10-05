@@ -163,7 +163,12 @@ def fingerprint(root):
     need(files, 'No source files found')
     for path in files:
         digest.update(path.relative_to(root).as_posix().encode('utf-8') + b'\0')
-        digest.update(bytes.fromhex(sha(path)))
+        content = path.read_bytes()
+        # Git may materialize text as CRLF on Windows even though CI checks out LF.
+        # Canonicalize text line endings while preserving binary inputs byte-for-byte.
+        if b'\0' not in content:
+            content = content.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+        digest.update(hashlib.sha256(content).digest())
     return digest.hexdigest()
 
 

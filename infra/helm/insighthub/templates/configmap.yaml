@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: insighthub-config
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+data:
+  REDIS_URL: {{ .Values.config.redisUrl | quote }}
+  INGESTION_QUEUE: {{ .Values.config.ingestionQueue | quote }}
+  PAYLOAD_DIR: {{ .Values.config.payloadDir | quote }}
+  RAG_MODE: {{ .Values.config.ragMode | quote }}
+  LLM_PROVIDER: {{ .Values.config.llmProvider | quote }}
+  OPENAI_BASE_URL: {{ .Values.config.openaiBaseUrl | quote }}
+  OPENAI_CHAT_MODEL: {{ .Values.config.openaiChatModel | quote }}
+  LLM_STRUCTURED_OUTPUT: {{ .Values.config.llmStructuredOutput | quote }}
+  NEMO_GUARDRAILS_URL: {{ .Values.config.nemoGuardrailsUrl | quote }}
+  EMBEDDING_PROVIDER: {{ .Values.config.embeddingProvider | quote }}
+  OLLAMA_BASE_URL: {{ .Values.config.ollamaBaseUrl | quote }}
+  OLLAMA_CHAT_MODEL: {{ .Values.config.ollamaChatModel | quote }}
+  OLLAMA_EMBEDDING_MODEL: {{ .Values.config.ollamaEmbeddingModel | quote }}
+  OLLAMA_THINK: {{ .Values.config.ollamaThink | quote }}
+  LLM_MAX_TOKENS: {{ .Values.config.llmMaxTokens | quote }}
+  EMBEDDING_DIM: {{ .Values.config.embeddingDim | quote }}
+  EMBEDDING_REVISION: {{ .Values.config.embeddingRevision | quote }}
+  PROVIDER_TIMEOUT_SECONDS: {{ .Values.config.providerTimeoutSeconds | quote }}
+  API_INTERNAL_URL: {{ .Values.config.apiInternalUrl | quote }}
+  DAY4_CHAOS_LLM_DELAY_SECONDS: {{ .Values.config.day4ChaosLlmDelaySeconds | quote }}
+  DAY4_CHAOS_FORCE_ERROR: {{ .Values.config.day4ChaosForceError | quote }}

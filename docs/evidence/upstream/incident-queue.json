@@ -1,0 +1,188 @@
+{
+  "incident_id": "upstream-real-queue-1791171871493",
+  "started_at": "2026-10-05T03:41:42.172Z",
+  "ended_at": "2026-10-05T03:44:31.493Z",
+  "environment": "Docker Desktop Kubernetes; native LiteLLM/Ollama real generation; no paid provider",
+  "controlled_fault": "worker paused; 20 genuine uploads",
+  "alert_firing": true,
+  "samples": [
+    {
+      "metric": "insighthub:ingestion_queue_depth",
+      "labels": {},
+      "timestamp": "2026-10-05T03:44:17.195Z",
+      "value": 20
+    },
+    {
+      "metric": "ALERTS",
+      "labels": {
+        "alertname": "InsightHubQueueBacklogAnomaly",
+        "alertstate": "firing",
+        "incident": "queue-backlog",
+        "severity": "warning"
+      },
+      "timestamp": "2026-10-05T03:44:17.186Z",
+      "value": 1
+    }
+  ],
+  "nonfinite_observations": [],
+  "restored": true,
+  "recovery": {
+    "observed_at": "2026-10-05T03:44:31.366Z",
+    "health_status": 200,
+    "worker_replicas": 1,
+    "documents": [
+      {
+        "id": 24,
+        "status": "ready"
+      },
+      {
+        "id": 25,
+        "status": "ready"
+      },
+      {
+        "id": 26,
+        "status": "ready"
+      },
+      {
+        "id": 27,
+        "status": "ready"
+      },
+      {
+        "id": 28,
+        "status": "ready"
+      },
+      {
+        "id": 29,
+        "status": "ready"
+      },
+      {
+        "id": 30,
+        "status": "ready"
+      },
+      {
+        "id": 31,
+        "status": "ready"
+      },
+      {
+        "id": 32,
+        "status": "ready"
+      },
+      {
+        "id": 33,
+        "status": "ready"
+      },
+      {
+        "id": 34,
+        "status": "ready"
+      },
+      {
+        "id": 35,
+        "status": "ready"
+      },
+      {
+        "id": 36,
+        "status": "ready"
+      },
+      {
+        "id": 37,
+        "status": "ready"
+      },
+      {
+        "id": 38,
+        "status": "ready"
+      },
+      {
+        "id": 39,
+        "status": "ready"
+      },
+      {
+        "id": 40,
+        "status": "ready"
+      },
+      {
+        "id": 41,
+        "status": "ready"
+      },
+      {
+        "id": 42,
+        "status": "ready"
+      },
+      {
+        "id": 43,
+        "status": "ready"
+      }
+    ],
+    "queue_depth": [
+      {
+        "metric": {
+          "__name__": "insighthub:ingestion_queue_depth"
+        },
+        "value": [
+          1791171871.49,
+          "20"
+        ]
+      }
+    ]
+  },
+  "uploaded_ids": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43
+  ],
+  "provider_cost_usd": 0,
+  "mcp_observation": {
+    "tool": "mcp__prometheus_day2__query",
+    "query": "insighthub:ingestion_queue_depth",
+    "timestamp": "2026-10-05T03:44:17.195Z",
+    "observed_at": "2026-10-05 03:45:22 UTC",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"result\":\"insighthub:ingestion_queue_depth =\\u003e 20 @[1791171857.195]\",\"warnings\":null}"
+        }
+      ]
+    }
+  },
+  "hypotheses": [
+    "Known controlled fault: Worker paused, 20 genuine uploads processed",
+    "Alternative hypothesis 1: Temporary network partition during ingestion",
+    "Alternative hypothesis 2: Rate limiting on ingestion service due to high volume"
+  ],
+  "ai_rca": {
+    "provider_response_id": "chatcmpl-519a5310-2e42-4d13-9e00-2497e9dfd3fd",
+    "model": "qwen3:4b",
+    "usage": {
+      "completion_tokens": 106,
+      "prompt_tokens": 822,
+      "total_tokens": 928
+    },
+    "advisory": true,
+    "root_cause": "Worker paused",
+    "recommendations": [
+      "Verify worker health status before starting new uploads to prevent pausing",
+      "Implement queue depth monitoring with automatic scaling triggers"
+    ],
+    "actual_native_virtual_key_workload": "coding",
+    "input_output_guard_checked": true
+  },
+  "causal_scope": "Controlled local fault is known; model hypotheses are advisory and must be reviewed. No Slack delivery or AWS execution.",
+  "raw_incident_sha256": "860c222c61c2de1b4086faf890c553b7a897ef891738eb935ea1c29595527fb2"
+}

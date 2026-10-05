@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: insighthub-postgres-init
+  labels:
+    {{- include "insighthub.labels" . | nindent 4 }}
+data:
+  init.sql: |
+{{- $initSql := required "postgres.initSql must be supplied with --set-file" .Values.postgres.initSql }}
+{{- $normalizedInitSql := $initSql | replace "\r\n" "\n" }}
+{{ $normalizedInitSql | indent 4 | replace "\n    \n" "\n\n" }}
