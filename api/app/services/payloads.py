@@ -84,12 +84,12 @@ def prepare_retry(document_id: int) -> str:
                 len(content) > get_settings().max_upload_bytes
                 or
                 row[2] is None
-                or row[3] != _pipeline_id()
+                or row[3] not in {_pipeline_id(), _pipeline_id(legacy=True)}
                 or hashlib.sha256(content).hexdigest() != row[2]
             ):
                 raise DocumentConflict()
             conn.execute(
-                "UPDATE documents SET status = 'pending', error_code = NULL WHERE id = %s",
-                (document_id,),
+                "UPDATE documents SET status = 'pending', error_code = NULL, pipeline_id = %s WHERE id = %s",
+                (_pipeline_id(), document_id),
             )
     return row[0]

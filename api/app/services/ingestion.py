@@ -54,12 +54,15 @@ def extract_text(filename: str, content: bytes) -> str:
         raise InvalidDocument() from None
 
 
-def _pipeline_id() -> str:
+def _pipeline_id(*, legacy: bool = False) -> str:
     settings = get_settings()
+    from app.services.chunking import effective_embedding_budget
+
+    bounded = effective_embedding_budget(settings) is not None and not legacy
     return hashlib.sha256(
         json.dumps(
             {
-                "version": "extract-chunk-v1",
+                "version": "extract-chunk-bounded-v2" if bounded else "extract-chunk-v1",
                 "chunk_size": settings.chunk_size,
                 "chunk_overlap": settings.chunk_overlap,
                 "embedding_identity": settings.embedding_identity_id,
