@@ -1,61 +1,126 @@
 rule_files:
-  - prometheus-rules.yaml
-
+- prometheus-rules.yaml
 evaluation_interval: 1m
-
 tests:
-  - name: normal-baseline-does-not-alert
-    interval: 1m
-    input_series:
-      - series: 'insighthub:llm_latency_p95_seconds'
-        values: '0.2+0x65'
-      - series: 'insighthub:ingestion_queue_depth'
-        values: '0+0x65'
-      - series: 'insighthub:api_error_ratio5m'
-        values: '0+0x65'
-    alert_rule_test:
-      - eval_time: 65m
-        alertname: InsightHubLlmLatencyAnomaly
-        exp_alerts: []
-      - eval_time: 65m
-        alertname: InsightHubQueueBacklogAnomaly
-        exp_alerts: []
-      - eval_time: 65m
-        alertname: InsightHubApiErrorRateAnomaly
-        exp_alerts: []
-
-  - name: llm-latency-anomaly
-    interval: 1m
-    input_series:
-      - series: 'insighthub:llm_latency_p95_seconds'
-        values: '0.2+0x60 5+0x5'
-    alert_rule_test:
-      - eval_time: 65m
-        alertname: InsightHubLlmLatencyAnomaly
-        exp_alerts:
-          - exp_labels: {severity: warning, incident: llm-latency}
-            exp_annotations: {summary: InsightHub fixture LLM latency exceeds its one-hour 3-sigma band}
-
-  - name: queue-backlog-anomaly
-    interval: 1m
-    input_series:
-      - series: 'insighthub:ingestion_queue_depth'
-        values: '0+0x60 10+0x5'
-    alert_rule_test:
-      - eval_time: 65m
-        alertname: InsightHubQueueBacklogAnomaly
-        exp_alerts:
-          - exp_labels: {severity: warning, incident: queue-backlog}
-            exp_annotations: {summary: InsightHub ingestion queue exceeds its one-hour 3-sigma band}
-
-  - name: api-error-rate-anomaly
-    interval: 1m
-    input_series:
-      - series: 'insighthub:api_error_ratio5m'
-        values: '0+0x60 0.8+0x5'
-    alert_rule_test:
-      - eval_time: 65m
-        alertname: InsightHubApiErrorRateAnomaly
-        exp_alerts:
-          - exp_labels: {severity: warning, incident: api-error-rate}
-            exp_annotations: {summary: InsightHub API error ratio exceeds its one-hour 3-sigma band}
+- name: normal-baseline-does-not-alert
+  interval: 1m
+  input_series:
+  - series: insighthub:llm_latency_p95_seconds
+    values: 0.2+0x80
+  - series: insighthub:ingestion_queue_depth
+    values: 0+0x80
+  - series: insighthub:api_error_ratio5m
+    values: 0+0x80
+  - series: insighthub:llm_calls_5m
+    values: 25+0x80
+  - series: insighthub:api_requests_5m
+    values: 25+0x80
+  - series: insighthub:api_request_rate5m
+    values: 1+0x80
+  alert_rule_test:
+  - eval_time: 80m
+    alertname: InsightHubLlmLatencyAnomaly
+    exp_alerts: []
+  - eval_time: 80m
+    alertname: InsightHubQueueBacklogAnomaly
+    exp_alerts: []
+  - eval_time: 80m
+    alertname: InsightHubApiErrorRateAnomaly
+    exp_alerts: []
+- name: llm-latency-anomaly
+  interval: 1m
+  input_series:
+  - series: insighthub:llm_latency_p95_seconds
+    values: 0.2+0x75 5+0x5
+  - series: insighthub:llm_calls_5m
+    values: 25+0x80
+  - series: insighthub:api_requests_5m
+    values: 25+0x80
+  - series: insighthub:api_request_rate5m
+    values: 1+0x80
+  alert_rule_test:
+  - eval_time: 80m
+    alertname: InsightHubLlmLatencyAnomaly
+    exp_alerts:
+    - exp_labels:
+        severity: warning
+        incident: llm-latency
+      exp_annotations:
+        summary: InsightHub LLM latency exceeds its one-hour 3-sigma band
+- name: queue-backlog-anomaly
+  interval: 1m
+  input_series:
+  - series: insighthub:ingestion_queue_depth
+    values: 0+0x75 20+0x5
+  - series: insighthub:llm_calls_5m
+    values: 25+0x80
+  - series: insighthub:api_requests_5m
+    values: 25+0x80
+  - series: insighthub:api_request_rate5m
+    values: 1+0x80
+  alert_rule_test:
+  - eval_time: 80m
+    alertname: InsightHubQueueBacklogAnomaly
+    exp_alerts:
+    - exp_labels:
+        severity: warning
+        incident: queue-backlog
+      exp_annotations:
+        summary: InsightHub ingestion queue exceeds its one-hour 3-sigma band
+- name: api-error-rate-anomaly
+  interval: 1m
+  input_series:
+  - series: insighthub:api_error_ratio5m
+    values: 0+0x75 0.8+0x5
+  - series: insighthub:llm_calls_5m
+    values: 25+0x80
+  - series: insighthub:api_requests_5m
+    values: 25+0x80
+  - series: insighthub:api_request_rate5m
+    values: 1+0x80
+  alert_rule_test:
+  - eval_time: 80m
+    alertname: InsightHubApiErrorRateAnomaly
+    exp_alerts:
+    - exp_labels:
+        severity: warning
+        incident: api-error-rate
+      exp_annotations:
+        summary: InsightHub API error ratio exceeds its one-hour 3-sigma band
+- name: short-baseline-cannot-fire
+  interval: 1m
+  input_series:
+  - series: insighthub:ingestion_queue_depth
+    values: 0+0x20 20+0x5
+  alert_rule_test:
+  - eval_time: 25m
+    alertname: InsightHubQueueBacklogAnomaly
+    exp_alerts: []
+- name: missing-or-nan-llm-baseline-cannot-fire
+  interval: 1m
+  input_series:
+  - series: insighthub:llm_latency_p95_seconds
+    values: NaN+0x75 20+0x5
+  - series: insighthub:llm_calls_5m
+    values: 25+0x80
+  alert_rule_test:
+  - eval_time: 80m
+    alertname: InsightHubLlmLatencyAnomaly
+    exp_alerts: []
+- name: prometheus-exported-route-health-errors-excluded
+  interval: 1m
+  input_series:
+  - series: insighthub_http_requests_total{endpoint="http",exported_endpoint="/healthz",status="500"}
+    values: 0+100x80
+  - series: insighthub_http_requests_total{endpoint="http",exported_endpoint="/chat",status="200"}
+    values: 0+1x80
+  promql_expr_test:
+  - expr: insighthub:api_error_ratio5m
+    eval_time: 80m
+    exp_samples:
+    - labels: insighthub:api_error_ratio5m
+      value: 0
+  alert_rule_test:
+  - eval_time: 80m
+    alertname: InsightHubApiErrorRateAnomaly
+    exp_alerts: []

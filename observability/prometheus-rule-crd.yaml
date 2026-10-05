@@ -8,49 +8,74 @@ metadata:
     app.kubernetes.io/part-of: insighthub
 spec:
   groups:
-    - name: insighthub-recording
-      interval: 15s
-      rules:
-        - record: insighthub:api_request_rate5m
-          expr: sum(rate(insighthub_http_requests_total[5m]))
-        - record: insighthub:api_error_ratio5m
-          expr: (sum(rate(insighthub_http_requests_total{status=~"5.."}[5m])) or 0 * sum(rate(insighthub_http_requests_total[5m]))) / clamp_min(sum(rate(insighthub_http_requests_total[5m])), 0.001)
-        - record: insighthub:rag_latency_p95_seconds
-          expr: histogram_quantile(0.95, sum by (le) (rate(insighthub_rag_query_latency_seconds_bucket[5m])))
-        - record: insighthub:llm_latency_p95_seconds
-          expr: histogram_quantile(0.95, sum by (le) (rate(insighthub_llm_call_latency_seconds_bucket[5m])))
-        - record: insighthub:ingestion_queue_depth
-          expr: max(insighthub_ingestion_queue_depth)
-    - name: insighthub-anomaly-baselines
-      interval: 15s
-      rules:
-        - record: insighthub:llm_latency_baseline_1h
-          expr: avg_over_time(insighthub:llm_latency_p95_seconds[1h])
-        - record: insighthub:llm_latency_upper_3sigma_1h
-          expr: insighthub:llm_latency_baseline_1h + clamp_min(3 * stddev_over_time(insighthub:llm_latency_p95_seconds[1h]), 0.5)
-        - record: insighthub:queue_depth_baseline_1h
-          expr: avg_over_time(insighthub:ingestion_queue_depth[1h])
-        - record: insighthub:queue_depth_upper_3sigma_1h
-          expr: insighthub:queue_depth_baseline_1h + clamp_min(3 * stddev_over_time(insighthub:ingestion_queue_depth[1h]), 1)
-        - record: insighthub:error_ratio_baseline_1h
-          expr: avg_over_time(insighthub:api_error_ratio5m[1h])
-        - record: insighthub:error_ratio_upper_3sigma_1h
-          expr: insighthub:error_ratio_baseline_1h + clamp_min(3 * stddev_over_time(insighthub:api_error_ratio5m[1h]), 0.05)
-    - name: insighthub-anomalies
-      interval: 15s
-      rules:
-        - alert: InsightHubLlmLatencyAnomaly
-          expr: insighthub:llm_latency_p95_seconds > insighthub:llm_latency_upper_3sigma_1h and insighthub:llm_latency_p95_seconds > 1
-          for: 1m
-          labels: {severity: warning, incident: llm-latency}
-          annotations: {summary: InsightHub fixture LLM latency exceeds its one-hour 3-sigma band}
-        - alert: InsightHubQueueBacklogAnomaly
-          expr: insighthub:ingestion_queue_depth > insighthub:queue_depth_upper_3sigma_1h and insighthub:ingestion_queue_depth > 0
-          for: 1m
-          labels: {severity: warning, incident: queue-backlog}
-          annotations: {summary: InsightHub ingestion queue exceeds its one-hour 3-sigma band}
-        - alert: InsightHubApiErrorRateAnomaly
-          expr: insighthub:api_error_ratio5m > insighthub:error_ratio_upper_3sigma_1h and insighthub:api_error_ratio5m > 0.05
-          for: 1m
-          labels: {severity: warning, incident: api-error-rate}
-          annotations: {summary: InsightHub API error ratio exceeds its one-hour 3-sigma band}
+  - name: insighthub-recording
+    interval: 15s
+    rules:
+    - record: insighthub:api_request_rate5m
+      expr: sum(rate(insighthub_http_requests_total[5m]))
+    - record: insighthub:api_error_ratio5m
+      expr: (sum(increase(insighthub_http_requests_total{status=~"5..",endpoint!~"/(metrics|healthz|readyz)",exported_endpoint!~"/(metrics|healthz|readyz)"}[5m]))
+        or vector(0)) / clamp_min(sum(increase(insighthub_http_requests_total{endpoint!~"/(metrics|healthz|readyz)",exported_endpoint!~"/(metrics|healthz|readyz)"}[5m])),
+        1)
+    - record: insighthub:rag_latency_p95_seconds
+      expr: histogram_quantile(0.95, sum by (le) (rate(insighthub_rag_query_latency_seconds_bucket[5m])))
+    - record: insighthub:llm_latency_p95_seconds
+      expr: histogram_quantile(0.95, sum by (le) (rate(insighthub_llm_call_latency_seconds_bucket[5m])))
+    - record: insighthub:ingestion_queue_depth
+      expr: max(insighthub_ingestion_queue_depth)
+    - record: insighthub:llm_calls_5m
+      expr: sum(increase(insighthub_llm_call_latency_seconds_count[5m]))
+    - record: insighthub:api_requests_5m
+      expr: sum(increase(insighthub_http_requests_total{endpoint!~"/(metrics|healthz|readyz)",exported_endpoint!~"/(metrics|healthz|readyz)"}[5m]))
+  - name: insighthub-anomaly-baselines
+    interval: 15s
+    rules:
+    - record: insighthub:llm_latency_baseline_1h
+      expr: avg_over_time((insighthub:llm_latency_p95_seconds < Inf)[1h:1m] offset
+        10m)
+    - record: insighthub:llm_latency_upper_3sigma_1h
+      expr: insighthub:llm_latency_baseline_1h + clamp_min(3 * stddev_over_time((insighthub:llm_latency_p95_seconds
+        < Inf)[1h:1m] offset 10m), 0.5)
+    - record: insighthub:queue_depth_baseline_1h
+      expr: avg_over_time(insighthub:ingestion_queue_depth[1h] offset 10m)
+    - record: insighthub:queue_depth_upper_3sigma_1h
+      expr: insighthub:queue_depth_baseline_1h + clamp_min(3 * stddev_over_time(insighthub:ingestion_queue_depth[1h]
+        offset 10m), 1)
+    - record: insighthub:error_ratio_baseline_1h
+      expr: avg_over_time(insighthub:api_error_ratio5m[1h] offset 10m)
+    - record: insighthub:error_ratio_upper_3sigma_1h
+      expr: insighthub:error_ratio_baseline_1h + clamp_min(3 * stddev_over_time(insighthub:api_error_ratio5m[1h]
+        offset 10m), 0.05)
+  - name: insighthub-anomalies
+    interval: 15s
+    rules:
+    - alert: InsightHubLlmLatencyAnomaly
+      expr: insighthub:llm_latency_p95_seconds > insighthub:llm_latency_upper_3sigma_1h
+        and insighthub:llm_latency_p95_seconds > 1 and count_over_time((insighthub:llm_latency_p95_seconds
+        < Inf)[1h:1m] offset 10m) >= 60 and insighthub:llm_calls_5m >= 20
+      for: 2m
+      labels:
+        severity: warning
+        incident: llm-latency
+      annotations:
+        summary: InsightHub LLM latency exceeds its one-hour 3-sigma band
+    - alert: InsightHubQueueBacklogAnomaly
+      expr: insighthub:ingestion_queue_depth > insighthub:queue_depth_upper_3sigma_1h
+        and insighthub:ingestion_queue_depth > 10 and count_over_time(insighthub:ingestion_queue_depth[1h:1m]
+        offset 10m) >= 60
+      for: 2m
+      labels:
+        severity: warning
+        incident: queue-backlog
+      annotations:
+        summary: InsightHub ingestion queue exceeds its one-hour 3-sigma band
+    - alert: InsightHubApiErrorRateAnomaly
+      expr: insighthub:api_error_ratio5m > insighthub:error_ratio_upper_3sigma_1h
+        and insighthub:api_error_ratio5m > 0.05 and count_over_time(insighthub:api_request_rate5m[1h:1m]
+        offset 10m) >= 60 and insighthub:api_requests_5m >= 20
+      for: 2m
+      labels:
+        severity: warning
+        incident: api-error-rate
+      annotations:
+        summary: InsightHub API error ratio exceeds its one-hour 3-sigma band
