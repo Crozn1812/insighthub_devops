@@ -28,3 +28,5 @@ does not waive AWS, Slack LIVE, quizzes, Loom or trainer rubric. Day6 formal
 fresh-source/every-case/live-observation acceptance is unmet despite no HIGH.
 
 Current additional native NeMo proof: 4 PASS/1 FAIL (unsafe output override allowed). This is separate from 305 passing unit/mechanics tests and remains a known local control gap.
+
+Final implementation CI checkpoint e0d199c: Starter baseline and IaC push/PR runs PASS. Pristine Day3 GitHub verifier PASS with downloaded artifact/current canonical Git source; AWS plan/cost/apply SKIPPED. Latest recorded official results: Day1 PASS, Day2 PASS, Day3 PASS (CI/static only), Day4 PASS, Day5 PASS (local transport), Day6 INCOMPLETE/runtime_verified=false. Each report retains its own source/timestamp scope; later documentation-only changes do not extend old runtime observations.

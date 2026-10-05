@@ -20,7 +20,9 @@ chunk/embed/store with bounded transient retry and idempotent replay.
 Chat embeds/retrieves/sanitizes, routes through native LiteLLM 1.98.0 to local
 Ollama qwen3:4b, validates structured output/citations and applies output controls.
 Embeddings remain mxbai with consistent identity. Native NeMo 0.24.1 protects
-input/context/output using pinned regex rails; outage fails closed.
+input/context/output using pinned regex rails; outage fails closed. The latest
+native probe has **4 PASS / 1 FAIL**: an output behavior-override sentence was
+allowed. Semantic checks are disabled; see [security status](docs/final-security-status.md).
 
 Docker Desktop Kubernetes runs application/monitoring namespaces; Ollama runs on
 the host and native LiteLLM/NeMo/accounting services run in local Docker.

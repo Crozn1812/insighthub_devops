@@ -34,3 +34,5 @@ upstream executable and records that difference, rather than modifying a verifie
 - [Failed error attempt](incident-error-attempt1.json) and earlier Day4 verifier FAIL remain preserved; actual range-query projection documents one recording-value discrepancy. Latest pristine Day4 PASS covers 16 samples.
 - [Current runtime](final-runtime-smoke.json), [native attribution](native-attribution-final.json), [current NeMo](nemo-final-runtime.json): NeMo probe 4 PASS/1 FAIL, output override allowed; no semantic protection claim.
 - [Day6 preconditions](day6-verifier-preconditions.md): no-HIGH is distinct from strict all-pass/fresh-source/live-observation acceptance. No extra full scan.
+
+[CI checkpoint](ci-final-checkpoint.json): four push/PR runs green at e0d199c. Day3 pristine GitHub profile PASS against actual artifact/source 2cefdb588c88cd298fa4e3e4d8b564e4297065147a568053e47a0e1cc403b512; deployment/AWS not attested. Previous local INCOMPLETE and other verifier runs remain preserved.

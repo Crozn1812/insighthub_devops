@@ -1,0 +1,101 @@
+{
+  "observed_at": "2026-10-05T09:15:04.663Z",
+  "implementation_sha": "e0d199cd53c77b624cb9c659732e136441b0d692",
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 37287898061,
+      "headSha": "e0d199cd53c77b624cb9c659732e136441b0d692",
+      "name": "Starter baseline",
+      "status": "completed",
+      "url": "https://github.com/Crozn1812/insighthub_devops/actions/runs/37287898061"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 37287898041,
+      "headSha": "e0d199cd53c77b624cb9c659732e136441b0d692",
+      "name": "Day 3 IaC validation",
+      "status": "completed",
+      "url": "https://github.com/Crozn1812/insighthub_devops/actions/runs/37287898041"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 37287893250,
+      "headSha": "e0d199cd53c77b624cb9c659732e136441b0d692",
+      "name": "Starter baseline",
+      "status": "completed",
+      "url": "https://github.com/Crozn1812/insighthub_devops/actions/runs/37287893250"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 37287893179,
+      "headSha": "e0d199cd53c77b624cb9c659732e136441b0d692",
+      "name": "Day 3 IaC validation",
+      "status": "completed",
+      "url": "https://github.com/Crozn1812/insighthub_devops/actions/runs/37287893179"
+    }
+  ],
+  "verified_iac": {
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/Crozn1812/insighthub_devops/actions/runs/37287893179",
+    "jobs": [
+      {
+        "name": "security-scan",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "policy-check",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "helm-lint",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "fmt",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "render-chart",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "terraform-validate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "verification-source",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "plan",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "apply",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "cost-estimate",
+        "status": "completed",
+        "conclusion": "skipped"
+      }
+    ]
+  },
+  "scope": "Actual static/local CI. AWS plan/cost-estimate/apply are skipped, not executed. Subsequent documentation-only tip checks must be read live from PR."
+}

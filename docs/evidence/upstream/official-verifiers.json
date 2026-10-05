@@ -766,6 +766,59 @@
         "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
       },
       "source_report_sha256": "9a2beacb54fb68865402cdc594850238b49751e85f3d5a608d391c42319a5d10"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "evidence/upstream-audit/reference/scripts/verify.py",
+        "day3",
+        "--repo",
+        "<repository>",
+        "--evidence-dir",
+        "evidence/upstream-audit/github-final-37287893179",
+        "--ci-profile",
+        "github",
+        "--ci-repo",
+        "Crozn1812/insighthub_devops",
+        "--ci-run-id",
+        "37287893179",
+        "--json",
+        "--timeout",
+        "60"
+      ],
+      "started_at": "2026-10-05T09:11:03.967803+00:00",
+      "ended_at": "2026-10-05T09:13:09.405217+00:00",
+      "exit_code": 0,
+      "upstream_verifier_sha256": "e94c2184eb1eb2eeb23e7c61deba934e4c0eea204aad83d2f90d1a6bb175c23b",
+      "upstream_git_sha": "4923fed6ef650aeea69eb179ff2a12415cf0fc90",
+      "canonical_source_sha256": "2cefdb588c88cd298fa4e3e4d8b564e4297065147a568053e47a0e1cc403b512",
+      "ci_run_id": "37287893179",
+      "ci_binding": {
+        "source_sha256": "2cefdb588c88cd298fa4e3e4d8b564e4297065147a568053e47a0e1cc403b512",
+        "artifact_sha256": "74c576d12def279e6cb805c69db09ac18483c5f557ba68f3510d38540ee7697e"
+      },
+      "report": {
+        "schema_version": 1,
+        "target": "day3",
+        "status": "PASS",
+        "scope": "partial-runtime-contract",
+        "runtime_verified": true,
+        "source_sha256": "2cefdb588c88cd298fa4e3e4d8b564e4297065147a568053e47a0e1cc403b512",
+        "milestone_complete": false,
+        "checks": [
+          {
+            "id": "day3",
+            "status": "PASS",
+            "runtime_verified": true,
+            "ci_url": "https://github.com/Crozn1812/insighthub_devops/actions/runs/37287893179",
+            "note": "CI/policy verified; deployment health is not attested."
+          }
+        ],
+        "specification_review_required": true,
+        "note": "PASS covers implemented checks only, not all project requirements; use the complete specification and reviewer evidence."
+      },
+      "scope": "Actual GitHub CI/static policy contract; AWS runtime/deployment not attested"
     }
   ]
 }
