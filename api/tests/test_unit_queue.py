@@ -61,7 +61,7 @@ class QueueTests(unittest.IsolatedAsyncioTestCase):
     ):
         started, release = threading.Event(), threading.Event()
 
-        def blocked(document_id):
+        def blocked(document_id, retry_transient=False):
             started.set()
             release.wait(timeout=3)
             return "ready"

@@ -5,10 +5,11 @@ import json
 import logging
 from datetime import datetime, timezone
 from typing import Any
+from arq import Retry
 
 from app.core.config import get_settings
 from app.core.db import close_pool, get_conn, initialize_database
-from app.core.errors import DocumentNotFound, InvalidDocument, ServiceError
+from app.core.errors import DocumentNotFound, InvalidDocument, ServiceError, TransientProviderError
 from app.services.ingestion import process_document
 from app.services.payloads import mark_pending_failed, payload_path
 from app.services.queue import redis_settings
@@ -16,7 +17,7 @@ from app.services.queue import redis_settings
 logger = logging.getLogger("insighthub.worker")
 
 
-def run_document(document_id: int) -> str:
+def run_document(document_id: int, retry_transient: bool = False) -> str:
     try:
         with get_conn() as conn:
             row = conn.execute(
@@ -30,6 +31,8 @@ def run_document(document_id: int) -> str:
             raise InvalidDocument()
         process_document(document_id, row[0], content)
     except Exception as exc:  # noqa: BLE001 - sanitize errors before ARQ can log them
+        if retry_transient and isinstance(exc, TransientProviderError):
+            raise exc from None
         code = exc.code if isinstance(exc, ServiceError) else "payload_or_worker_error"
         try:
             mark_pending_failed(document_id, code)
@@ -65,9 +68,18 @@ async def ingest_document(ctx: dict[str, Any], document_id: int) -> str:
     # The sync DB/provider work runs outside ARQ's event loop. If cancelled,
     # finish this thread before allowing ARQ to replay it; row locks and hashes
     # also protect replay after abrupt process termination.
-    task = asyncio.create_task(asyncio.to_thread(run_document, document_id))
+    attempt = ctx.get("job_try", 1)
+    retry_transient = type(attempt) is int and 1 <= attempt <= 3
+    task = asyncio.create_task(asyncio.to_thread(run_document, document_id, retry_transient))
     try:
         return await asyncio.shield(task)
+    except TransientProviderError:
+        delay = 2 ** (attempt - 1)
+        logger.info(json.dumps({"event": "ingestion_retry_scheduled",
+                                "document_id": document_id, "attempt": attempt,
+                                "delay_seconds": delay,
+                                "timestamp": datetime.now(timezone.utc).isoformat()}))
+        raise Retry(defer=delay) from None
     except asyncio.CancelledError:
         await task
         raise
@@ -95,7 +107,7 @@ class WorkerSettings:
     on_startup = startup
     on_shutdown = shutdown
     max_jobs = 2
-    max_tries = 3
+    max_tries = 4  # Initial execution plus three retries at 1/2/4 seconds.
     job_timeout = 300
     health_check_interval = 5
     # A completed result would reserve document:<id> and block a later manual retry.

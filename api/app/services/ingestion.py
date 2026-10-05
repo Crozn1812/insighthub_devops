@@ -1,4 +1,4 @@
-"""Starter ingestion is synchronous. Day 1 students still implement the queue/worker."""
+"""Transactional ingestion executed by the separate Redis/ARQ worker."""
 
 import hashlib
 import io

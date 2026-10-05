@@ -16,6 +16,10 @@ class ProviderError(ServiceError):
     message = "Dịch vụ AI không khả dụng hoặc trả dữ liệu không hợp lệ."
 
 
+class TransientProviderError(ProviderError):
+    """Sanitized transport/5xx failure eligible for bounded worker retry."""
+
+
 class InvalidDocument(ServiceError):
     status_code = 422
     code = "invalid_document"

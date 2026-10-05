@@ -19,7 +19,9 @@ def request(path: str, body: bytes | None = None, content_type: str = "applicati
         api_url() + path, body, headers={"Content-Type": content_type}
     )
     try:
-        with urllib.request.urlopen(req, timeout=5) as response:
+        # Real local generation has a separate deadline; upload <1s and worker
+        # ready <30s remain independently enforced by the untouched verifier.
+        with urllib.request.urlopen(req, timeout=60 if path == "/chat" else 5) as response:
             return response.status, json.load(response)
     except urllib.error.HTTPError as exc:
         return exc.code, json.load(exc)

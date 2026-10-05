@@ -128,11 +128,15 @@ def _real_generate(question, contexts, settings):
                 "messages": messages,
                 "stream": False,
                 "max_completion_tokens": settings.llm_max_tokens,
+                **({"response_format": {"type": "json_schema", "json_schema": {
+                    "name": "rag_answer", "strict": True, "schema": _ANSWER_SCHEMA,
+                }}} if settings.llm_structured_output else {}),
             },
         )
         usage = data.get("usage") or {}
         return (
-            data["choices"][0]["message"]["content"],
+            (_structured_answer(data["choices"][0]["message"]["content"])
+             if settings.llm_structured_output else data["choices"][0]["message"]["content"]),
             usage.get("prompt_tokens"),
             usage.get("completion_tokens"),
         )

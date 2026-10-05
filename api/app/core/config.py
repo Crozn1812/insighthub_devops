@@ -26,6 +26,8 @@ class Settings(BaseSettings):
     enqueue_timeout_seconds: float = Field(default=0.75, gt=0, le=10)
     environment: str = "development"
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
+    nemo_guardrails_url: str = ""
+    nemo_guardrails_key: str = Field(default="", repr=False)
     database_url: str = Field(
         default="postgresql://insighthub:insighthub@postgres:5432/insighthub",
         repr=False,
@@ -45,6 +47,7 @@ class Settings(BaseSettings):
     voyage_api_key: str = Field(default="", repr=False)
     voyage_embedding_model: str = "voyage-3.5"
     openai_api_key: str = Field(default="", repr=False)
+    litellm_api_key: str = Field(default="", repr=False)
     # Required explicitly for OpenAI, including OpenAI-compatible gateways.
     openai_base_url: str = ""
     openai_chat_model: str = ""
@@ -56,6 +59,7 @@ class Settings(BaseSettings):
     llm_model: str = ""
     embedding_model: str = ""
     llm_max_tokens: int = Field(default=1024, ge=1, le=32768)
+    llm_structured_output: bool = False
     embedding_dim: int = Field(default=1024, ge=1, le=2000)
     embedding_revision: str = Field(default="1", min_length=1, max_length=128)
     provider_timeout_seconds: float = Field(
@@ -74,6 +78,8 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_configuration(self):
+        if self.litellm_api_key and self.llm_provider == "openai" and not self.openai_api_key:
+            object.__setattr__(self, "openai_api_key", self.litellm_api_key)
         if self.chunk_overlap >= self.chunk_size:
             raise ValueError("CHUNK_OVERLAP must be smaller than CHUNK_SIZE")
         if self.rag_mode == "fixture":

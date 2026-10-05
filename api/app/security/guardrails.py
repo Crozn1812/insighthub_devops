@@ -14,6 +14,11 @@ _DIRECT = (
     r"\b(reveal|show|print|extract|repeat)\b.{0,40}\b(system|hidden|developer)\b.{0,20}\b(prompt|instruction|policy)",
     r"\b(role|policy)\b.{0,20}\b(override|bypass|change|disable)",
     r"\b(disregard|forget)\b.{0,40}\b(instruction|policy|rules?)",
+    r"\b(update|change|adjust|switch)\b.{0,20}\b(your|the assistant'?s)\b"
+    r".{0,20}\b(behavio[u]?r|instructions?|policy)\b.{0,100}"
+    r"\b(uncensored|unrestricted|without restrictions|ignore safety)\b",
+    r"\b(uncensored|unrestricted)\b.{0,400}\b(update|change|adjust|switch)\b"
+    r".{0,20}\byour\b.{0,20}\bbehavio[u]?r\b",
 )
 _AGENCY = re.compile(
     r"\b(delete|remove|scale|restart|deploy|execute|run|send|modify|change)\b.{0,50}"
@@ -21,7 +26,7 @@ _AGENCY = re.compile(
     re.I | re.S,
 )
 _EMAIL = re.compile(r"(?<![\w.+-])[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}(?![\w.-])")
-_PHONE = re.compile(r"(?<!\d)(?:\+?\d[\d .()-]{7,}\d)(?!\d)")
+_PHONE = re.compile(r"(?<!\w)(?:\+?\d[\d .()-]{7,}\d)(?!\w)")
 _SECRET = re.compile(
     r"(?i)\b(?:api[_-]?key|access[_-]?token|secret|password)\b\s*[:=]\s*[A-Za-z0-9_./+\-=]{8,}"
     r"|\b(?:AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,}|gh[pousr]_[A-Za-z0-9]{20,})\b"

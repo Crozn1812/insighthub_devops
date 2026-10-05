@@ -14,6 +14,7 @@ from app.core.metrics import (
 )
 from app.services.llm import SYSTEM_PROMPT, generate
 from app.services.retrieval import retrieve
+from app.security.nemo import nemo_allowed
 from app.core.config import get_settings
 from app.core.metrics import guardrail_decisions_total
 from app.security.guardrails import (
@@ -58,7 +59,7 @@ def chat(req: ChatRequest):
     guardrail_decisions_total.labels(
         "request", "allow" if decision.allowed else "block", decision.category
     ).inc()
-    if not decision.allowed:
+    if not decision.allowed or not nemo_allowed(req.question, "input"):
         settings = get_settings()
         return ChatResponse(
             answer=REFUSAL, sources=[], contexts=[],
@@ -75,6 +76,10 @@ def chat(req: ChatRequest):
             )
         retrieved_contexts = contexts
         contexts, filtered = filter_contexts(contexts)
+        nemo_contexts = [context for context in contexts
+                         if nemo_allowed(str(context.get("chunk_text", "")), "context")]
+        filtered = filtered or len(nemo_contexts) != len(contexts)
+        contexts = nemo_contexts
         response_contexts = contexts
         if filtered:
             safe_keys = {(context.get("id"), context["source"]) for context in contexts}
@@ -93,6 +98,8 @@ def chat(req: ChatRequest):
             with llm_call_latency.time():
                 result = generate(req.question, generation_contexts)
             result["answer"], _ = protect_output(result["answer"], (SYSTEM_PROMPT,))
+            if result["answer"] != REFUSAL and not nemo_allowed(result["answer"], "output"):
+                result["answer"] = REFUSAL
             if result["answer"] == REFUSAL:
                 result["sources"] = []
             else:
